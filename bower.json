@@ -13,7 +13,8 @@
     "bootstrap": "latest",
     "angular-modal-service": "latest",
     "angular-growl-notifications": "latest",
-    "ngstorage": "latest"
+    "ngstorage": "latest",
+    "cryptojslib": "latest"
   },
   "resolutions": {
     "angular": ">= 1.5"
