@@ -19,6 +19,6 @@
 
         $translateProvider.useSanitizeValueStrategy('escape');
 
-        $translateProvider.useStaticFilesLoader({prefix: 'langs/lang-', suffix: '.json'});
+        $translateProvider.useStaticFilesLoader({prefix: 'i18n/lang-', suffix: '.json'});
     }
 })();

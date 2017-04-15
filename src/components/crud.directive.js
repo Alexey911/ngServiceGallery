@@ -1,7 +1,7 @@
 (function () {
 
     angular.module('app').component('crud', {
-        templateUrl: 'app/components/crud.directive.html',
+        templateUrl: 'src/components/crud.directive.html',
         bindings: {},
         controllerAs: 'vm',
         controller: crudCtrl
@@ -11,7 +11,6 @@
 
     function crudCtrl(NgTableParams, crudService, ModalService) {
         var vm = this;
-
         vm.save = save;
         vm.reset = reset;
         vm.select = select;

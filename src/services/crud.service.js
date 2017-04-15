@@ -21,9 +21,9 @@
         };
 
         function configure() {
-            return $http.get(config.component.path + 'crud.json').then(response => {
+            return $http.get(/*config.component.path +*/ 'crud.json').then(response => {
                 var data = response.data;
-                api = config.context + data.url + '/';
+                api = /*config.context +*/ data.url + '/';
                 return data;
             });
         }

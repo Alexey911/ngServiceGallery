@@ -4,7 +4,7 @@
     angular
         .module('app')
         .component('notifications', {
-            templateUrl: 'app/components/notifications.directive.html',
+            templateUrl: 'src/components/notifications.directive.html',
             restrict: 'E',
             controllerAs: 'vm',
             controller: notificationCtrl,

@@ -5,14 +5,11 @@ var uglify = require('gulp-uglify');
 var replace = require('gulp-replace');
 var html2js = require('gulp-html2js');
 
-
 var jsFiles = [
-    "app/some/util.js",
-    "app/app.module.js",
-    "app/app.config.js",
-    "app/services/**/*.*",
-    "app/configs/**/*.js",
-    "app/components/**/*.js"
+    "src/app.js",
+    "src/configs/**/*.js",
+    "src/services/**/*.*",
+    "src/components/**/*.js"
 ];
 
 var jsDest = 'dist';
@@ -32,7 +29,7 @@ gulp.task('build', function () {
     //     .pipe(replace('undefined', new Date()))
     //     .pipe(gulp.dest(jsDest + '/scripts.js'));
 
-    gulp.src('app/components/*.html')
+    gulp.src('src/components/*.html')
         .pipe(html2js('templates.js', {
             adapter: 'angular',
             name: 'app'
@@ -42,6 +39,6 @@ gulp.task('build', function () {
 
 gulp.task('watch', function (){
     var files = jsFiles.slice();
-    files.push('app/components/**/*.html');
+    files.push('src/components/**/*.html');
     gulp.watch(files, ['build']);
 });

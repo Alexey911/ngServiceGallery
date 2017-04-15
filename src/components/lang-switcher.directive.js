@@ -4,7 +4,7 @@
     angular
         .module('app')
         .component('langSwitcher', {
-            templateUrl: 'app/components/lang-switcher.directive.html',
+            templateUrl: 'src/components/lang-switcher.directive.html',
             restrict: 'E',
             controllerAs: 'vm',
             controller: langSwitcherCtrl,
