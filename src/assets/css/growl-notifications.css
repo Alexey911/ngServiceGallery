@@ -1,0 +1,23 @@
+growl-notifications {
+    position: fixed;
+    top: 150px;
+    right: 10px;
+    z-index: 1000
+}
+
+growl-notifications growl-notification {
+    background: white;
+    padding: 15px 30px;
+    width: 200px;
+    display: block;
+    border-radius: 5px;
+    margin-top: 15px;
+    border: 1px solid #eeeeee;
+    border-left-width: 5px;
+    border-radius: 3px;
+    border-left-color: #f0ad4e
+}
+
+growl-notifications growl-notification:first-child {
+    margin-top: 0
+}

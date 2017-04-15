@@ -4,12 +4,13 @@ let del = require('del'),
     gulp = require('gulp'),
     merge2 = require('merge2'),
     babel = require('gulp-babel'),
+    rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglifyjs'),
     replace = require('gulp-replace'),
+    concatCss = require('gulp-concat-css'),
     ngTemplates = require('gulp-ng-templates');
 
-'use strict';
 
 let paths = {
     scripts: [
@@ -17,6 +18,9 @@ let paths = {
         'src/configs/**/*.js',
         'src/services/**/*.*',
         'src/components/**/*.js'
+    ],
+    styles: [
+        'src/assets/css/**/*.css'
     ],
     templates: [
         'src/components/*.html'
@@ -29,18 +33,24 @@ gulp.task('clean', function () {
     return del([srcDest]);
 });
 
-gulp.task('build', ['clean'], function () {
-    merge2(
+function concatAllSources() {
+    return merge2(
         gulp.src(paths.scripts),
         gulp.src(paths.templates)
             .pipe(ngTemplates({
                 module: 'ngServiceGallery',
                 standalone: false
             }))
-    )
-        .pipe(concat('ngServiceGallery.js'))
+    ).pipe(concat('ngServiceGallery.js'))
+}
+
+gulp.task('build', ['clean'], function () {
+    concatAllSources()
         .pipe(gulp.dest(srcDest));
 
+    gulp.src(paths.styles)
+        .pipe(concatCss("ngServiceGallery.css"))
+        .pipe(gulp.dest(srcDest));
 });
 
 gulp.task('watch', function () {
@@ -49,15 +59,9 @@ gulp.task('watch', function () {
 });
 
 gulp.task('minify', function () {
-    merge2(
-        gulp.src(paths.scripts),
-        gulp.src(paths.templates)
-            .pipe(ngTemplates({
-                module: 'ngServiceGallery',
-                standalone: false
-            }))
-    )
-        .pipe(concat('ngServiceGallery.min.js'))
+    concatAllSources()
+        .pipe(gulp.dest(srcDest))
+        .pipe(rename({suffix: '.min'}))
         .pipe(babel({
             presets: ['es2015']
         }))
