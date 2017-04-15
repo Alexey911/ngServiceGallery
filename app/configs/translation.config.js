@@ -5,10 +5,10 @@
         .module('app')
         .config(setUpTranslations);
 
-    setUpTranslations.inject = ['$translateProvider'];
+    setUpTranslations.inject = ['$translateProvider', '$localStorageProvider', 'TRANSLATION_CONFIG'];
 
-    function setUpTranslations($translateProvider) {
-        let lang = 'en';//$localStorageProvider.get(TRANSLATION_CONFIG.USER_LANGUAGE) || TRANSLATION_CONFIG.DEFAULT_LANGUAGE;
+    function setUpTranslations($translateProvider, $localStorageProvider, TRANSLATION_CONFIG) {
+        let lang = $localStorageProvider.get(TRANSLATION_CONFIG.USER_LANGUAGE) || TRANSLATION_CONFIG.DEFAULT_LANGUAGE;
 
         $translateProvider.fallbackLanguage(lang);
         $translateProvider.preferredLanguage(lang);

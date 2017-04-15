@@ -5,9 +5,9 @@
         .module('app')
         .factory('translationService', translationService);
 
-    translationService.inject = ['$translate'/* 'storageService', 'TRANSLATION_CONFIG'*/];
+    translationService.inject = ['$translate', 'storageService', 'TRANSLATION_CONFIG'];
 
-    function translationService($translate /*storageService, TRANSLATION_CONFIG*/) {
+    function translationService($translate, storageService, TRANSLATION_CONFIG) {
         let languages = [
             {key: 'en', title: "English"},
             {key: 'ru', title: 'Русский'}
@@ -30,12 +30,12 @@
 
         function changeLanguage(lang) {
             $translate.use(lang.key);
-            // storageService.save(TRANSLATION_CONFIG.USER_LANGUAGE, lang.key);
+            storageService.save(TRANSLATION_CONFIG.USER_LANGUAGE, lang.key);
         }
 
         function getDefaultLanguage() {
-            return 'en';
-            // return storageService.get(TRANSLATION_CONFIG.USER_LANGUAGE, TRANSLATION_CONFIG.DEFAULT_LANGUAGE);
+            let key = storageService.get(TRANSLATION_CONFIG.USER_LANGUAGE, TRANSLATION_CONFIG.DEFAULT_LANGUAGE);
+            return languages.filter(language => language.key === key)[0];
         }
     }
 })();

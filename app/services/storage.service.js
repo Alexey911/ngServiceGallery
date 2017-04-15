@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-/*    angular
+    angular
         .module('app')
         .factory('storageService', storageService);
 
-    storageService.inject = ['$localStorage'];
+    storageService.inject = ['$log', '$localStorage'];
 
-    function storageService($localStorage) {
+    function storageService($log, $localStorage) {
 
         return {
             get: get,
@@ -16,19 +16,20 @@
         };
 
         function get(key, defaultValue) {
-            console.log('getting', key, defaultValue);
-
-            let value = $localStorage[key];
-            return value ? value : defaultValue;
+            let saved = $localStorage[key];
+            let value = saved ? saved : defaultValue;
+            $log.debug(`Data[key="${key}", default="${defaultValue}"] was loaded with value="${value}"`);
+            return value;
         }
 
         function save(key, value) {
-            console.log('saving', key, value);
             $localStorage[key] = value;
+            $log.debug(`Data[key="${key}", value="${value}"] was saved`);
         }
 
         function remove(key) {
+            $log.debug(`Data[key="${key}"] was removed`);
             delete $localStorage[key];
         }
-    }*/
+    }
 })();

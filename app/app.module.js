@@ -1,7 +1,7 @@
 (function () {
     angular.module('app', [
         'ngTable',
-        // 'ngStorage',
+        'ngStorage',
         'growlNotifications',
         'angularModalService',
         'angular-loading-bar',
