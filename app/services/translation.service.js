@@ -34,7 +34,7 @@
         }
 
         function getDefaultLanguage() {
-            let key = storageService.get(TRANSLATION_CONFIG.USER_LANGUAGE, TRANSLATION_CONFIG.DEFAULT_LANGUAGE);
+            let key = storageService.get(TRANSLATION_CONFIG.USER_LANGUAGE);
             return languages.filter(language => language.key === key)[0];
         }
     }

@@ -8,7 +8,11 @@
     setUpTranslations.inject = ['$translateProvider', '$localStorageProvider', 'TRANSLATION_CONFIG'];
 
     function setUpTranslations($translateProvider, $localStorageProvider, TRANSLATION_CONFIG) {
-        let lang = $localStorageProvider.get(TRANSLATION_CONFIG.USER_LANGUAGE) || TRANSLATION_CONFIG.DEFAULT_LANGUAGE;
+        const userLangKey = TRANSLATION_CONFIG.USER_LANGUAGE;
+        const defaultLang = TRANSLATION_CONFIG.DEFAULT_LANGUAGE;
+        const lang = $localStorageProvider.get(userLangKey) || defaultLang;
+
+        $localStorageProvider.set(userLangKey, lang);
 
         $translateProvider.fallbackLanguage(lang);
         $translateProvider.preferredLanguage(lang);
