@@ -2,13 +2,14 @@
 
 let del = require('del'),
     gulp = require('gulp'),
-    merge2 = require('merge2'),
+    merge = require('merge2'),
     babel = require('gulp-babel'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglifyjs'),
     replace = require('gulp-replace'),
     concatCss = require('gulp-concat-css'),
+    translate = require('gulp-angular-translate'),
     ngTemplates = require('gulp-ng-templates');
 
 
@@ -24,6 +25,9 @@ let paths = {
     ],
     templates: [
         'src/components/*.html'
+    ],
+    translations: [
+        'src/i18n/*.json'
     ]
 };
 
@@ -34,8 +38,15 @@ gulp.task('clean', function () {
 });
 
 function concatAllSources() {
-    return merge2(
+    return merge(
         gulp.src(paths.scripts),
+
+        gulp.src(paths.translations)
+            .pipe(translate({
+                module: 'ngServiceGallery',
+                standalone: false
+            })),
+
         gulp.src(paths.templates)
             .pipe(ngTemplates({
                 module: 'ngServiceGallery',

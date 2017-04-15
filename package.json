@@ -24,6 +24,7 @@
     "babel-preset-es2015": "latest",
     "gulp-babel": "^6.1.2",
     "gulp-replace": "^0.5.4",
+    "gulp-angular-translate": "^0.1.4",
     "gulp-concat-css": "^2.3.0",
     "gulp-ng-templates": "^0.0.10"
   },
