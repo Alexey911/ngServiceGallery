@@ -1,7 +1,7 @@
 (function () {
 
     angular.module('ngServiceGallery').component('crud', {
-        templateUrl: 'src/components/crud.directive.html',
+        templateUrl: 'crud.directive.html',
         bindings: {},
         controllerAs: 'vm',
         controller: crudCtrl

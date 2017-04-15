@@ -1,44 +1,69 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var rename = require('gulp-rename');
-var uglify = require('gulp-uglify');
-var replace = require('gulp-replace');
-var html2js = require('gulp-html2js');
+'use strict';
 
-var jsFiles = [
-    "src/app.js",
-    "src/configs/**/*.js",
-    "src/services/**/*.*",
-    "src/components/**/*.js"
-];
+let del = require('del'),
+    gulp = require('gulp'),
+    merge2 = require('merge2'),
+    babel = require('gulp-babel'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglifyjs'),
+    replace = require('gulp-replace'),
+    ngTemplates = require('gulp-ng-templates');
 
-var jsDest = 'dist';
+'use strict';
 
-gulp.task('build', function () {
-    gulp.src(jsFiles)
-        .pipe(concat('scripts.js'))
-        .pipe(gulp.dest(jsDest));
-        // .pipe(rename('scripts.min.js'))
-        // .pipe(uglify())
-        // .pipe(gulp.dest(jsDest));
+let paths = {
+    scripts: [
+        'src/app.js',
+        'src/configs/**/*.js',
+        'src/services/**/*.*',
+        'src/components/**/*.js'
+    ],
+    templates: [
+        'src/components/*.html'
+    ]
+};
 
-    // gulp.src(['app/components/**/*.html', 'app/crud.json'])
-    //     .pipe(gulp.dest(jsDest));
+let srcDest = 'dist';
 
-    // gulp.src([jsDest + '/scripts.js'])
-    //     .pipe(replace('undefined', new Date()))
-    //     .pipe(gulp.dest(jsDest + '/scripts.js'));
-
-    gulp.src('src/components/*.html')
-        .pipe(html2js('templates.js', {
-            adapter: 'angular',
-            name: 'app'
-        }))
-        .pipe(gulp.dest('dist/'));
+gulp.task('clean', function () {
+    return del([srcDest]);
 });
 
-gulp.task('watch', function (){
-    var files = jsFiles.slice();
-    files.push('src/components/**/*.html');
-    gulp.watch(files, ['build']);
+gulp.task('build', ['clean'], function () {
+    merge2(
+        gulp.src(paths.scripts),
+        gulp.src(paths.templates)
+            .pipe(ngTemplates({
+                module: 'ngServiceGallery',
+                standalone: false
+            }))
+    )
+        .pipe(concat('ngServiceGallery.js'))
+        .pipe(gulp.dest(srcDest));
+
+});
+
+gulp.task('watch', function () {
+    gulp.watch(paths.scripts, ['build']);
+});
+
+gulp.task('minify', function () {
+    merge2(
+        gulp.src(paths.scripts),
+        gulp.src(paths.templates)
+            .pipe(ngTemplates({
+                module: 'ngServiceGallery',
+                standalone: false
+            }))
+    )
+        .pipe(concat('ngServiceGallery.min.js'))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(uglify())
+        .pipe(gulp.dest(srcDest));
+});
+
+gulp.task('default', function () {
+    gulp.start('build', 'minify');
 });

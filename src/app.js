@@ -9,7 +9,11 @@
                 'angular-loading-bar',
                 'pascalprecht.translate'
             ])
-        .run(function ($log) {
-            $log.info('ServiceGallery is running');
-        });
+        .run(startUp);
+
+    startUp.inject = ['$log'];
+
+    function startUp($log) {
+        $log.info('ServiceGallery is running');
+    }
 })();

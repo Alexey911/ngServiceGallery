@@ -15,12 +15,16 @@
     "karma-jasmine": "^0.3.8",
     "karma-junit-reporter": "^0.4.1",
 
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "merge2": "^1.0.3",
     "gulp-concat": "^2.6.1",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.1.2",
+    "gulp-uglifyjs": "^0.6.2",
+    "babel-preset-es2015": "latest",
+    "gulp-babel": "^6.1.2",
     "gulp-replace": "^0.5.4",
-    "gulp-html2js": "^0.4.2"
+    "gulp-ng-templates": "^0.0.10"
   },
   "scripts": {
     "postinstall": "bower install",

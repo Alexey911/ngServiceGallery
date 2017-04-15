@@ -4,7 +4,7 @@
     angular
         .module('ngServiceGallery')
         .component('langSwitcher', {
-            templateUrl: 'src/components/lang-switcher.directive.html',
+            templateUrl: 'lang-switcher.directive.html',
             restrict: 'E',
             controllerAs: 'vm',
             controller: langSwitcherCtrl,
