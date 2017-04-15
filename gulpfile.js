@@ -13,7 +13,7 @@ let del = require('del'),
 
 let paths = {
     scripts: [
-        'src/app.js',
+        'src/*.js',
         'src/configs/**/*.js',
         'src/services/**/*.*',
         'src/components/**/*.js'
