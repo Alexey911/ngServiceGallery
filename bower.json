@@ -14,7 +14,8 @@
     "angular-modal-service": "latest",
     "angular-growl-notifications": "latest",
     "ngstorage": "latest",
-    "cryptojslib": "latest"
+    "cryptojslib": "latest",
+    "angular-mocks": "1.5.11"
   },
   "resolutions": {
     "angular": ">= 1.5"
