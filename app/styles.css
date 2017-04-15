@@ -1,0 +1,55 @@
+.center {
+    margin: auto;
+    width: 50%;
+    border: 1px solid deepskyblue;
+    padding: 10px;
+}
+
+body {
+    background-color: #CCFFCC; /* Цвет фона веб-страницы */
+}
+
+/*growl-notifications {*/
+    /*position: fixed;*/
+    /*top: 150px;*/
+    /*right: 10px;*/
+    /*z-index: 1000;*/
+/*}*/
+
+/*growl-notifications growl-notification {*/
+    /*background: rgba(0, 0, 0, 0.6);*/
+    /*color: white;*/
+    /*padding: 15px 30px;*/
+    /*width: 200px;*/
+    /*display: block;*/
+    /*border-radius: 5px;*/
+    /*margin-top: 15px;*/
+/*}*/
+
+growl-notifications {
+    position: fixed;
+    top: 150px;
+    right: 10px;
+    z-index: 1000
+}
+
+growl-notifications growl-notification {
+    background: white;
+    padding: 15px 30px;
+    width: 200px;
+    display: block;
+    border-radius: 5px;
+    margin-top: 15px;
+    border: 1px solid #eeeeee;
+    border-left-width: 5px;
+    border-radius: 3px;
+    border-left-color: #f0ad4e
+}
+
+growl-notifications growl-notification:first-child {
+    margin-top: 0
+}
+
+section.comments {
+    margin: 60px 0
+}

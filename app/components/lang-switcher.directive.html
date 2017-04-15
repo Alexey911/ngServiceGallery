@@ -1,0 +1,6 @@
+<div>
+    <select ng-options="lang.title for lang in vm.languages"
+            ng-model="vm.lang"
+            ng-change="vm.changeLanguage()">
+    </select>
+</div>

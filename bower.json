@@ -1,0 +1,21 @@
+{
+  "name": "crud",
+  "description": "",
+  "version": "1.0.0",
+  "homepage": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "ng-table": "2.0.2",
+    "ngCordova": "v0.1.14-alpha",
+    "angular-translate": "v2.15.1",
+    "angular-translate-loader-static-files": "v2.15.1",
+    "bootstrap": "latest",
+    "angular-modal-service": "latest",
+    "angular-growl-notifications": "latest",
+    "ngStorage": "latest"
+  },
+  "resolutions": {
+    "angular": ">= 1.5"
+  }
+}

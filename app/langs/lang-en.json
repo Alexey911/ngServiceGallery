@@ -1,0 +1,8 @@
+{
+  "CREATE": "Create",
+  "UPDATE": "Update",
+  "REMOVE": "Remove",
+  "REFRESH": "Refresh",
+  "RESET": "Reset",
+  "WARN": "Smth going wrong"
+}
