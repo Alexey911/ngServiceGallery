@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('ngServiceGallery')
         .config(setUpTranslations);
 
     setUpTranslations.inject = ['$translateProvider', '$localStorageProvider', 'TRANSLATION_CONFIG'];

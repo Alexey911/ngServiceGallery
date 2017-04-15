@@ -1,7 +1,7 @@
 {
-  "name": "crud",
+  "name": "ngServiceGallery",
   "version": "1.0.0",
-  "description": "",
+  "description": "Full support of all necessary operations for work with web-services",
   "author": "Alexey Zhytnik",
   "license": "MIT",
   "devDependencies": {

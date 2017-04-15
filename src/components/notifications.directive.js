@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('ngServiceGallery')
         .component('notifications', {
             templateUrl: 'src/components/notifications.directive.html',
             restrict: 'E',

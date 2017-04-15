@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('app',
+        .module('ngServiceGallery',
             [
                 'ngTable',
                 'ngStorage',
@@ -10,6 +10,6 @@
                 'pascalprecht.translate'
             ])
         .run(function ($log) {
-            $log.info('App is running');
+            $log.info('ServiceGallery is running');
         });
 })();

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('ngServiceGallery')
         .component('langSwitcher', {
             templateUrl: 'src/components/lang-switcher.directive.html',
             restrict: 'E',

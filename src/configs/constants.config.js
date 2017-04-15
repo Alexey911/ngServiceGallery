@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('ngServiceGallery')
         .constant("TRANSLATION_CONFIG", {
             "USER_LANGUAGE": "userLanguage",
             "DEFAULT_LANGUAGE": "en"

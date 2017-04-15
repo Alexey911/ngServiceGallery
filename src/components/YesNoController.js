@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module('app');
+    var app = angular.module('ngServiceGallery');
 
     app.controller('YesNoController', ['$scope', 'close', 'notificationService', function($scope, close, notificationService) {
 

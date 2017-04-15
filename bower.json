@@ -1,6 +1,6 @@
 {
-  "name": "crud",
-  "description": "",
+  "name": "ngServiceGallery",
+  "description": "Full support of all necessary operations for work with web-services",
   "version": "1.0.0",
   "homepage": "",
   "license": "MIT",

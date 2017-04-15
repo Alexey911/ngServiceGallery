@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('ngServiceGallery')
         .factory('storageService', storageService);
 
     storageService.inject = ['$log', '$localStorage'];

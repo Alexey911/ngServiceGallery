@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('ngServiceGallery')
         .factory('cryptService', cryptService);
 
     cryptService.inject = [];
