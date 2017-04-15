@@ -21,6 +21,5 @@
         function decrypt(message, key) {
             return CryptoJS.AES.decrypt(message, key).toString(CryptoJS.enc.Utf8);
         }
-
     }
 })();
