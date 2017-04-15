@@ -44,7 +44,8 @@ gulp.task('build', ['clean'], function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(paths.scripts, ['build']);
+    let sources = paths.scripts.concat(paths.templates);
+    gulp.watch(sources, ['build']);
 });
 
 gulp.task('minify', function () {
