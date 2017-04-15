@@ -1,5 +1,4 @@
 (function () {
-
     'use strict';
 
     angular
@@ -9,6 +8,6 @@
     setUpLocalStorage.inject = ['$localStorageProvider'];
 
     function setUpLocalStorage($localStorageProvider) {
-        $localStorageProvider.setKeyPrefix('app-');
+        $localStorageProvider.setKeyPrefix('ngServiceGallery-');
     }
 })();
