@@ -19,7 +19,7 @@ let paths = {
         'src/shared/*.js',
         'src/shared/configs/*.js',
         'src/shared/services/*.js',
-        'src/shared/components/*.js',
+        'src/shared/components/**/*.js',
         'src/modules/crud/ngServiceGallery.crud.module.js',
         'src/modules/monitoring/ngServiceGallery.monitoring.module.js',
         'src/modules/**/*.js'
@@ -29,7 +29,10 @@ let paths = {
     ],
     templates: {
         crud: ['src/modules/crud/*.html'],
-        common: ['src/shared/**/*.html'],
+        common: [
+            'src/shared/components/lang-switcher/*.html',
+            'src/shared/components/notifications/*.html'
+        ],
         monitoring: ['src/modules/monitoring/*.html']
     },
     translations: [
