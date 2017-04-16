@@ -1,10 +1,10 @@
 .center {
     margin: auto;
     width: 50%;
-    border: 1px solid deepskyblue;
+    border: 1px solid lightgrey;
     padding: 10px;
 }
 
 body {
-    background-color: #CCFFCC;
+    background-color: white;
 }
