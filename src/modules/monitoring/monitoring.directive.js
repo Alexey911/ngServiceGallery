@@ -57,6 +57,15 @@
         }
 
         function refresh() {
+            /* The table has previous state in this place,
+             if there's single item & current page isn't first - manual page changing.
+             */
+            if (vm.services.data.length === 1) {
+                let currPage = vm.services.page();
+                if (currPage > 1) {
+                    vm.services.page(currPage - 1);
+                }
+            }
             vm.services.reload();
         }
 
