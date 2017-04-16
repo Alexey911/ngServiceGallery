@@ -7,9 +7,9 @@
         controller: crudCtrl
     });
 
-    crudCtrl.$inject = ['NgTableParams', 'crudService', 'ModalService'];
+    crudCtrl.$inject = ['NgTableParams', 'crudService'];
 
-    function crudCtrl(NgTableParams, crudService, ModalService) {
+    function crudCtrl(NgTableParams, crudService) {
         var vm = this;
         vm.save = save;
         vm.reset = reset;
@@ -60,17 +60,6 @@
         }
 
         function save(item) {
-
-            ModalService.showModal({
-                templateUrl: "components/yesno.html",
-                controller: "YesNoController"
-            }).then(function(modal) {
-                modal.element.modal();
-                modal.close.then(function(result) {
-                    console.log('close');
-                    // vm.yesNoResult = result ? "You said Yes" : "You said No";
-                });
-            });
             // crudService
             //     .save(item)
             //     .then(refreshAll)
