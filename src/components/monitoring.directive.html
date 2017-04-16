@@ -6,7 +6,7 @@
                 ng-click="vm.select(service)"
                 class="row"
                 ng-attr-title="{{service.address}}">
-                {{service.name}}
+                {{service.name}}<span style="padding: 0 10px 0 10px; color: grey">{{service.description}}</span>
                 <button class="btn btn-sm" ng-click="vm.update(service)" translate>UPDATE</button>
                 <button class="btn btn-sm" ng-click="vm.remove(service)" translate>REMOVE</button>
             </td>

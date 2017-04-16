@@ -12,6 +12,7 @@
         return {
             get: get,
             save: save,
+            reset: reset,
             remove: remove
         };
 
@@ -30,6 +31,10 @@
         function remove(key) {
             $log.debug(`Data[key="${key}"] was removed`);
             delete $localStorage[key];
+        }
+
+        function reset(){
+            $localStorage.$reset();
         }
     }
 })();
