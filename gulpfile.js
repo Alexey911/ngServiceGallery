@@ -64,8 +64,23 @@ gulp.task('build', ['clean'], function () {
         .pipe(gulp.dest(srcDest));
 });
 
+function concatArrays(/*arrays*/) {
+    let result = [];
+
+    for (let i in arguments) {
+        result = result.concat(arguments[i]);
+    }
+    return result;
+}
+
 gulp.task('watch', function () {
-    let sources = paths.scripts.concat(paths.templates);
+    let sources = concatArrays(
+        paths.styles,
+        paths.scripts,
+        paths.templates,
+        paths.translations
+    );
+
     gulp.watch(sources, ['build']);
 });
 
