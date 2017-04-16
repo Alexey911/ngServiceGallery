@@ -38,7 +38,11 @@
             //TODO: by chain of promises
             services.push(service);
             storageService.save(SERVICE_STORAGE_KEY, services);
-            notificationService.showMessage("REGISTERED_NEW_SERVICE" /*TODO: add service name*/);
+
+            notificationService.showMessage(
+                "REGISTERED_NEW_SERVICE",
+                {'service': service.name}
+            );
         }
 
         function extractDomain(url) {

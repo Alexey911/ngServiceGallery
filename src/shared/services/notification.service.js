@@ -22,10 +22,10 @@
             subscribers.push(subscriber);
         }
 
-        function showMessage(message) {
+        function showMessage(message, params) {
             if (!message) return;
 
-            let localized = translationService.translate(message);
+            let localized = translationService.translate(message, params);
             let notification = {id: lastMessageId++, message: localized};
 
             subscribers.forEach(

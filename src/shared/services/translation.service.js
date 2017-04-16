@@ -20,8 +20,8 @@
             getDefaultLanguage: getDefaultLanguage
         };
 
-        function translate(message) {
-            return $translate.instant(message);
+        function translate(message, params) {
+            return $translate.instant(message, params);
         }
 
         function getLanguages() {

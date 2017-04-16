@@ -13,6 +13,6 @@
   "SERVICE_ALREADY_EXISTS": "Сервис с таким именем уже существует!",
   "CANCEL": "Отменить",
   "REQUIRED_SERVICE_ADDRESS": "Введите адрес сервиса",
-  "REGISTERED_NEW_SERVICE": "Сервис сохранен",
+  "REGISTERED_NEW_SERVICE": "Сервис {{service}} сохранен",
   "SERVICES": "Сервисы"
 }
