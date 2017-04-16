@@ -3,7 +3,7 @@
         .module('ngServiceGallery')
         .controller('RegistrationController', RegistrationController);
 
-    RegistrationController.$inject = ['$scope', 'close'];
+    RegistrationController.$inject = ['close'];
 
     function RegistrationController(close) {
         let vm = this;
