@@ -19,7 +19,7 @@
         function get(key, defaultValue) {
             let saved = $localStorage[key];
             let value = saved ? saved : defaultValue;
-            $log.debug(`Data[key="${key}", default="${defaultValue}"] was loaded with value="${value}"`);
+            $log.debug(`Data[key="${key}", default="${defaultValue}"] was loaded`);
             return value;
         }
 
