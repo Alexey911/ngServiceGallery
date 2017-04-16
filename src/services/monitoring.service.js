@@ -5,14 +5,12 @@
         .module('ngServiceGallery')
         .factory('monitoringService', monitoringService);
 
-    monitoringService.inject = ['notificationService'];
+    monitoringService.inject = ['notificationService', 'storageService'];
 
-    function monitoringService(notificationService) {
+    function monitoringService(notificationService, storageService) {
+        const SERVICE_STORAGE_KEY = 'services';
 
-        let services = [
-            {name: 'Vk', address: 'https://vk.com', description: 'Social network Vk'},
-            {name: 'Google', address: 'https://google.com', description: 'Search engine'}
-        ];
+        let services = null;
 
         return {
             getAll: getAll,
@@ -22,6 +20,7 @@
         };
 
         function getAll() {
+            services = services || storageService.get(SERVICE_STORAGE_KEY, []);
             return services;
         }
 
@@ -36,7 +35,9 @@
 
             if (!service.name) service.name = extractDomain(service.address);
 
+            //TODO: by chain of promises
             services.push(service);
+            storageService.save(SERVICE_STORAGE_KEY, services);
             notificationService.showMessage("REGISTERED_NEW_SERVICE" /*TODO: add service name*/);
         }
 
@@ -50,6 +51,7 @@
         function removeService(service) {
             let index = services.indexOf(service);
             services.splice(index, 1);
+            storageService.save(SERVICE_STORAGE_KEY, services);
         }
     }
 })();
