@@ -18,13 +18,15 @@ let paths = {
         'src/*.js',
         'src/configs/**/*.js',
         'src/services/**/*.*',
-        'src/components/**/*.js'
+        'src/components/**/*.js',
+        'src/modals/*.js'
     ],
     styles: [
         'src/assets/css/**/*.css'
     ],
     templates: [
-        'src/components/*.html'
+        'src/components/*.html',
+        'src/modals/*.html'
     ],
     translations: [
         'src/i18n/*.json'
