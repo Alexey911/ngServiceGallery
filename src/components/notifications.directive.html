@@ -1,7 +1,9 @@
-<growl-notifications></growl-notifications>
+<div>
+    <growl-notifications></growl-notifications>
 
-<div ng-repeat="(id, notification) in vm.notifications track by id">
-    <growl-notification>
-        {{notification}}
-    </growl-notification>
+    <div ng-repeat="(id, notification) in vm.notifications track by id">
+        <growl-notification>
+            {{notification}}
+        </growl-notification>
+    </div>
 </div>
