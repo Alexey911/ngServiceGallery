@@ -61,8 +61,7 @@
         }
 
         function register() {
-            ModalService.
-            showModal({
+            ModalService.showModal({
                 templateUrl: "register.view.html",
                 controllerAs: 'vm',
                 controller: "registerCtrl"

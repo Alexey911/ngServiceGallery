@@ -34,8 +34,17 @@
         function addService(service) {
             if (!service) return;
 
+            if (!service.name) service.name = extractDomain(service.address);
+
             services.push(service);
             notificationService.showMessage("REGISTERED_NEW_SERVICE" /*TODO: add service name*/);
+        }
+
+        function extractDomain(url) {
+            let s = url.indexOf('//') + 2;
+            let f = url.indexOf('/', s + 1);
+            f = (f !== -1) ? f : url.length;
+            return url.substr(s, f - s);
         }
 
         function removeService(service) {
