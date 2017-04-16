@@ -5,7 +5,7 @@
         .module('ngServiceGallery.common')
         .config(setUpLocalStorage);
 
-    setUpLocalStorage.inject = ['$localStorageProvider'];
+    setUpLocalStorage.$inject = ['$localStorageProvider'];
 
     function setUpLocalStorage($localStorageProvider) {
         $localStorageProvider.setKeyPrefix('ngServiceGallery-');

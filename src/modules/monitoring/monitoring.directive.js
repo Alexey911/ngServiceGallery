@@ -10,7 +10,7 @@
             controller: MonitoringController,
         });
 
-    MonitoringController.inject = ['ModalService', 'NgTableParams', 'monitoringService'];
+    MonitoringController.$inject = ['ModalService', 'NgTableParams', 'monitoringService'];
 
     function MonitoringController(ModalService, NgTableParams, monitoringService) {
         let vm = this;

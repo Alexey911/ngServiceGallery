@@ -5,13 +5,13 @@
         .module('ngServiceGallery.common')
         .config(setUpExceptionHandler);
 
-    setUpExceptionHandler.inject = ['$provide'];
+    setUpExceptionHandler.$inject = ['$provide'];
 
     function setUpExceptionHandler($provide) {
         $provide.decorator('$exceptionHandler', exceptionHandler);
     }
 
-    exceptionHandler.inject = ['$log', '$delegate', '$injector'];
+    exceptionHandler.$inject = ['$log', '$delegate', '$injector'];
 
     function exceptionHandler($log, $delegate, $injector) {
         return (exception, cause) => {

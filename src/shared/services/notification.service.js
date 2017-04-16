@@ -5,7 +5,7 @@
         .module('ngServiceGallery.common')
         .factory('notificationService', notificationService);
 
-    notificationService.inject = ['translationService'];
+    notificationService.$inject = ['translationService'];
 
     function notificationService(translationService) {
 

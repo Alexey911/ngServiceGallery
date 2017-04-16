@@ -3,7 +3,7 @@
         .module('ngServiceGallery.monitoring')
         .directive('uniqueService', uniqueService);
 
-    uniqueService.inject = ['monitoringService'];
+    uniqueService.$inject = ['monitoringService'];
 
     function uniqueService(monitoringService) {
         let isUniqueServiceAddress = address => !monitoringService.isRegistered(address);

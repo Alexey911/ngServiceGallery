@@ -5,7 +5,7 @@
         .module('ngServiceGallery.common')
         .factory('storageService', storageService);
 
-    storageService.inject = ['$log', '$localStorage'];
+    storageService.$inject = ['$log', '$localStorage'];
 
     function storageService($log, $localStorage) {
 

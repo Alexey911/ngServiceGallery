@@ -5,7 +5,7 @@
         .module('ngServiceGallery.common')
         .factory('translationService', translationService);
 
-    translationService.inject = ['$translate', 'storageService', 'TRANSLATION_CONFIG'];
+    translationService.$inject = ['$translate', 'storageService', 'TRANSLATION_CONFIG'];
 
     function translationService($translate, storageService, TRANSLATION_CONFIG) {
         let languages = [

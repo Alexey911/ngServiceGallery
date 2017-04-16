@@ -5,7 +5,7 @@
         .module('ngServiceGallery.monitoring')
         .factory('monitoringService', monitoringService);
 
-    monitoringService.inject = ['notificationService', 'storageService'];
+    monitoringService.$inject = ['notificationService', 'storageService'];
 
     function monitoringService(notificationService, storageService) {
         const SERVICE_STORAGE_KEY = 'services';

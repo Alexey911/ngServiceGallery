@@ -10,7 +10,7 @@
             controller: NotificationController,
         });
 
-    NotificationController.inject = ['notificationService'];
+    NotificationController.$inject = ['notificationService'];
 
     function NotificationController(notificationService) {
         let vm = this;

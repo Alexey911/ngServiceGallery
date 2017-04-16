@@ -5,7 +5,7 @@
         .module('ngServiceGallery.common')
         .factory('cryptService', cryptService);
 
-    cryptService.inject = [];
+    cryptService.$inject = [];
 
     function cryptService() {
 

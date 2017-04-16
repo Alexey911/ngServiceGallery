@@ -10,7 +10,7 @@
             controller: LangSwitcherController,
         });
 
-    LangSwitcherController.inject = ['translationService'];
+    LangSwitcherController.$inject = ['translationService'];
 
     function LangSwitcherController(translationService) {
         let vm = this;

@@ -5,7 +5,7 @@
         .module('ngServiceGallery.common')
         .config(setUpTranslations);
 
-    setUpTranslations.inject = ['$translateProvider', '$localStorageProvider', 'TRANSLATION_CONFIG'];
+    setUpTranslations.$inject = ['$translateProvider', '$localStorageProvider', 'TRANSLATION_CONFIG'];
 
     function setUpTranslations($translateProvider, $localStorageProvider, TRANSLATION_CONFIG) {
         const userLangKey = TRANSLATION_CONFIG.USER_LANGUAGE;
