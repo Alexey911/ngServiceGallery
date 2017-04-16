@@ -4,5 +4,13 @@
   "REMOVE": "Удалить",
   "REFRESH": "Перезагрузить",
   "RESET": "Сбросить",
-  "WARN": "Произошел сбой"
+  "WARN": "Произошел сбой",
+  "REGISTER": "Зарегистрировать",
+  "SERVICE_REGISTRATION": "Регистрация сервиса",
+  "SERVICE_NAME": "Название",
+  "SERVICE_ADDRESS": "Адрес",
+  "SERVICE_DESCRIPTION": "Описание",
+  "SERVICE_ALREADY_EXISTS": "Сервис с таким именем уже существует!",
+  "CANCEL": "Отменить",
+  "REQUIRED_SERVICE_ADDRESS": "Введите адрес сервиса"
 }

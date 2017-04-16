@@ -1,0 +1,18 @@
+<div>
+    <table ng-table="vm.services" class="table table-condensed table-bordered table-striped">
+        <tr ng-repeat="service in $data">
+            <td ng-cloak
+                ng-click="vm.select(service)"
+                class="row"
+                ng-attr-title="{{service.address}}">
+                {{service.name}}
+            </td>
+        </tr>
+    </table>
+    <br>
+
+    <button type="submit"
+            class="btn btn-info"
+            ng-click="vm.register()" translate>REGISTER
+    </button>
+</div>

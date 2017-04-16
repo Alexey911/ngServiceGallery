@@ -4,5 +4,13 @@
   "REMOVE": "Remove",
   "REFRESH": "Refresh",
   "RESET": "Reset",
-  "WARN": "Smth going wrong"
+  "WARN": "Smth going wrong",
+  "REGISTER": "Register",
+  "SERVICE_REGISTRATION": "Service registration",
+  "SERVICE_NAME": "Name",
+  "SERVICE_ADDRESS": "URL",
+  "SERVICE_DESCRIPTION": "Description",
+  "SERVICE_ALREADY_EXISTS": "Service with such name already exists!",
+  "CANCEL": "Cancel",
+  "REQUIRED_SERVICE_ADDRESS": "Please input service address"
 }
