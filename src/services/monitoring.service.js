@@ -35,7 +35,7 @@
             if (!service) return;
 
             services.push(service);
-            notificationService.showMessage("REGISTERED_NEW_SERVICE", /*TODO: add service name*/);
+            notificationService.showMessage("REGISTERED_NEW_SERVICE" /*TODO: add service name*/);
         }
 
         function removeService(service) {
