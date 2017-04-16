@@ -1,7 +1,7 @@
 (function () {
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.crud')
         .factory('crudService', crudService);
 
     crudService.$inject = [

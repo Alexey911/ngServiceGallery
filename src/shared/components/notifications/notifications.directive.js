@@ -2,17 +2,17 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.common')
         .component('notifications', {
             templateUrl: 'notifications.directive.html',
             restrict: 'E',
             controllerAs: 'vm',
-            controller: notificationCtrl,
+            controller: NotificationController,
         });
 
-    notificationCtrl.inject = ['notificationService'];
+    NotificationController.inject = ['notificationService'];
 
-    function notificationCtrl(notificationService) {
+    function NotificationController(notificationService) {
         let vm = this;
 
         vm.notifications = {};

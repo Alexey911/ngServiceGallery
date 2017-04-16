@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.common')
         .config(setUpExceptionHandler);
 
     setUpExceptionHandler.inject = ['$provide'];

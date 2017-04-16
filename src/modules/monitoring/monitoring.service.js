@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.monitoring')
         .factory('monitoringService', monitoringService);
 
     monitoringService.inject = ['notificationService', 'storageService'];

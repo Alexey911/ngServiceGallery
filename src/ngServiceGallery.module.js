@@ -2,12 +2,8 @@
     angular
         .module('ngServiceGallery',
             [
-                'ngTable',
-                'ngStorage',
-                'growlNotifications',
-                'angularModalService',
-                'angular-loading-bar',
-                'pascalprecht.translate'
+                'ngServiceGallery.crud',
+                'ngServiceGallery.monitoring'
             ])
         .run(startUp);
 

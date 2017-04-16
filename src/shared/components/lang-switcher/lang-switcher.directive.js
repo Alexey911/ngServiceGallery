@@ -2,17 +2,17 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.common')
         .component('langSwitcher', {
             templateUrl: 'lang-switcher.directive.html',
             restrict: 'E',
             controllerAs: 'vm',
-            controller: langSwitcherCtrl,
+            controller: LangSwitcherController,
         });
 
-    langSwitcherCtrl.inject = ['translationService'];
+    LangSwitcherController.inject = ['translationService'];
 
-    function langSwitcherCtrl(translationService) {
+    function LangSwitcherController(translationService) {
         let vm = this;
 
         vm.languages = translationService.getLanguages();

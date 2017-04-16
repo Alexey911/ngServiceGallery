@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.common')
         .factory('notificationService', notificationService);
 
     notificationService.inject = ['translationService'];

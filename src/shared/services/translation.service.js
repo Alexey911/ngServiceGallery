@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.common')
         .factory('translationService', translationService);
 
     translationService.inject = ['$translate', 'storageService', 'TRANSLATION_CONFIG'];

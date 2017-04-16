@@ -2,17 +2,17 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.monitoring')
         .component('monitoring', {
             templateUrl: 'monitoring.directive.html',
             restrict: 'E',
             controllerAs: 'vm',
-            controller: monitoringCtrl,
+            controller: MonitoringController,
         });
 
-    monitoringCtrl.inject = ['ModalService', 'NgTableParams', 'monitoringService'];
+    MonitoringController.inject = ['ModalService', 'NgTableParams', 'monitoringService'];
 
-    function monitoringCtrl(ModalService, NgTableParams, monitoringService) {
+    function MonitoringController(ModalService, NgTableParams, monitoringService) {
         let vm = this;
 
         vm.add = add;
@@ -64,7 +64,7 @@
             ModalService.showModal({
                 templateUrl: "register.view.html",
                 controllerAs: 'vm',
-                controller: "registerCtrl"
+                controller: "RegistrationController"
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close

@@ -1,15 +1,15 @@
 (function () {
 
-    angular.module('ngServiceGallery').component('crud', {
-        templateUrl: 'crud.directive.html',
+    angular.module('ngServiceGallery.crud').component('crud', {
+        templateUrl: 'crud.view.html',
         bindings: {},
         controllerAs: 'vm',
-        controller: crudCtrl
+        controller: CrudController
     });
 
-    crudCtrl.$inject = ['NgTableParams', 'crudService'];
+    CrudController.$inject = ['NgTableParams', 'crudService'];
 
-    function crudCtrl(NgTableParams, crudService) {
+    function CrudController(NgTableParams, crudService) {
         var vm = this;
         vm.save = save;
         vm.reset = reset;

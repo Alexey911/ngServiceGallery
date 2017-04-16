@@ -1,11 +1,11 @@
 (function () {
     angular
         .module('ngServiceGallery')
-        .controller('registerCtrl', registerCtrl);
+        .controller('RegistrationController', RegistrationController);
 
-    registerCtrl.inject = ['$scope', 'close'];
+    RegistrationController.inject = ['$scope', 'close'];
 
-    function registerCtrl(close) {
+    function RegistrationController(close) {
         let vm = this;
 
         vm.service = {};

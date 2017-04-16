@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.monitoring')
         .directive('uniqueService', uniqueService);
 
     uniqueService.inject = ['monitoringService'];
