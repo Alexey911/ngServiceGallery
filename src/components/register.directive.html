@@ -24,7 +24,8 @@
                                    ng-minlength="0"
                                    required
                                    unique-service
-                                   autofocus>
+                                   autofocus
+                                   autocomplete="off">
                             <span class="help-block"
                                   ng-show="registerForm.address.$invalid && registerForm.address.$touched && !registerForm.address.$error.unique"
                                   translate>REQUIRED_SERVICE_ADDRESS
@@ -42,7 +43,8 @@
                                    class="form-control"
                                    id="name"
                                    name="name"
-                                   ng-model="vm.service.name">
+                                   ng-model="vm.service.name"
+                                   autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group">
@@ -52,7 +54,8 @@
                                    class="form-control"
                                    id="description"
                                    name="description"
-                                   ng-model="vm.service.description">
+                                   ng-model="vm.service.description"
+                                   autocomplete="off">
                         </div>
                     </div>
                 </form>
