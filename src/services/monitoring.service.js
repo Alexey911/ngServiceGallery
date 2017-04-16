@@ -5,9 +5,9 @@
         .module('ngServiceGallery')
         .factory('monitoringService', monitoringService);
 
-    monitoringService.inject = [];
+    monitoringService.inject = ['notificationService'];
 
-    function monitoringService() {
+    function monitoringService(notificationService) {
 
         let services = [
             {name: 'Vk', address: 'https://vk.com', description: 'Social network Vk'},
@@ -32,7 +32,10 @@
         }
 
         function addService(service) {
+            if (!service) return;
+
             services.push(service);
+            notificationService.showMessage("REGISTERED_NEW_SERVICE", /*TODO: add service name*/);
         }
 
         function removeService(service) {

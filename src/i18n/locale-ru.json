@@ -12,5 +12,6 @@
   "SERVICE_DESCRIPTION": "Описание",
   "SERVICE_ALREADY_EXISTS": "Сервис с таким именем уже существует!",
   "CANCEL": "Отменить",
-  "REQUIRED_SERVICE_ADDRESS": "Введите адрес сервиса"
+  "REQUIRED_SERVICE_ADDRESS": "Введите адрес сервиса",
+  "REGISTERED_NEW_SERVICE": "Сервис сохранен"
 }

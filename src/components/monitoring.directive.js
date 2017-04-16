@@ -60,10 +60,7 @@
                 controller: "registerCtrl"
             }).then(function (modal) {
                 modal.element.modal();
-                modal.close.then(function (result) {
-
-                    console.log(result);
-                });
+                modal.close.then(monitoringService.addService);
             });
         }
     }

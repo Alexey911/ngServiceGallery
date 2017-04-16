@@ -25,7 +25,8 @@
         function showMessage(message) {
             if (!message) return;
 
-            let notification = {id: lastMessageId++, message: message};
+            let localized = translationService.translate(message);
+            let notification = {id: lastMessageId++, message: localized};
 
             subscribers.forEach(
                 subscriber => subscriber.call(subscriber, notification)
@@ -33,8 +34,7 @@
         }
 
         function warn() {
-            let message = translationService.translate('WARN');
-            showMessage(message);
+            showMessage('WARN');
         }
     }
 })();
