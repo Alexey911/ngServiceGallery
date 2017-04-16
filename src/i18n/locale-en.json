@@ -13,5 +13,6 @@
   "SERVICE_ALREADY_EXISTS": "Service with such name already exists!",
   "CANCEL": "Cancel",
   "REQUIRED_SERVICE_ADDRESS": "Please input service address",
-  "REGISTERED_NEW_SERVICE": "Service was saved"
+  "REGISTERED_NEW_SERVICE": "Service was saved",
+  "SERVICES": "Services"
 }

@@ -20,6 +20,7 @@
         vm.select = select;
         vm.refresh = refresh;
         vm.register = register;
+        vm.update = update;
 
         activate();
 
@@ -43,7 +44,8 @@
         }
 
         function remove(service) {
-            monitoringService.remove(service);
+            monitoringService.removeService(service);
+            refresh();
         }
 
         function getAll() {
@@ -59,7 +61,8 @@
         }
 
         function register() {
-            ModalService.showModal({
+            ModalService.
+            showModal({
                 templateUrl: "register.view.html",
                 controllerAs: 'vm',
                 controller: "registerCtrl"
@@ -69,6 +72,10 @@
                     .then(monitoringService.addService)
                     .then(refresh);
             });
+        }
+
+        function update(service) {
+            /*TODO*/
         }
     }
 })();
