@@ -18,6 +18,7 @@
         vm.add = add;
         vm.remove = remove;
         vm.select = select;
+        vm.refresh = refresh;
         vm.register = register;
 
         activate();
@@ -53,6 +54,10 @@
             vm.service = service;
         }
 
+        function refresh() {
+            vm.services.reload();
+        }
+
         function register() {
             ModalService.showModal({
                 templateUrl: "register.view.html",
@@ -60,7 +65,9 @@
                 controller: "registerCtrl"
             }).then(function (modal) {
                 modal.element.modal();
-                modal.close.then(monitoringService.addService);
+                modal.close
+                    .then(monitoringService.addService)
+                    .then(refresh);
             });
         }
     }
