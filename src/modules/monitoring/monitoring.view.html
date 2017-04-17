@@ -1,19 +1,16 @@
 <div>
     <h3 translate>SERVICES</h3>
-    <table ng-table="vm.services" class="table table-condensed table-bordered table-striped general-view">
-        <tr ng-repeat="service in $data">
-            <td ng-cloak
-                ng-click="vm.select(service)"
-                class="row"
-                ng-attr-title="{{service.address}}" style="cursor: pointer">
-                <div class="row">
-                    <span class="col-sm-3">{{service.name}}</span>
-                    <span class="col-sm-5">{{service.description | limitTo:30}}</span>
-                    <span class="col-sm-4" style="float: right; text-align: right">
-                        <button class="btn-link btn-xs" ng-click="vm.update(service)" translate>EDIT</button>
-                        <button class="btn-link btn-xs" ng-click="vm.remove(service)" translate>REMOVE</button>
-                    </span>
-                </div>
+    <table ng-table="vm.services" class="table table-condensed table-striped general-view">
+        <tr class="row"
+            ng-repeat="service in $data"
+            ng-click="vm.select(service)"
+            style="cursor:pointer;min-height:25px"
+            ng-attr-title="{{service.address}}">
+            <td class="col-sm-2" ng-cloak>{{service.name}}</td>
+            <td class="col-sm-6" ng-cloak style="color: gray">{{service.description | limitTo:30}}</td>
+            <td class="col-sm-4" style="text-align:right">
+                <button class="btn-link btn-xs" ng-click="vm.update(service)" translate>EDIT</button>
+                <button class="btn-link btn-xs" ng-click="vm.remove(service)" translate>REMOVE</button>
             </td>
         </tr>
     </table>
