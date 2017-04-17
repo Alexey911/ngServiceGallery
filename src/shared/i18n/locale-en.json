@@ -9,6 +9,8 @@
   "REGISTER": "Register",
   "SERVICE_REGISTRATION": "Service registration",
   "SERVICE_EDITING": "Service editing",
+  "SERVICE_DELETION": "Service deletion",
+  "SERVICE_DELETION_CONFIRM": "Service {{name}} will be removed",
   "SERVICE_NAME": "Name",
   "SERVICE_ADDRESS": "URL",
   "SERVICE_DESCRIPTION": "Description",
@@ -19,5 +21,7 @@
   "SERVICES": "Services",
   "WATCH": "Watch",
   "PAUSE": "Pause",
-  "MILLISECOND": " ms."
+  "MILLISECOND": " ms.",
+  "YES": "Yes",
+  "NO": "No"
 }

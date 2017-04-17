@@ -66,6 +66,7 @@
         }
 
         function removeService(service) {
+            pingService.remove(service);
             let index = services.indexOf(service);
             services.splice(index, 1);
             storageService.save(SERVICE_STORAGE_KEY, services);

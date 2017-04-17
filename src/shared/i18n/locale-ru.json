@@ -9,6 +9,8 @@
   "REGISTER": "Регистрация",
   "SERVICE_REGISTRATION": "Регистрация сервиса",
   "SERVICE_EDITING": "Редактирование сервиса",
+  "SERVICE_DELETION": "Удаление сервиса",
+  "SERVICE_DELETION_CONFIRM": "Сервис {{name}} будет удален",
   "SERVICE_NAME": "Название",
   "SERVICE_ADDRESS": "Адрес",
   "SERVICE_DESCRIPTION": "Описание",
@@ -19,5 +21,7 @@
   "SERVICES": "Сервисы",
   "WATCH": "Начать",
   "PAUSE": "Приостановить",
-  "MILLISECOND": " мс."
+  "MILLISECOND": " мс.",
+  "YES": "Да",
+  "NO": "Нет"
 }

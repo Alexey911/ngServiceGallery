@@ -56,8 +56,8 @@
 
             if (!timers.has(key)) return;
 
-            let timer = timers.get(key);
-            tryToStopTimer(timer);
+            let config = timers.get(key);
+            tryToStopTimer(config.settings.timer);
             timers.delete(key);
         }
 

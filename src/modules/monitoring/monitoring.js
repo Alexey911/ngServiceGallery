@@ -60,11 +60,6 @@
             monitoringService.start();
         }
 
-        function remove(service) {
-            monitoringService.removeService(service);
-            refresh();
-        }
-
         function getAll() {
             return monitoringService.getAll();
         }
@@ -84,6 +79,24 @@
                 }
             }
             vm.services.reload();
+        }
+
+        function remove(service) {
+            ModalService.showModal({
+                templateUrl: "delete.view.html",
+                controllerAs: 'vm',
+                controller: "DeletionController",
+                inputs: {service: service}
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close
+                    .then(confirm => {
+                        if (confirm) {
+                            monitoringService.removeService(service);
+                        }
+                    })
+                    .then(refresh);
+            });
         }
 
         function register() {
