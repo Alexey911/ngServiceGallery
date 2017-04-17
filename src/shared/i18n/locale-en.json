@@ -2,6 +2,7 @@
   "CREATE": "Create",
   "UPDATE": "Update",
   "REMOVE": "Remove",
+  "EDIT": "Edit",
   "REFRESH": "Refresh",
   "RESET": "Reset",
   "WARN": "Smth going wrong",

@@ -3,9 +3,9 @@
         .module('ngServiceGallery')
         .controller('UpdateController', UpdateController);
 
-    UpdateController.$inject = ['close', 'service', '$stateParams'];
+    UpdateController.$inject = ['close', '$stateParams', 'service'];
 
-    function UpdateController(close, service, $stateParams) {
+    function UpdateController(close, $stateParams, service) {
         let vm = this;
 
         vm.cancel = onCancel;

@@ -87,10 +87,18 @@
                 templateUrl: "service.view.html",
                 controllerAs: 'vm',
                 controller: "UpdateController",
-                inputs: {service: service}
+                inputs: {service: angular.copy(service)}
             }).then(function (modal) {
                 modal.element.modal();
-                modal.close.then(refresh);
+                modal.close
+                    .then(function (modified) {
+                        if (!modified) return;
+
+                        service.name = modified.name;
+                        service.address = modified.address;
+                        service.description = modified.description;
+                    })
+                    .then(refresh);
             });
         }
     }
