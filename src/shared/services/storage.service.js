@@ -19,13 +19,13 @@
         function get(key, defaultValue) {
             let saved = $localStorage[key];
             let value = saved ? saved : defaultValue;
-            $log.debug(`Data[key="${key}", default="${defaultValue}"] was loaded`);
+            $log.debug(`Data[key="${key}"] was loaded`);
             return value;
         }
 
         function save(key, value) {
             $localStorage[key] = value;
-            $log.debug(`Data[key="${key}", value="${value}"] was saved`);
+            $log.debug(`Data[key="${key}"] was saved`);
         }
 
         function remove(key) {
