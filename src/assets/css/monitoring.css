@@ -5,17 +5,3 @@
 .general-view thead {
     display: none;
 }
-
-ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-ul li span {
-    float: left;
-    width: 100px;
-}
-
-.nowrap {
-    white-space: nowrap;
-}

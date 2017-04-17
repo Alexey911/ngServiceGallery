@@ -6,20 +6,19 @@
                 ng-click="vm.select(service)"
                 class="row"
                 ng-attr-title="{{service.address}}" style="cursor: pointer">
-                <ul>
-                    <li><span style="padding-left: 10px">{{service.name}}</span></li>
-                    <li><span class="nowrap" style="color: grey">{{service.description | limitTo:30}}</span></li>
-                    <li>
-                        <span class="nowrap" style="float: right;">
-                            <button class="btn-link btn-xs" ng-click="vm.update(service)" translate>EDIT</button>
-                            <button class="btn-link btn-xs" ng-click="vm.remove(service)" translate>REMOVE</button>
-                        </span>
-                    </li>
-                </ul>
+                <div class="row">
+                    <span class="col-sm-3">{{service.name}}</span>
+                    <span class="col-sm-5">{{service.description | limitTo:30}}</span>
+                    <span class="col-sm-4" style="float: right; text-align: right">
+                        <button class="btn-link btn-xs" ng-click="vm.update(service)" translate>EDIT</button>
+                        <button class="btn-link btn-xs" ng-click="vm.remove(service)" translate>REMOVE</button>
+                    </span>
+                </div>
             </td>
         </tr>
     </table>
     <br>
+
     <div class="monitoring-actions">
         <button type="submit"
                 class="btn btn-info"
