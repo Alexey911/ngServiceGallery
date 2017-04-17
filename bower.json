@@ -8,7 +8,6 @@
   "dependencies": {
     "ng-table": "2.0.2",
     "web-pingjs": "latest",
-    "ngCordova": "v0.1.14-alpha",
     "angular-translate": "v2.15.1",
     "angular-translate-loader-static-files": "v2.15.1",
     "bootstrap": "latest",
