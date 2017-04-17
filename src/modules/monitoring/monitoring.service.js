@@ -52,10 +52,7 @@
             services.push(service);
             storageService.save(SERVICE_STORAGE_KEY, services);
 
-            notificationService.showMessage(
-                "REGISTERED_NEW_SERVICE",
-                {'service': service.name}
-            );
+            notificationService.showMessage("REGISTERED_NEW_SERVICE", service);
         }
 
         function extractDomain(url) {
@@ -70,6 +67,7 @@
             let index = services.indexOf(service);
             services.splice(index, 1);
             storageService.save(SERVICE_STORAGE_KEY, services);
+            notificationService.showMessage("SERVICE_WAS_REMOVED", service);
         }
     }
 })();
