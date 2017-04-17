@@ -8,7 +8,8 @@
                         data-dismiss="modal"
                         aria-hidden="true">&times;
                 </button>
-                <h4 class="modal-title" translate>SERVICE_REGISTRATION</h4>
+                <h4 class="modal-title" translate ng-cloak ng-show="vm.mode === 'register'">SERVICE_REGISTRATION</h4>
+                <h4 class="modal-title" translate ng-cloak ng-show="vm.mode === 'editing'">SERVICE_EDITING</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form" name="registerForm" novalidate>
@@ -64,9 +65,9 @@
                 <button type="button"
                         class="btn btn-primary"
                         data-dismiss="modal"
-                        ng-click="vm.register()"
+                        ng-click="vm.submit()"
                         ng-disabled="registerForm.$invalid"
-                        translate>REGISTER
+                        ng-cloak>{{(vm.mode === 'register' ? 'REGISTER' : 'UPDATE') | translate}}
                 </button>
                 <button type="button"
                         ng-click="vm.cancel()"

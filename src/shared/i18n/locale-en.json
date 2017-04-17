@@ -7,6 +7,7 @@
   "WARN": "Smth going wrong",
   "REGISTER": "Register",
   "SERVICE_REGISTRATION": "Service registration",
+  "SERVICE_EDITING": "Service editing",
   "SERVICE_NAME": "Name",
   "SERVICE_ADDRESS": "URL",
   "SERVICE_DESCRIPTION": "Description",

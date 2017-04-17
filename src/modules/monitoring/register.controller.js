@@ -8,9 +8,15 @@
     function RegistrationController(close) {
         let vm = this;
 
-        vm.service = {};
         vm.cancel = onCancel;
-        vm.register = register;
+        vm.submit = register;
+
+        activate();
+
+        function activate() {
+            vm.service = {};
+            vm.mode = 'register';
+        }
 
         function onCancel() {
             close(null, 500)

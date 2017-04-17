@@ -15,7 +15,7 @@
         return {
             getAll: getAll,
             addService: addService,
-            isRegistered: isRegistered,
+            isFreeAddress: isFreeAddress,
             removeService: removeService
         };
 
@@ -24,10 +24,10 @@
             return services;
         }
 
-        function isRegistered(address) {
-            return services
+        function isFreeAddress(address, owner) {
+            return address === owner || services
                     .filter(registered => registered.address === address)
-                    .length > 0;
+                    .length === 0;
         }
 
         function addService(service) {

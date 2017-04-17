@@ -3,18 +3,17 @@
         .module('ngServiceGallery.monitoring')
         .directive('uniqueService', uniqueService);
 
-    uniqueService.$inject = ['monitoringService'];
+    uniqueService.$inject = ['monitoringService', '$stateParams'];
 
-    function uniqueService(monitoringService) {
-        let isUniqueServiceAddress = address => !monitoringService.isRegistered(address);
+    function uniqueService(monitoringService, $stateParams) {
+
+        let isValidServiceAddress = address => monitoringService.isFreeAddress(address, $stateParams.owner);
 
         return {
             require: 'ngModel',
             restrict: "A",
             link: function ($scope, element, attributes, ctrl) {
-                if (ctrl) {
-                    ctrl.$validators.unique = isUniqueServiceAddress;
-                }
+                ctrl.$validators.unique = isValidServiceAddress;
             }
         };
     }

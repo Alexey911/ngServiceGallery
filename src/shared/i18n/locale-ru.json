@@ -7,6 +7,7 @@
   "WARN": "Произошел сбой",
   "REGISTER": "Зарегистрировать",
   "SERVICE_REGISTRATION": "Регистрация сервиса",
+  "SERVICE_EDITING": "Редактирование сервиса",
   "SERVICE_NAME": "Название",
   "SERVICE_ADDRESS": "Адрес",
   "SERVICE_DESCRIPTION": "Описание",

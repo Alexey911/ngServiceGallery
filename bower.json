@@ -16,7 +16,8 @@
     "ngstorage": "latest",
     "cryptojslib": "latest",
     "angular-mocks": "1.5.11",
-    "angular-loading-bar": "0.9.0"
+    "angular-loading-bar": "0.9.0",
+    "angular-ui-router": "latest"
   },
   "resolutions": {
     "angular": ">= 1.5"

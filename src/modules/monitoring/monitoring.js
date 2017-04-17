@@ -71,7 +71,7 @@
 
         function register() {
             ModalService.showModal({
-                templateUrl: "register.view.html",
+                templateUrl: "service.view.html",
                 controllerAs: 'vm',
                 controller: "RegistrationController"
             }).then(function (modal) {
@@ -83,7 +83,15 @@
         }
 
         function update(service) {
-            /*TODO*/
+            ModalService.showModal({
+                templateUrl: "service.view.html",
+                controllerAs: 'vm',
+                controller: "UpdateController",
+                inputs: {service: service}
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(refresh);
+            });
         }
     }
 })();
