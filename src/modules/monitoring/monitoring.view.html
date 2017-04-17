@@ -1,25 +1,28 @@
 <div>
     <h3 translate>SERVICES</h3>
-    <table ng-table="vm.services" class="table table-condensed table-bordered table-striped">
+    <table ng-table="vm.services" class="table table-condensed table-bordered table-striped general-view">
         <tr ng-repeat="service in $data">
             <td ng-cloak
                 ng-click="vm.select(service)"
                 class="row"
                 ng-attr-title="{{service.address}}">
                 {{service.name}}<span style="padding: 0 10px 0 10px; color: grey">{{service.description | limitTo:30}}</span>
-                <button class="btn btn-sm" ng-click="vm.update(service)" translate>EDIT</button>
-                <button class="btn btn-sm" ng-click="vm.remove(service)" translate>REMOVE</button>
+                <span class="service-actions">
+                    <button class="btn-link btn-xs" ng-click="vm.update(service)" translate>EDIT</button>
+                    <button class="btn-link btn-xs" ng-click="vm.remove(service)" translate>REMOVE</button>
+                </span>
             </td>
         </tr>
     </table>
     <br>
-
-    <button type="submit"
-            class="btn btn-info"
-            ng-click="vm.register()" translate>REGISTER
-    </button>
-    <button type="submit"
-            class="btn btn-info"
-            ng-click="vm.refresh()" translate>REFRESH
-    </button>
+    <div class="monitoring-actions">
+        <button type="submit"
+                class="btn btn-info"
+                ng-click="vm.register()" translate>REGISTER
+        </button>
+        <button type="submit"
+                class="btn btn-info"
+                ng-click="vm.refresh()" translate>REFRESH
+        </button>
+    </div>
 </div>

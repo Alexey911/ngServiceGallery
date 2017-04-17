@@ -1,5 +1,6 @@
-<div class="col-md-10 col-md-offset-10">
-    <select ng-options="lang.title for lang in vm.languages"
+<div style="float:right">
+    <select class="form-control input-sm"
+            ng-options="lang.title for lang in vm.languages"
             ng-model="vm.lang"
             ng-change="vm.changeLanguage()">
     </select>
