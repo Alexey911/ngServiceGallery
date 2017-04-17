@@ -16,5 +16,8 @@
   "CANCEL": "Отменить",
   "REQUIRED_SERVICE_ADDRESS": "Введите адрес сервиса",
   "REGISTERED_NEW_SERVICE": "Сервис {{service}} сохранен",
-  "SERVICES": "Сервисы"
+  "SERVICES": "Сервисы",
+  "WATCH": "Начать",
+  "PAUSE": "Приостановить",
+  "MILLISECOND": " мс."
 }

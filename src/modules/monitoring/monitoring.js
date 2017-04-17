@@ -15,12 +15,13 @@
     function MonitoringController(ModalService, NgTableParams, monitoringService) {
         let vm = this;
 
-        vm.add = add;
         vm.remove = remove;
-        vm.select = select;
         vm.refresh = refresh;
         vm.register = register;
         vm.update = update;
+        vm.pause = pause;
+        vm.start = start;
+        vm.color = color;
 
         activate();
 
@@ -36,11 +37,27 @@
                     paginationMaxBlocks: 5
                 }
             );
-            vm.service = undefined;
         }
 
-        function add(service) {
-            monitoringService.add(service);
+        function color(ping) {
+            let red = {color: "red"};
+            let dark = {color: "darkRed"};
+            let green = {color: "green"};
+            let orange = {color: "orange"};
+
+            if (ping === -1) {
+                return red;
+            } else if (ping < 350.0) {
+                return green;
+            } else if (ping < 1000.0) {
+                return orange;
+            }
+
+            return dark;
+        }
+
+        function start() {
+            monitoringService.start();
         }
 
         function remove(service) {
@@ -52,8 +69,8 @@
             return monitoringService.getAll();
         }
 
-        function select(service) {
-            vm.service = service;
+        function pause() {
+            monitoringService.pause();
         }
 
         function refresh() {

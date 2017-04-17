@@ -14,7 +14,10 @@
   "SERVICE_DESCRIPTION": "Description",
   "SERVICE_ALREADY_EXISTS": "Service with such name already exists!",
   "CANCEL": "Cancel",
-  "REQUIRED_SERVICE_ADDRESS": "Please input service address",
+  "REQUIRED_SERVICE_ADDRESS": "Please input valid service address",
   "REGISTERED_NEW_SERVICE": "Service {{service}} was saved",
-  "SERVICES": "Services"
+  "SERVICES": "Services",
+  "WATCH": "Watch",
+  "PAUSE": "Pause",
+  "MILLISECOND": " ms."
 }

@@ -5,19 +5,30 @@
         .module('ngServiceGallery.monitoring')
         .factory('monitoringService', monitoringService);
 
-    monitoringService.$inject = ['notificationService', 'storageService'];
+    monitoringService.$inject = ['notificationService', 'storageService', 'pingService'];
 
-    function monitoringService(notificationService, storageService) {
+    function monitoringService(notificationService, storageService, pingService) {
         const SERVICE_STORAGE_KEY = 'services';
 
         let services = null;
 
         return {
+            start: start,
+            pause: pause,
             getAll: getAll,
             addService: addService,
             isFreeAddress: isFreeAddress,
             removeService: removeService
         };
+
+        function start() {
+            getAll().forEach(pingService.register);
+            pingService.start();
+        }
+
+        function pause() {
+            pingService.stop();
+        }
 
         function getAll() {
             services = services || storageService.get(SERVICE_STORAGE_KEY, []);
@@ -34,6 +45,8 @@
             if (!service) return;
 
             if (!service.name) service.name = extractDomain(service.address);
+
+            service.id = new Date().getMilliseconds();
 
             //TODO: by chain of promises
             services.push(service);
