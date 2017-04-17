@@ -51,6 +51,8 @@
                 return green;
             } else if (ping < 1000.0) {
                 return orange;
+            } else if (ping < 2000.0) {
+                return red;
             }
 
             return dark;

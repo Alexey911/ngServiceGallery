@@ -53,6 +53,9 @@
             storageService.save(SERVICE_STORAGE_KEY, services);
 
             notificationService.showMessage("REGISTERED_NEW_SERVICE", service);
+
+            pingService.register(service);
+            pingService.start();
         }
 
         function extractDomain(url) {
