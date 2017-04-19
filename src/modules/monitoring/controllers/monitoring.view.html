@@ -11,6 +11,7 @@
                 <span ng-show="service.ping" ng-style="vm.color(service.ping)">{{service.ping}}</span>
                 <span ng-show="service.ping" style="color: grey;" translate>MILLISECOND</span>
                 <span ng-show="!service.ping" style="color: lightgrey" translate>UNKNOWN</span>
+                <span ng-show="service.ping === -1" style="color: indianred" translate>FAILED</span>
             </td>
             <td class="col-sm-4" ng-cloak style="color: grey">{{service.description | limitTo:30}}</td>
             <td class="col-sm-4" style="text-align:right">

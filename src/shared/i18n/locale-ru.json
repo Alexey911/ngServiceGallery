@@ -21,6 +21,7 @@
   "SERVICE_WAS_REMOVED": "Сервис {{name}} был удален",
   "WEAK_RESPONSE": "Сервис {{name}} медленно отвечает",
   "UNKNOWN": "неизвестен",
+  "FAILED": "недоступен",
   "SERVICES": "Сервисы",
   "FORCE": "Обновить",
   "WATCH": "Начать",

@@ -34,8 +34,17 @@
 
             let config = {
                 service: service,
+                statistics: {
+                    fails: 0,
+                    attempts: 0,
+                    commonTime: 0,
+                    min: undefined,
+                    avg: undefined,
+                    max: undefined,
+                },
                 settings: {
-                    timer: undefined
+                    timer: undefined,
+                    frequency: 2500
                 }
             };
             timers.set(service.id, config);
@@ -46,7 +55,9 @@
 
             for (let config of timers.values()) {
                 if (!hasExecutor(config.service)) {
-                    config.settings.timer = $interval(() => sendPing(config), 2500);
+                    config.settings.timer = $interval(() => sendPing(config),
+                        config.settings.frequency
+                    );
                 }
             }
         }
@@ -97,12 +108,31 @@
                     notificationService.showMessage('WEAK_RESPONSE', service)
                 }
 
+                recountStatistics(config, delta);
                 subscriber(service);
-            }).catch(function () {
+            }).catch(function (/*TODO: never called*/) {
                 service.ping = -1;
-
+                recountStatistics(config);
                 subscriber(service);
             });
+        }
+
+        function recountStatistics(config, ping) {
+            let statistics = config.statistics;
+
+            if (ping) {
+                statistics.attempts += 1;
+                statistics.commonTime += ping;
+
+                statistics.avg = statistics.commonTime / statistics.attempts;
+
+                if (ping > statistics.max || !statistics.max) statistics.max = ping;
+                if (ping < statistics.min || !statistics.min) statistics.min = ping;
+            } else {
+                statistics.fails += 1;
+            }
+
+            $log.info(config);
         }
     }
 })();

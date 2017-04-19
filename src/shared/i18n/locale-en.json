@@ -21,6 +21,7 @@
   "SERVICE_WAS_REMOVED": "Service {{name}} was removed",
   "WEAK_RESPONSE": "Service {{name}} has weak response",
   "UNKNOWN": "unknown",
+  "FAILED": "failed",
   "FORCE": "Force",
   "SERVICES": "Services",
   "WATCH": "Watch",

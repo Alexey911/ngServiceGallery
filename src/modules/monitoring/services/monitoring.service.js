@@ -71,6 +71,8 @@
             notificationService.showMessage("REGISTERED_NEW_SERVICE", service);
 
             pingService.register(service);
+
+            //TODO: change on single call
             pingService.start();
         }
 
