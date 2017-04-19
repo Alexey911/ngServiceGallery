@@ -8,9 +8,9 @@
             ng-attr-title="{{service.address}}">
             <td class="col-sm-2" ng-cloak>{{service.name}}</td>
             <td class="col-sm-2" ng-cloak>
-                <span ng-style="vm.color(service.ping)">{{service.ping}}</span>
-                <span ng-show="service.ping > 0" style="color: grey;" translate>MILLISECOND</span>
-                <span ng-show="!service.ping" style="color: lightgrey">unknown</span>
+                <span ng-show="service.ping" ng-style="vm.color(service.ping)">{{service.ping}}</span>
+                <span ng-show="service.ping" style="color: grey;" translate>MILLISECOND</span>
+                <span ng-show="!service.ping" style="color: lightgrey" translate>UNKNOWN</span>
             </td>
             <td class="col-sm-4" ng-cloak style="color: grey">{{service.description | limitTo:30}}</td>
             <td class="col-sm-4" style="text-align:right">

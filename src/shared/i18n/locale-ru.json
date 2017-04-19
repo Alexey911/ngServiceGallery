@@ -20,6 +20,7 @@
   "REGISTERED_NEW_SERVICE": "Сервис {{name}} сохранен",
   "SERVICE_WAS_REMOVED": "Сервис {{name}} был удален",
   "WEAK_RESPONSE": "Сервис {{name}} медленно отвечает",
+  "UNKNOWN": "неизвестен",
   "SERVICES": "Сервисы",
   "FORCE": "Обновить",
   "WATCH": "Начать",

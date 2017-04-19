@@ -20,17 +20,18 @@
             refresh: refresh,
             addService: addService,
             isFreeAddress: isFreeAddress,
-            removeService: removeService
+            removeService: removeService,
+            resetStatistics: resetStatistics
         };
 
         function setUp(subscriber) {
-            getAll().forEach(resetPing);
+            getAll().forEach(resetStatistics);
             getAll().forEach(pingService.register);
             pingService.subscribe(subscriber);
         }
 
-        function resetPing(service) {
-            service.ping = 0;
+        function resetStatistics(service) {
+            service.ping = undefined;
         }
 
         function start() {

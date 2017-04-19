@@ -138,6 +138,8 @@
                         service.name = modified.name;
                         service.address = modified.address;
                         service.description = modified.description;
+
+                        monitoringService.resetStatistics(service);
                     })
                     .then(refresh);
             });

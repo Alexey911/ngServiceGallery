@@ -93,7 +93,7 @@
             ping(service.address).then(function (delta) {
                 service.ping = delta;
 
-                if (delta < 350.0) {
+                if (delta >= 3500.0) {
                     notificationService.showMessage('WEAK_RESPONSE', service)
                 }
 
