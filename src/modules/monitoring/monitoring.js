@@ -15,8 +15,8 @@
     function MonitoringController(ModalService, NgTableParams, monitoringService) {
         let vm = this;
 
+        vm.force = force;
         vm.remove = remove;
-        vm.refresh = refresh;
         vm.register = register;
         vm.update = update;
         vm.pause = pause;
@@ -56,6 +56,10 @@
             }
 
             return dark;
+        }
+
+        function force() {
+            monitoringService.refresh();
         }
 
         function start() {

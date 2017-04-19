@@ -5,15 +5,16 @@
         .module('ngServiceGallery.monitoring')
         .factory('pingService', pingService);
 
-    pingService.$inject = ['$log', '$interval'];
+    pingService.$inject = ['$log', '$interval', 'notificationService'];
 
-    function pingService($log, $interval) {
+    function pingService($log, $interval, notificationService) {
 
         let timers = new Map();
 
         return {
             stop: stop,
             start: start,
+            force: force,
             remove: remove,
             register: register,
         };
@@ -40,6 +41,10 @@
                     config.settings.timer = $interval(() => sendPing(config), 2500);
                 }
             }
+        }
+
+        function force() {
+            for (let config of timers.values()) sendPing(config);
         }
 
         function stop() {
@@ -79,6 +84,11 @@
 
             ping(service.address).then(function (delta) {
                 service.ping = delta;
+
+                if (delta < 350.0) {
+                    notificationService.showMessage('WEAK_RESPONSE', service)
+                }
+
             }).catch(function () {
                 service.ping = -1;
             });

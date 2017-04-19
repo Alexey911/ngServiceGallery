@@ -12,17 +12,23 @@
 
         let services = null;
 
+        activate();
+
         return {
             start: start,
             pause: pause,
             getAll: getAll,
+            refresh: refresh,
             addService: addService,
             isFreeAddress: isFreeAddress,
             removeService: removeService
         };
 
-        function start() {
+        function activate(){
             getAll().forEach(pingService.register);
+        }
+
+        function start() {
             pingService.start();
         }
 
@@ -33,6 +39,10 @@
         function getAll() {
             services = services || storageService.get(SERVICE_STORAGE_KEY, []);
             return services;
+        }
+
+        function refresh() {
+            pingService.force();
         }
 
         function isFreeAddress(address, owner) {

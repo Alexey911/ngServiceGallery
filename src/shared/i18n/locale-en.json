@@ -19,6 +19,8 @@
   "REQUIRED_SERVICE_ADDRESS": "Please input valid service address",
   "REGISTERED_NEW_SERVICE": "Service {{name}} was saved",
   "SERVICE_WAS_REMOVED": "Service {{name}} was removed",
+  "WEAK_RESPONSE": "Service {{name}} has weak response",
+  "FORCE": "Force",
   "SERVICES": "Services",
   "WATCH": "Watch",
   "PAUSE": "Pause",
