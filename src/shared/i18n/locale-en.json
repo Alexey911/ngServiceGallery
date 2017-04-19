@@ -29,5 +29,5 @@
   "MILLISECOND": " ms.",
   "YES": "Yes",
   "NO": "No",
-  "RESPONSE_TIME_NOTE": "Notes: It would be better to use purposefully wrong web-service api for better approximation of response time as ping"
+  "RESPONSE_TIME_NOTE": "Note: it would be better to use fastest methods of api for better approximation responses as ping."
 }
