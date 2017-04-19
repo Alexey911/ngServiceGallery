@@ -33,7 +33,10 @@ let paths = {
             'src/shared/components/lang-switcher/*.html',
             'src/shared/components/notifications/*.html'
         ],
-        monitoring: ['src/modules/monitoring/*.html']
+        monitoring: [
+            'src/modules/monitoring/modals/*.html',
+            'src/modules/monitoring/controllers/*.html'
+        ]
     },
     translations: [
         'src/shared/i18n/*.json'
@@ -86,7 +89,7 @@ gulp.task('build', ['clean'], function () {
         .pipe(gulp.dest(srcDest));
 });
 
-function concatArrays(/*arrays*/) {
+function concatArrays() {
     let result = [];
 
     for (let i in arguments) {
