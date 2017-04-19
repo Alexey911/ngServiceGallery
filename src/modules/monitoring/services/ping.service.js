@@ -131,8 +131,6 @@
             } else {
                 statistics.fails += 1;
             }
-
-            $log.info(config);
         }
     }
 })();

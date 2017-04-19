@@ -28,5 +28,6 @@
   "PAUSE": "Pause",
   "MILLISECOND": " ms.",
   "YES": "Yes",
-  "NO": "No"
+  "NO": "No",
+  "RESPONSE_TIME_NOTE": "Notes: It would be better to use purposefully wrong web-service api for better approximation of response time as ping"
 }
