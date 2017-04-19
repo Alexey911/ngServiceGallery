@@ -21,7 +21,8 @@
             addService: addService,
             isFreeAddress: isFreeAddress,
             removeService: removeService,
-            resetStatistics: resetStatistics
+            resetStatistics: resetStatistics,
+            getCommonStatistic: getCommonStatistic
         };
 
         function setUp(subscriber) {
@@ -74,6 +75,10 @@
 
             //TODO: change on single call
             pingService.start();
+        }
+
+        function getCommonStatistic() {
+            return pingService.getStatistic();
         }
 
         function extractDomain(url) {

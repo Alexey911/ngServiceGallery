@@ -9,6 +9,7 @@
 
     function pingService($log, $interval, notificationService) {
 
+        //TODO: rename
         let timers = new Map();
 
         //TODO: change notification-subscriber binding way
@@ -21,6 +22,7 @@
             remove: remove,
             register: register,
             subscribe: subscribe,
+            getStatistic: getStatistic,
         };
 
         function subscribe(item) {
@@ -131,6 +133,23 @@
             } else {
                 statistics.fails += 1;
             }
+        }
+
+        function getStatistic() {
+            let statistic = {fast: 0, medium: 0, slow: 0};
+
+            for (let config of timers.values()) {
+                const avg = config.statistics.avg;
+
+                if (avg < 350) {
+                    statistic.fast += 1;
+                } else if (avg < 1000) {
+                    statistic.medium += 1;
+                } else if (avg < 3500) {
+                    statistic.slow += 1;
+                }
+            }
+            return statistic;
         }
     }
 })();

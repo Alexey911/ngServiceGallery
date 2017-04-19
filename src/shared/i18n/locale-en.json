@@ -10,7 +10,7 @@
   "SERVICE_REGISTRATION": "Service registration",
   "SERVICE_EDITING": "Service editing",
   "SERVICE_DELETION": "Service deletion",
-  "SERVICE_DELETION_CONFIRM": "Service {{name}} will be removed",
+  "SERVICE_DELETION_CONFIRM": "Are you sure to remove {{name}}?",
   "SERVICE_NAME": "Name",
   "SERVICE_ADDRESS": "URL",
   "SERVICE_DESCRIPTION": "Description",
@@ -23,11 +23,12 @@
   "UNKNOWN": "unknown",
   "FAILED": "failed",
   "FORCE": "Force",
-  "SERVICES": "Services",
+  "SERVICES": "WEB Services",
   "WATCH": "Watch",
   "PAUSE": "Pause",
   "MILLISECOND": " ms.",
   "YES": "Yes",
   "NO": "No",
-  "RESPONSE_TIME_NOTE": "Note: it would be better to use fastest methods of api for better approximation responses as ping."
+  "RESPONSE_TIME_NOTE": "Note: it would be better to use fastest methods of api for better approximation responses as ping",
+  "COMMON_SERVICE_STATISTICS": "fast {{fast}}, medium {{medium}}, slow {{slow}}"
 }

@@ -1,5 +1,14 @@
 <div>
-    <h3 translate>SERVICES</h3>
+    <div class="row">
+        <div class="col-sm-4">
+            <h3 style="color:dimgrey;white-space:nowrap" translate>SERVICES</h3>
+        </div>
+        <div class="col-sm-6">
+            <span ng-show="vm.statistic" ng-cloak style="float: right; color: darkgrey" class="h6">
+                {{'COMMON_SERVICE_STATISTICS' | translate:vm.statistic}}
+            </span>
+        </div>
+    </div>
     <table ng-table="vm.services" class="table table-condensed table-striped general-view">
         <tr class="row"
             ng-repeat="service in $data"

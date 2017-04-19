@@ -38,6 +38,7 @@
                     paginationMaxBlocks: 5
                 }
             );
+            vm.statistic = undefined;
         }
 
         function subscribeOnNotifications() {
@@ -90,6 +91,7 @@
                 }
             }
             vm.services.reload();
+            vm.statistic = monitoringService.getCommonStatistic();
         }
 
         function remove(service) {
