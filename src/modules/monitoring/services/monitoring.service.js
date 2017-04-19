@@ -12,9 +12,8 @@
 
         let services = null;
 
-        activate();
-
         return {
+            setUp: setUp,
             start: start,
             pause: pause,
             getAll: getAll,
@@ -24,8 +23,14 @@
             removeService: removeService
         };
 
-        function activate(){
+        function setUp(subscriber) {
+            getAll().forEach(resetPing);
             getAll().forEach(pingService.register);
+            pingService.subscribe(subscriber);
+        }
+
+        function resetPing(service) {
+            service.ping = 0;
         }
 
         function start() {

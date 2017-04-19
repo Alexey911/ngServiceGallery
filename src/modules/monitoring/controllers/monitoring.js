@@ -22,6 +22,7 @@
         vm.pause = pause;
         vm.start = start;
         vm.color = color;
+        vm.$onInit = subscribeOnNotifications;
 
         activate();
 
@@ -37,6 +38,10 @@
                     paginationMaxBlocks: 5
                 }
             );
+        }
+
+        function subscribeOnNotifications() {
+            monitoringService.setUp(refresh);
         }
 
         function color(ping) {

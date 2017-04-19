@@ -11,13 +11,21 @@
 
         let timers = new Map();
 
+        //TODO: change notification-subscriber binding way
+        let subscriber = null;
+
         return {
             stop: stop,
             start: start,
             force: force,
             remove: remove,
             register: register,
+            subscribe: subscribe,
         };
+
+        function subscribe(item) {
+            subscriber = item;
+        }
 
         function register(service) {
             if (timers.has(service.id)) return;
@@ -89,8 +97,11 @@
                     notificationService.showMessage('WEAK_RESPONSE', service)
                 }
 
+                subscriber(service);
             }).catch(function () {
                 service.ping = -1;
+
+                subscriber(service);
             });
         }
     }
