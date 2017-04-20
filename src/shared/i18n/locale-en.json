@@ -29,6 +29,6 @@
   "MILLISECOND": " ms.",
   "YES": "Yes",
   "NO": "No",
-  "RESPONSE_TIME_NOTE": "Note: it would be better to use fastest methods of api for better approximation responses as ping",
+  "RESPONSE_TIME_WARNING": "Warning: it would be better to use fastest methods of api for better approximation responses as ping",
   "COMMON_SERVICE_STATISTICS": "fast {{fast}}, medium {{medium}}, slow {{slow}}"
 }
