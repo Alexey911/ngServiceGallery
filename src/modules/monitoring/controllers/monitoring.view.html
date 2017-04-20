@@ -12,10 +12,9 @@
     <table ng-table="vm.services" class="table table-condensed table-striped general-view">
         <tr class="row"
             ng-repeat="service in $data"
-            ng-click="vm.select(service)"
             style="cursor:pointer"
             ng-attr-title="{{service.address}}">
-            <td class="col-sm-2" ng-cloak>{{service.name}}</td>
+            <td class="col-sm-2" ng-cloak ng-click="vm.show(service)">{{service.name}}</td>
             <td class="col-sm-2" ng-cloak>
                 <span ng-show="service.ping" ng-style="vm.color(service.ping)">{{service.ping}}</span>
                 <span ng-show="service.ping" style="color: grey;" translate>MILLISECOND</span>

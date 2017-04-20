@@ -15,6 +15,7 @@
     function MonitoringController(ModalService, NgTableParams, monitoringService) {
         let vm = this;
 
+        vm.show = show;
         vm.force = force;
         vm.remove = remove;
         vm.register = register;
@@ -145,6 +146,17 @@
                         monitoringService.update(service);
                     })
                     .then(refresh);
+            });
+        }
+
+        function show(service) {
+            ModalService.showModal({
+                templateUrl: "info.view.html",
+                controllerAs: 'vm',
+                controller: "ServiceInfoController",
+                inputs: {service: service}
+            }).then(function (modal) {
+                modal.element.modal();
             });
         }
     }
