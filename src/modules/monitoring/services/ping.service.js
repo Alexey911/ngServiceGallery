@@ -56,6 +56,7 @@
             const config = timers.get(service.id);
 
             tryStopTimer(config.settings.timer);
+            config.settings = {};
             startTimer(config);
         }
 
