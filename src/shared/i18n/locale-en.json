@@ -1,8 +1,8 @@
 {
   "CREATE": "Create",
   "UPDATE": "Update",
-  "REMOVE": "Remove",
-  "EDIT": "Edit",
+  "REMOVE": "remove",
+  "EDIT": "edit",
   "REFRESH": "Refresh",
   "RESET": "Reset",
   "WARN": "Smth going wrong",
