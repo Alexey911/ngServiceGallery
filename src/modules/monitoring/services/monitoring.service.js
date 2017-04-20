@@ -18,6 +18,7 @@
             pause: pause,
             getAll: getAll,
             refresh: refresh,
+            update: update,
             addService: addService,
             isFreeAddress: isFreeAddress,
             removeService: removeService,
@@ -33,6 +34,11 @@
 
         function resetStatistics(service) {
             service.ping = undefined;
+        }
+
+        function update(service) {
+            resetStatistics(service);
+            pingService.update(service);
         }
 
         function start() {

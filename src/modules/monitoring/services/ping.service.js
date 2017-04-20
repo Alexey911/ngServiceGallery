@@ -19,6 +19,7 @@
             stop: stop,
             start: start,
             force: force,
+            update: update,
             remove: remove,
             register: register,
             subscribe: subscribe,
@@ -45,22 +46,32 @@
                     max: undefined,
                 },
                 settings: {
-                    timer: undefined,
-                    frequency: 2500
+                    timer: undefined
                 }
             };
             timers.set(service.id, config);
+        }
+
+        function update(service) {
+            const config = timers.get(service.id);
+
+            tryStopTimer(config.settings.timer);
+            startTimer(config);
         }
 
         function start() {
             $log.info(`Start ping`);
 
             for (let config of timers.values()) {
-                if (!hasExecutor(config.service)) {
-                    config.settings.timer = $interval(() => sendPing(config),
-                        config.settings.frequency
-                    );
-                }
+                startTimer(config);
+            }
+        }
+
+        function startTimer(config) {
+            if (!hasExecutor(config.service)) {
+                config.settings.timer = $interval(() => sendPing(config),
+                    config.service.frequency
+                );
             }
         }
 
@@ -72,7 +83,7 @@
             $log.info(`Stop ping`);
 
             for (let config of timers.values()) {
-                tryToStopTimer(config.settings.timer);
+                tryStopTimer(config.settings.timer);
                 config.settings.timer = undefined;
             }
         }
@@ -83,11 +94,11 @@
             if (!timers.has(key)) return;
 
             let config = timers.get(key);
-            tryToStopTimer(config.settings.timer);
+            tryStopTimer(config.settings.timer);
             timers.delete(key);
         }
 
-        function tryToStopTimer(timer) {
+        function tryStopTimer(timer) {
             if (angular.isDefined(timer)) {
                 $interval.cancel(timer);
             }

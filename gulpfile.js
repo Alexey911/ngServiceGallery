@@ -22,6 +22,7 @@ let paths = {
         'src/shared/components/**/*.js',
         'src/modules/crud/ngServiceGallery.crud.module.js',
         'src/modules/monitoring/ngServiceGallery.monitoring.module.js',
+        'src/modules/monitoring/configs/*.js',
         'src/modules/**/*.js'
     ],
     styles: [

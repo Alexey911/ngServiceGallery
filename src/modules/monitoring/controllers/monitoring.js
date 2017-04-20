@@ -140,8 +140,9 @@
                         service.name = modified.name;
                         service.address = modified.address;
                         service.description = modified.description;
+                        service.frequency = modified.frequency;
 
-                        monitoringService.resetStatistics(service);
+                        monitoringService.update(service);
                     })
                     .then(refresh);
             });
