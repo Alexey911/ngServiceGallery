@@ -54,7 +54,7 @@
             return modals.showEdit(service)
                 .then(modified => copyServiceFields(modified, service))
                 .then(resetPing)
-                .then(pingService.update);
+                .then(pingService.reset);
         }
 
         function save(service) {

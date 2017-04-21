@@ -10,33 +10,32 @@
     function pingService($log, $interval, notificationService) {
 
         //TODO: rename
-        let timers = new Map();
+        let services = new Map();
 
-        //TODO: change notification-subscriber binding way
-        let subscriber = null;
+        let subscribers = [];
 
         return {
             stop: stop,
             start: start,
             force: force,
-            update: update,
+            reset: reset,
             remove: remove,
             register: register,
             subscribe: subscribe,
             getSummary: getSummary,
         };
 
-        function subscribe(item) {
-            subscriber = item;
+        function subscribe(subscriber) {
+            subscribers.push(subscriber);
         }
 
         function register(service) {
-            if (timers.has(service.id)) return;
+            if (services.has(service.id)) return;
 
             $log.debug(`Service[name=${service.name}] was registered for ping`);
 
             let config = {
-                service: service,
+                original: service,
                 statistics: {
                     fails: 0,
                     attempts: 0,
@@ -49,42 +48,47 @@
                     timer: undefined
                 }
             };
-            timers.set(service.id, config);
-        }
-
-        function update(service) {
-            const config = timers.get(service.id);
-
-            tryStopTimer(config.settings.timer);
-            config.settings = {};
-            startTimer(config);
+            services.set(service.id, config);
         }
 
         function start() {
             $log.info(`Start ping`);
 
-            for (let config of timers.values()) {
+            for (let config of services.values()) {
                 startTimer(config);
             }
         }
 
         function startTimer(config) {
-            if (!hasExecutor(config.service)) {
+            if (!hasExecutor(config.original)) {
                 config.settings.timer = $interval(() => sendPing(config),
-                    config.service.frequency
+                    config.original.frequency
                 );
             }
         }
 
+        function hasExecutor(service) {
+            let id = service.id;
+            return services.has(id) && angular.isDefined(services.get(id).settings.timer);
+        }
+
         function force() {
-            for (let config of timers.values()) sendPing(config);
+            for (let config of services.values()) sendPing(config);
+        }
+
+        function reset(service) {
+            const config = services.get(service.id);
+
+            tryStop(config.settings.timer);
+            config.settings = {};
+            startTimer(config);
         }
 
         function stop() {
             $log.info(`Stop ping`);
 
-            for (let config of timers.values()) {
-                tryStopTimer(config.settings.timer);
+            for (let config of services.values()) {
+                tryStop(config.settings.timer);
                 config.settings.timer = undefined;
             }
         }
@@ -92,26 +96,21 @@
         function remove(service) {
             let key = service.id;
 
-            if (!timers.has(key)) return;
+            if (!services.has(key)) return;
 
-            let config = timers.get(key);
-            tryStopTimer(config.settings.timer);
-            timers.delete(key);
+            let config = services.get(key);
+            tryStop(config.settings.timer);
+            services.delete(key);
         }
 
-        function tryStopTimer(timer) {
+        function tryStop(timer) {
             if (angular.isDefined(timer)) {
                 $interval.cancel(timer);
             }
         }
 
-        function hasExecutor(service) {
-            let id = service.id;
-            return timers.has(id) && angular.isDefined(timers.get(id).settings.timer);
-        }
-
         function sendPing(config) {
-            let service = config.service;
+            let service = config.original;
 
             $log.debug(`Staring ping for Service[name=${service.name}]`);
 
@@ -124,11 +123,11 @@
                 }
 
                 recountStatistics(config, delta);
-                subscriber(service);
+                notify(service);
             }).catch(function (/*TODO: never called*/) {
                 service.ping = -1;
                 recountStatistics(config);
-                subscriber(service);
+                notify(service);
             });
         }
 
@@ -170,7 +169,7 @@
         function getSummary() {
             let summary = {fast: 0, medium: 0, slow: 0};
 
-            for (let config of timers.values()) {
+            for (let config of services.values()) {
                 const avg = config.statistics.avg;
 
                 if (avg < 350) {
@@ -182,6 +181,10 @@
                 }
             }
             return summary;
+        }
+
+        function notify(service) {
+            subscribers.forEach(subscriber => subscriber(service));
         }
     }
 })();
