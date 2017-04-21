@@ -104,17 +104,7 @@
         }
 
         function remove(service) {
-            ModalService.showModal({
-                templateUrl: "delete.view.html",
-                controllerAs: 'vm',
-                controller: "DeletionController",
-                inputs: {service: service}
-            }).then(function (modal) {
-                modal.element.modal();
-                modal.close
-                    .then(confirm => confirm && monitoringService.removeService(service))
-                    .then(refresh);
-            });
+            monitoringService.remove(service).then(refresh);
         }
 
         function update(service) {

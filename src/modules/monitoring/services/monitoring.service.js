@@ -20,6 +20,7 @@
             getAll: getAll,
             refresh: refresh,
             update: update,
+            remove:remove,
             register: register,
             isFreeAddress: isFreeAddress,
             removeService: removeService,
@@ -53,6 +54,21 @@
                 controller: "ServiceInfoController",
                 inputs: {service: service}
             })
+        }
+
+        function remove(service) {
+            return removalForm(service)
+                .then(open)
+                .then(confirm => confirm && removeService(service));
+        }
+
+        function removalForm(service) {
+            return ModalService.showModal({
+                templateUrl: "delete.view.html",
+                controllerAs: 'vm',
+                controller: "DeletionController",
+                inputs: {service: service}
+            });
         }
 
         function open(modal) {
