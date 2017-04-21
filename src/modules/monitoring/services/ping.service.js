@@ -9,7 +9,6 @@
 
     function pingService($log, $interval, notificationService) {
 
-        //TODO: rename
         let services = new Map();
 
         let subscribers = [];
@@ -34,7 +33,8 @@
 
             $log.debug(`Service[name=${service.name}] was registered for ping`);
 
-            let config = {
+            let data = {
+                timer: undefined,
                 original: service,
                 statistics: {
                     fails: 0,
@@ -43,12 +43,9 @@
                     min: undefined,
                     avg: undefined,
                     max: undefined,
-                },
-                settings: {
-                    timer: undefined
                 }
             };
-            services.set(service.id, config);
+            services.set(service.id, data);
         }
 
         function start() {
@@ -61,15 +58,13 @@
 
         function startTimer(config) {
             if (!hasExecutor(config.original)) {
-                config.settings.timer = $interval(() => sendPing(config),
-                    config.original.frequency
-                );
+                config.timer = $interval(() => sendPing(config), config.original.frequency);
             }
         }
 
         function hasExecutor(service) {
             let id = service.id;
-            return services.has(id) && angular.isDefined(services.get(id).settings.timer);
+            return services.has(id) && angular.isDefined(services.get(id).timer);
         }
 
         function force() {
@@ -79,8 +74,8 @@
         function reset(service) {
             const config = services.get(service.id);
 
-            tryStop(config.settings.timer);
-            config.settings = {};
+            tryStop(config.timer);
+            config.timer = undefined;
             startTimer(config);
         }
 
@@ -88,8 +83,8 @@
             $log.info(`Stop ping`);
 
             for (let config of services.values()) {
-                tryStop(config.settings.timer);
-                config.settings.timer = undefined;
+                tryStop(config.timer);
+                config.timer = undefined;
             }
         }
 
@@ -99,7 +94,7 @@
             if (!services.has(key)) return;
 
             let config = services.get(key);
-            tryStop(config.settings.timer);
+            tryStop(config.timer);
             services.delete(key);
         }
 
