@@ -10,16 +10,16 @@
             controller: MonitoringController,
         });
 
-    MonitoringController.$inject = ['ModalService', 'NgTableParams', 'monitoringService'];
+    MonitoringController.$inject = ['NgTableParams', 'monitoringService'];
 
-    function MonitoringController(ModalService, NgTableParams, monitoringService) {
+    function MonitoringController(NgTableParams, monitoringService) {
         let vm = this;
 
         vm.show = show;
+        vm.edit = edit;
         vm.force = force;
         vm.remove = remove;
         vm.register = register;
-        vm.update = update;
         vm.pause = pause;
         vm.start = start;
         vm.color = color;
@@ -81,6 +81,28 @@
             monitoringService.pause();
         }
 
+        function register() {
+            monitoringService
+                .register()
+                .then(refresh);
+        }
+
+        function show(service) {
+            monitoringService.show(service);
+        }
+
+        function remove(service) {
+            monitoringService
+                .remove(service)
+                .then(refresh);
+        }
+
+        function edit(service) {
+            monitoringService
+                .edit(service)
+                .then(refresh);
+        }
+
         function refresh() {
             /* The table has previous state in this place,
              if there's single item & current page isn't first - manual page changing.
@@ -93,41 +115,6 @@
             }
             vm.services.reload();
             vm.summary = monitoringService.getCommonStatistic();
-        }
-
-        function register() {
-            monitoringService.register().then(refresh);
-        }
-
-        function show(service) {
-            monitoringService.show(service);
-        }
-
-        function remove(service) {
-            monitoringService.remove(service).then(refresh);
-        }
-
-        function update(service) {
-            ModalService.showModal({
-                templateUrl: "service.view.html",
-                controllerAs: 'vm',
-                controller: "EditController",
-                inputs: {service: angular.copy(service)}
-            }).then(function (modal) {
-                modal.element.modal();
-                modal.close
-                    .then(function (modified) {
-                        if (!modified) return;
-
-                        service.name = modified.name;
-                        service.address = modified.address;
-                        service.description = modified.description;
-                        service.frequency = modified.frequency;
-
-                        monitoringService.update(service);
-                    })
-                    .then(refresh);
-            });
         }
     }
 })();

@@ -14,16 +14,15 @@
 
         return {
             show: show,
+            edit: edit,
             setUp: setUp,
             start: start,
             pause: pause,
             getAll: getAll,
             refresh: refresh,
-            update: update,
-            remove:remove,
+            remove: remove,
             register: register,
             isFreeAddress: isFreeAddress,
-            removeService: removeService,
             resetStatistics: resetStatistics,
             getCommonStatistic: getCommonStatistic
         };
@@ -68,6 +67,33 @@
                 controllerAs: 'vm',
                 controller: "DeletionController",
                 inputs: {service: service}
+            });
+        }
+
+        function edit(service) {
+            return editingForm(service)
+                .then(open)
+                .then(modified => copyServiceFields(modified, service))
+                .then(update);
+        }
+
+        function copyServiceFields(source, target) {
+            if (!source) return;
+
+            target.name = source.name;
+            target.address = source.address;
+            target.description = source.description;
+            target.frequency = source.frequency;
+
+            return target;
+        }
+
+        function editingForm(service) {
+            return ModalService.showModal({
+                templateUrl: "service.view.html",
+                controllerAs: 'vm',
+                controller: "EditController",
+                inputs: {service: angular.copy(service)}
             });
         }
 
