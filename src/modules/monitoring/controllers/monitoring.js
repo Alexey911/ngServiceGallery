@@ -10,9 +10,9 @@
             controller: MonitoringController,
         });
 
-    MonitoringController.$inject = ['NgTableParams', 'monitoringService'];
+    MonitoringController.$inject = ['NgTableParams', 'monitoringService', 'pingService'];
 
-    function MonitoringController(NgTableParams, monitoringService) {
+    function MonitoringController(NgTableParams, monitoringService, pingService) {
         let vm = this;
 
         vm.stop = stop;
@@ -44,11 +44,11 @@
         }
 
         function start() {
-            monitoringService.start();
+            pingService.start();
         }
 
         function stop() {
-            monitoringService.stop();
+            pingService.stop();
         }
 
         function show(service) {
@@ -56,7 +56,7 @@
         }
 
         function force() {
-            monitoringService.force();
+            pingService.force();
         }
 
         function edit(service) {
@@ -88,7 +88,7 @@
                 }
             }
             vm.services.reload();
-            vm.summary = monitoringService.getSummary();
+            vm.summary = pingService.getSummary();
         }
     }
 })();

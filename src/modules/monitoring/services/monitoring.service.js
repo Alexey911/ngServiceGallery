@@ -16,14 +16,10 @@
         return {
             show: show,
             edit: edit,
-            stop: stop,
-            force: force,
-            start: start,
             getAll: getAll,
             remove: remove,
             register: register,
             subscribe: subscribe,
-            getSummary: getSummary,
             isBusyAddress: isBusyAddress
         };
 
@@ -36,18 +32,6 @@
             return modals.showSummary(service);
         }
 
-        function start() {
-            pingService.start();
-        }
-
-        function stop() {
-            pingService.stop();
-        }
-
-        function force() {
-            pingService.force();
-        }
-
         function getAll() {
             services = services || storageService.get(MONITORING_CONFIG.SERVICES, []);
             return services;
@@ -55,10 +39,6 @@
 
         function subscribe(subscriber) {
             pingService.subscribe(subscriber);
-        }
-
-        function getSummary() {
-            return pingService.getSummary();
         }
 
         function register() {
