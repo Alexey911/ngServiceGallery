@@ -5,9 +5,9 @@
         .module('ngServiceGallery.monitoring')
         .factory('monitoringService', monitoringService);
 
-    monitoringService.$inject = ['notificationService', 'storageService', 'pingService'];
+    monitoringService.$inject = ['ModalService', 'notificationService', 'storageService', 'pingService'];
 
-    function monitoringService(notificationService, storageService, pingService) {
+    function monitoringService(ModalService, notificationService, storageService, pingService) {
         const SERVICE_STORAGE_KEY = 'services';
 
         let services = null;
@@ -19,12 +19,31 @@
             getAll: getAll,
             refresh: refresh,
             update: update,
-            addService: addService,
+            register: register,
             isFreeAddress: isFreeAddress,
             removeService: removeService,
             resetStatistics: resetStatistics,
             getCommonStatistic: getCommonStatistic
         };
+
+        function register() {
+            return registrationForm()
+                .then(open)
+                .then(addService);
+        }
+
+        function registrationForm() {
+            return ModalService.showModal({
+                templateUrl: "service.view.html",
+                controllerAs: 'vm',
+                controller: "RegistrationController"
+            });
+        }
+
+        function open(modal) {
+            modal.element.modal();
+            return modal.close;
+        }
 
         function setUp(subscriber) {
             getAll().forEach(resetStatistics);

@@ -96,16 +96,9 @@
         }
 
         function register() {
-            ModalService.showModal({
-                templateUrl: "service.view.html",
-                controllerAs: 'vm',
-                controller: "RegistrationController"
-            }).then(function (modal) {
-                modal.element.modal();
-                modal.close
-                    .then(monitoringService.addService)
-                    .then(refresh);
-            });
+            monitoringService
+                .register()
+                .then(refresh);
         }
 
         function show(service) {
