@@ -13,6 +13,7 @@
         let services = null;
 
         return {
+            show: show,
             setUp: setUp,
             start: start,
             pause: pause,
@@ -38,6 +39,20 @@
                 controllerAs: 'vm',
                 controller: "RegistrationController"
             });
+        }
+
+        function show(service) {
+            return summaryForm(service)
+                .then(open);
+        }
+
+        function summaryForm(service) {
+            return ModalService.showModal({
+                templateUrl: "info.view.html",
+                controllerAs: 'vm',
+                controller: "ServiceInfoController",
+                inputs: {service: service}
+            })
         }
 
         function open(modal) {

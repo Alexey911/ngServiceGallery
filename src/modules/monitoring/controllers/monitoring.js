@@ -96,20 +96,11 @@
         }
 
         function register() {
-            monitoringService
-                .register()
-                .then(refresh);
+            monitoringService.register().then(refresh);
         }
 
         function show(service) {
-            ModalService.showModal({
-                templateUrl: "info.view.html",
-                controllerAs: 'vm',
-                controller: "ServiceInfoController",
-                inputs: {service: service}
-            }).then(function (modal) {
-                modal.element.modal();
-            });
+            monitoringService.show(service);
         }
 
         function remove(service) {
