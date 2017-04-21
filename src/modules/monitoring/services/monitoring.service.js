@@ -11,44 +11,119 @@
 
         let services = null;
 
+        setUp();
+
         return {
             show: show,
             edit: edit,
-            start: start,
             stop: stop,
-            getAll: getAll,
             force: force,
+            start: start,
+            getAll: getAll,
             remove: remove,
             register: register,
-            isFreeAddress: isFreeAddress,
-            resetStatistics: resetStatistics,
             subscribe: subscribe,
-            getSummary: getSummary
+            getSummary: getSummary,
+            isBusyAddress: isBusyAddress
         };
 
-        function subscribe(subscriber) {
-            getAll().forEach(resetStatistics);
+        function setUp() {
+            getAll().forEach(resetPing);
             getAll().forEach(pingService.register);
-            pingService.subscribe(subscriber);
-        }
-
-        function register() {
-            return modals.showRegistry().then(addService);
         }
 
         function show(service) {
             return modals.showSummary(service);
         }
 
+        function start() {
+            pingService.start();
+        }
+
+        function stop() {
+            pingService.stop();
+        }
+
+        function force() {
+            pingService.force();
+        }
+
+        function getAll() {
+            services = services || storageService.get(MONITORING_CONFIG.SERVICES, []);
+            return services;
+        }
+
+        function subscribe(subscriber) {
+            pingService.subscribe(subscriber);
+        }
+
+        function getSummary() {
+            return pingService.getSummary();
+        }
+
+        function register() {
+            return modals.showRegistry().then(save);
+        }
+
         function remove(service) {
             return modals.showRemove(service)
-                .then(confirm => confirm && removeService(service));
+                .then(confirm => confirm && unregisterAndRemove(service));
         }
 
         function edit(service) {
             return modals.showEdit(service)
                 .then(modified => copyServiceFields(modified, service))
-                .then(update);
+                .then(resetPing)
+                .then(pingService.update);
+        }
+
+        function save(service) {
+            if (!service) return;
+
+            if (!service.name) service.name = extractDomain(service.address);
+
+            service.id = new Date().getMilliseconds();
+
+            services.push(service);
+            saveChanges();
+
+            //TODO: change on single call
+            pingService.register(service);
+            pingService.start();
+
+            notificationService.showMessage('REGISTERED_NEW_SERVICE', service);
+        }
+
+        function unregisterAndRemove(service) {
+            pingService.remove(service);
+
+            let index = services.indexOf(service);
+            services.splice(index, 1);
+
+            saveChanges();
+            notificationService.showMessage('SERVICE_WAS_REMOVED', service);
+        }
+
+        function isBusyAddress(address, owner) {
+            return address !== owner && services
+                    .filter(registered => registered.address === address)
+                    .length > 0;
+        }
+
+        function saveChanges() {
+            storageService.save(MONITORING_CONFIG.SERVICES, services);
+        }
+
+        function resetPing(service) {
+            service.ping = undefined;
+            return service;
+        }
+
+        function extractDomain(url) {
+            let s = url.indexOf('//') + 2;
+            let f = url.indexOf('/', s + 1);
+            f = (f !== -1) ? f : url.length;
+            return url.substr(s, f - s);
         }
 
         function copyServiceFields(source, target) {
@@ -60,76 +135,6 @@
             target.frequency = source.frequency;
 
             return target;
-        }
-
-        function resetStatistics(service) {
-            service.ping = undefined;
-        }
-
-        function update(service) {
-            resetStatistics(service);
-            pingService.update(service);
-        }
-
-        function start() {
-            pingService.start();
-        }
-
-        function stop() {
-            pingService.stop();
-        }
-
-        function getAll() {
-            services = services || storageService.get(MONITORING_CONFIG.SERVICES, []);
-            return services;
-        }
-
-        function force() {
-            pingService.force();
-        }
-
-        function isFreeAddress(address, owner) {
-            return address === owner || services
-                    .filter(registered => registered.address === address)
-                    .length === 0;
-        }
-
-        function addService(service) {
-            if (!service) return;
-
-            if (!service.name) service.name = extractDomain(service.address);
-
-            service.id = new Date().getMilliseconds();
-
-            //TODO: by chain of promises
-            services.push(service);
-            storageService.save(MONITORING_CONFIG.SERVICES, services);
-
-            notificationService.showMessage('REGISTERED_NEW_SERVICE', service);
-
-            pingService.register(service);
-
-            //TODO: change on single call
-            pingService.start();
-        }
-
-        function getSummary() {
-            return pingService.getStatistic();
-        }
-
-        function extractDomain(url) {
-            let s = url.indexOf('//') + 2;
-            let f = url.indexOf('/', s + 1);
-            f = (f !== -1) ? f : url.length;
-            return url.substr(s, f - s);
-        }
-
-        function removeService(service) {
-            pingService.remove(service);
-            let index = services.indexOf(service);
-            services.splice(index, 1);
-            storageService.save(MONITORING_CONFIG.SERVICES, services);
-            notificationService.showMessage('SERVICE_WAS_REMOVED', service);
         }
     }
 })();

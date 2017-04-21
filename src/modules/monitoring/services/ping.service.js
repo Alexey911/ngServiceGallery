@@ -23,7 +23,7 @@
             remove: remove,
             register: register,
             subscribe: subscribe,
-            getStatistic: getStatistic,
+            getSummary: getSummary,
         };
 
         function subscribe(item) {
@@ -167,21 +167,21 @@
             }
         }
 
-        function getStatistic() {
-            let statistic = {fast: 0, medium: 0, slow: 0};
+        function getSummary() {
+            let summary = {fast: 0, medium: 0, slow: 0};
 
             for (let config of timers.values()) {
                 const avg = config.statistics.avg;
 
                 if (avg < 350) {
-                    statistic.fast += 1;
+                    summary.fast += 1;
                 } else if (avg < 1000) {
-                    statistic.medium += 1;
+                    summary.medium += 1;
                 } else if (avg < 3500) {
-                    statistic.slow += 1;
+                    summary.slow += 1;
                 }
             }
-            return statistic;
+            return summary;
         }
     }
 })();

@@ -7,7 +7,7 @@
 
     function uniqueService(monitoringService, $stateParams) {
 
-        let isValidServiceAddress = address => monitoringService.isFreeAddress(address, $stateParams.owner);
+        let isValidServiceAddress = address => !monitoringService.isBusyAddress(address, $stateParams.owner);
 
         return {
             require: 'ngModel',
