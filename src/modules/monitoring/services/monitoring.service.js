@@ -5,10 +5,9 @@
         .module('ngServiceGallery.monitoring')
         .factory('monitoringService', monitoringService);
 
-    monitoringService.$inject = ['modals', 'notificationService', 'storageService', 'pingService'];
+    monitoringService.$inject = ['MONITORING_CONFIG', 'modals', 'notificationService', 'storageService', 'pingService'];
 
-    function monitoringService(modals, notificationService, storageService, pingService) {
-        const SERVICE_STORAGE_KEY = 'services';
+    function monitoringService(MONITORING_CONFIG, modals, notificationService, storageService, pingService) {
 
         let services = null;
 
@@ -81,7 +80,7 @@
         }
 
         function getAll() {
-            services = services || storageService.get(SERVICE_STORAGE_KEY, []);
+            services = services || storageService.get(MONITORING_CONFIG.SERVICES, []);
             return services;
         }
 
@@ -104,7 +103,7 @@
 
             //TODO: by chain of promises
             services.push(service);
-            storageService.save(SERVICE_STORAGE_KEY, services);
+            storageService.save(MONITORING_CONFIG.SERVICES, services);
 
             notificationService.showMessage("REGISTERED_NEW_SERVICE", service);
 
@@ -129,7 +128,7 @@
             pingService.remove(service);
             let index = services.indexOf(service);
             services.splice(index, 1);
-            storageService.save(SERVICE_STORAGE_KEY, services);
+            storageService.save(MONITORING_CONFIG.SERVICES, services);
             notificationService.showMessage("SERVICE_WAS_REMOVED", service);
         }
     }
