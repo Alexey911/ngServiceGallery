@@ -15,60 +15,54 @@
     function MonitoringController(NgTableParams, monitoringService) {
         let vm = this;
 
+        vm.stop = stop;
         vm.show = show;
         vm.edit = edit;
+        vm.start = start;
         vm.force = force;
         vm.remove = remove;
         vm.register = register;
-        vm.pause = pause;
-        vm.start = start;
-        vm.$onInit = subscribeOnNotifications;
 
         activate();
 
         function activate() {
+            vm.summary = undefined;
+
             vm.services = new NgTableParams(
                 {
                     count: 5
                 },
                 {
-                    dataset: getAll(),
                     counts: [5, 10, 25],
                     paginationMinBlocks: 1,
-                    paginationMaxBlocks: 5
+                    paginationMaxBlocks: 5,
+                    dataset: monitoringService.getAll()
                 }
             );
-            vm.summary = undefined;
-        }
 
-        function subscribeOnNotifications() {
-            monitoringService.setUp(refresh);
-        }
-
-        function force() {
-            monitoringService.force();
+            monitoringService.subscribe(refresh)
         }
 
         function start() {
             monitoringService.start();
         }
 
-        function getAll() {
-            return monitoringService.getAll();
-        }
-
-        function pause() {
-            monitoringService.pause();
-        }
-
-        function register() {
-            monitoringService
-                .register()
-                .then(refresh);
+        function stop() {
+            monitoringService.stop();
         }
 
         function show(service) {
             monitoringService.show(service);
+        }
+
+        function force() {
+            monitoringService.force();
+        }
+
+        function edit(service) {
+            monitoringService
+                .edit(service)
+                .then(refresh);
         }
 
         function remove(service) {
@@ -77,9 +71,9 @@
                 .then(refresh);
         }
 
-        function edit(service) {
+        function register() {
             monitoringService
-                .edit(service)
+                .register()
                 .then(refresh);
         }
 

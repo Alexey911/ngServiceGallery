@@ -15,17 +15,23 @@
         return {
             show: show,
             edit: edit,
-            setUp: setUp,
             start: start,
-            pause: pause,
+            stop: stop,
             getAll: getAll,
             force: force,
             remove: remove,
             register: register,
             isFreeAddress: isFreeAddress,
             resetStatistics: resetStatistics,
+            subscribe: subscribe,
             getSummary: getSummary
         };
+
+        function subscribe(subscriber) {
+            getAll().forEach(resetStatistics);
+            getAll().forEach(pingService.register);
+            pingService.subscribe(subscriber);
+        }
 
         function register() {
             return modals.showRegistry().then(addService);
@@ -57,12 +63,6 @@
             return target;
         }
 
-        function setUp(subscriber) {
-            getAll().forEach(resetStatistics);
-            getAll().forEach(pingService.register);
-            pingService.subscribe(subscriber);
-        }
-
         function resetStatistics(service) {
             service.ping = undefined;
         }
@@ -76,7 +76,7 @@
             pingService.start();
         }
 
-        function pause() {
+        function stop() {
             pingService.stop();
         }
 
