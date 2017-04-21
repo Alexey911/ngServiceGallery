@@ -1,11 +1,11 @@
 (function () {
     angular
         .module('ngServiceGallery')
-        .controller('UpdateController', UpdateController);
+        .controller('EditController', EditController);
 
-    UpdateController.$inject = ['close', '$stateParams', 'service'];
+    EditController.$inject = ['close', '$stateParams', 'service'];
 
-    function UpdateController(close, $stateParams, service) {
+    function EditController(close, $stateParams, service) {
         let vm = this;
 
         vm.cancel = onCancel;

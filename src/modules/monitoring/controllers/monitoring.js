@@ -39,7 +39,7 @@
                     paginationMaxBlocks: 5
                 }
             );
-            vm.statistic = undefined;
+            vm.summary = undefined;
         }
 
         function subscribeOnNotifications() {
@@ -92,25 +92,7 @@
                 }
             }
             vm.services.reload();
-            vm.statistic = monitoringService.getCommonStatistic();
-        }
-
-        function remove(service) {
-            ModalService.showModal({
-                templateUrl: "delete.view.html",
-                controllerAs: 'vm',
-                controller: "DeletionController",
-                inputs: {service: service}
-            }).then(function (modal) {
-                modal.element.modal();
-                modal.close
-                    .then(confirm => {
-                        if (confirm) {
-                            monitoringService.removeService(service);
-                        }
-                    })
-                    .then(refresh);
-            });
+            vm.summary = monitoringService.getCommonStatistic();
         }
 
         function register() {
@@ -126,11 +108,36 @@
             });
         }
 
+        function show(service) {
+            ModalService.showModal({
+                templateUrl: "info.view.html",
+                controllerAs: 'vm',
+                controller: "ServiceInfoController",
+                inputs: {service: service}
+            }).then(function (modal) {
+                modal.element.modal();
+            });
+        }
+
+        function remove(service) {
+            ModalService.showModal({
+                templateUrl: "delete.view.html",
+                controllerAs: 'vm',
+                controller: "DeletionController",
+                inputs: {service: service}
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close
+                    .then(confirm => confirm && monitoringService.removeService(service))
+                    .then(refresh);
+            });
+        }
+
         function update(service) {
             ModalService.showModal({
                 templateUrl: "service.view.html",
                 controllerAs: 'vm',
-                controller: "UpdateController",
+                controller: "EditController",
                 inputs: {service: angular.copy(service)}
             }).then(function (modal) {
                 modal.element.modal();
@@ -146,17 +153,6 @@
                         monitoringService.update(service);
                     })
                     .then(refresh);
-            });
-        }
-
-        function show(service) {
-            ModalService.showModal({
-                templateUrl: "info.view.html",
-                controllerAs: 'vm',
-                controller: "ServiceInfoController",
-                inputs: {service: service}
-            }).then(function (modal) {
-                modal.element.modal();
             });
         }
     }
