@@ -21,7 +21,7 @@
             remove: remove,
             register: register,
             subscribe: subscribe,
-            getSummary: getSummary,
+            getSummary: getSummary
         };
 
         function subscribe(subscriber) {
@@ -33,7 +33,7 @@
 
             $log.debug(`Service[name=${service.name}] was registered for ping`);
 
-            let data = {
+            const config = {
                 timer: undefined,
                 original: service,
                 statistics: {
@@ -45,7 +45,8 @@
                     max: undefined,
                 }
             };
-            services.set(service.id, data);
+            services.set(service.id, config);
+            sendPing(config);
         }
 
         function start() {
@@ -57,13 +58,13 @@
         }
 
         function startTimer(config) {
-            if (!hasExecutor(config.original)) {
+            if (!hasExecutor(config)) {
                 config.timer = $interval(() => sendPing(config), config.original.frequency);
             }
         }
 
-        function hasExecutor(service) {
-            let id = service.id;
+        function hasExecutor(config) {
+            let id = config.original.id;
             return services.has(id) && angular.isDefined(services.get(id).timer);
         }
 
@@ -74,8 +75,7 @@
         function reset(service) {
             const config = services.get(service.id);
 
-            tryStop(config.timer);
-            config.timer = undefined;
+            tryStopPing(config);
             startTimer(config);
         }
 
@@ -83,25 +83,26 @@
             $log.info(`Stop ping`);
 
             for (let config of services.values()) {
-                tryStop(config.timer);
-                config.timer = undefined;
+                tryStopPing(config);
             }
         }
 
         function remove(service) {
-            let key = service.id;
+            if (!services.has(service.id)) return;
 
-            if (!services.has(key)) return;
-
-            let config = services.get(key);
-            tryStop(config.timer);
-            services.delete(key);
+            let config = services.get(service.id);
+            tryStopPing(config);
+            services.delete(service.id);
         }
 
-        function tryStop(timer) {
+        function tryStopPing(config) {
+            const timer = config.timer;
+
             if (angular.isDefined(timer)) {
                 $interval.cancel(timer);
             }
+
+            config.timer = undefined;
         }
 
         function sendPing(config) {

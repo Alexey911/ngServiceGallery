@@ -66,10 +66,7 @@
 
             services.push(service);
             saveChanges();
-
-            //TODO: change on single call
             pingService.register(service);
-            pingService.start();
 
             notificationService.showMessage('REGISTERED_NEW_SERVICE', service);
         }
