@@ -117,6 +117,7 @@
 
             ping(service.address).then(function (delta) {
                 service.ping = delta;
+                service.color = color(delta);
 
                 if (delta >= 3500.0) {
                     notificationService.showMessage('WEAK_RESPONSE', service)
@@ -129,6 +130,25 @@
                 recountStatistics(config);
                 subscriber(service);
             });
+        }
+
+        function color(ping) {
+            let red = {color: "red"};
+            let dark = {color: "darkRed"};
+            let green = {color: "green"};
+            let orange = {color: "orange"};
+
+            if (ping === -1) {
+                return red;
+            } else if (ping < 350.0) {
+                return green;
+            } else if (ping < 1000.0) {
+                return orange;
+            } else if (ping < 2000.0) {
+                return red;
+            }
+
+            return dark;
         }
 
         function recountStatistics(config, ping) {

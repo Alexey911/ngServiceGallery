@@ -19,12 +19,12 @@
             start: start,
             pause: pause,
             getAll: getAll,
-            refresh: refresh,
+            force: force,
             remove: remove,
             register: register,
             isFreeAddress: isFreeAddress,
             resetStatistics: resetStatistics,
-            getCommonStatistic: getCommonStatistic
+            getSummary: getSummary
         };
 
         function register() {
@@ -36,9 +36,8 @@
         }
 
         function remove(service) {
-            return modals.showRemove(service).then(confirm =>
-                confirm && removeService(service)
-            );
+            return modals.showRemove(service)
+                .then(confirm => confirm && removeService(service));
         }
 
         function edit(service) {
@@ -86,7 +85,7 @@
             return services;
         }
 
-        function refresh() {
+        function force() {
             pingService.force();
         }
 
@@ -115,7 +114,7 @@
             pingService.start();
         }
 
-        function getCommonStatistic() {
+        function getSummary() {
             return pingService.getStatistic();
         }
 

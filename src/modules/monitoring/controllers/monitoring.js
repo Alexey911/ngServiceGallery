@@ -22,7 +22,6 @@
         vm.register = register;
         vm.pause = pause;
         vm.start = start;
-        vm.color = color;
         vm.$onInit = subscribeOnNotifications;
 
         activate();
@@ -46,27 +45,8 @@
             monitoringService.setUp(refresh);
         }
 
-        function color(ping) {
-            let red = {color: "red"};
-            let dark = {color: "darkRed"};
-            let green = {color: "green"};
-            let orange = {color: "orange"};
-
-            if (ping === -1) {
-                return red;
-            } else if (ping < 350.0) {
-                return green;
-            } else if (ping < 1000.0) {
-                return orange;
-            } else if (ping < 2000.0) {
-                return red;
-            }
-
-            return dark;
-        }
-
         function force() {
-            monitoringService.refresh();
+            monitoringService.force();
         }
 
         function start() {
@@ -114,7 +94,7 @@
                 }
             }
             vm.services.reload();
-            vm.summary = monitoringService.getCommonStatistic();
+            vm.summary = monitoringService.getSummary();
         }
     }
 })();
