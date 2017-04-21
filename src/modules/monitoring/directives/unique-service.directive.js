@@ -11,7 +11,7 @@
 
         return {
             require: 'ngModel',
-            restrict: "A",
+            restrict: 'A',
             link: function ($scope, element, attributes, ctrl) {
                 ctrl.$validators.unique = isValidServiceAddress;
             }

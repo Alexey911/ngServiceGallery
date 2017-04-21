@@ -34,36 +34,36 @@
 
         function removeModal(service) {
             return ModalService.showModal({
-                templateUrl: "delete.view.html",
+                templateUrl: 'delete.view.html',
                 controllerAs: 'vm',
-                controller: "DeletionController",
+                controller: 'DeletionController',
                 inputs: {service: service}
             });
         }
 
         function editModal(service) {
             return ModalService.showModal({
-                templateUrl: "service.view.html",
+                templateUrl: 'service.view.html',
                 controllerAs: 'vm',
-                controller: "EditController",
+                controller: 'EditController',
                 inputs: {service: angular.copy(service)}
             });
         }
 
         function summaryModal(service) {
             return ModalService.showModal({
-                templateUrl: "info.view.html",
+                templateUrl: 'info.view.html',
                 controllerAs: 'vm',
-                controller: "ServiceInfoController",
+                controller: 'ServiceInfoController',
                 inputs: {service: service}
             })
         }
 
         function registryModal() {
             return ModalService.showModal({
-                templateUrl: "service.view.html",
+                templateUrl: 'service.view.html',
                 controllerAs: 'vm',
-                controller: "RegistrationController"
+                controller: 'RegistrationController'
             });
         }
 

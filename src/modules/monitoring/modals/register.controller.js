@@ -3,9 +3,9 @@
         .module('ngServiceGallery')
         .controller('RegistrationController', RegistrationController);
 
-    RegistrationController.$inject = ['close', 'MONITORING_CONFIG'];
+    RegistrationController.$inject = ['MONITORING_CONFIG', 'close'];
 
-    function RegistrationController(close, MONITORING_CONFIG) {
+    function RegistrationController(MONITORING_CONFIG, close) {
         let vm = this;
 
         vm.cancel = onCancel;

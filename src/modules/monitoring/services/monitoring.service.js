@@ -105,7 +105,7 @@
             services.push(service);
             storageService.save(MONITORING_CONFIG.SERVICES, services);
 
-            notificationService.showMessage("REGISTERED_NEW_SERVICE", service);
+            notificationService.showMessage('REGISTERED_NEW_SERVICE', service);
 
             pingService.register(service);
 
@@ -129,7 +129,7 @@
             let index = services.indexOf(service);
             services.splice(index, 1);
             storageService.save(MONITORING_CONFIG.SERVICES, services);
-            notificationService.showMessage("SERVICE_WAS_REMOVED", service);
+            notificationService.showMessage('SERVICE_WAS_REMOVED', service);
         }
     }
 })();
