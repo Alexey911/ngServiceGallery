@@ -5,9 +5,9 @@
         .module('ngServiceGallery.monitoring')
         .factory('monitoringService', monitoringService);
 
-    monitoringService.$inject = ['ModalService', 'notificationService', 'storageService', 'pingService'];
+    monitoringService.$inject = ['modals', 'notificationService', 'storageService', 'pingService'];
 
-    function monitoringService(ModalService, notificationService, storageService, pingService) {
+    function monitoringService(modals, notificationService, storageService, pingService) {
         const SERVICE_STORAGE_KEY = 'services';
 
         let services = null;
@@ -28,51 +28,21 @@
         };
 
         function register() {
-            return registrationForm()
-                .then(open)
-                .then(addService);
-        }
-
-        function registrationForm() {
-            return ModalService.showModal({
-                templateUrl: "service.view.html",
-                controllerAs: 'vm',
-                controller: "RegistrationController"
-            });
+            return modals.showRegistry().then(addService);
         }
 
         function show(service) {
-            return summaryForm(service)
-                .then(open);
-        }
-
-        function summaryForm(service) {
-            return ModalService.showModal({
-                templateUrl: "info.view.html",
-                controllerAs: 'vm',
-                controller: "ServiceInfoController",
-                inputs: {service: service}
-            })
+            return modals.showSummary(service);
         }
 
         function remove(service) {
-            return removalForm(service)
-                .then(open)
-                .then(confirm => confirm && removeService(service));
-        }
-
-        function removalForm(service) {
-            return ModalService.showModal({
-                templateUrl: "delete.view.html",
-                controllerAs: 'vm',
-                controller: "DeletionController",
-                inputs: {service: service}
-            });
+            return modals.showRemove(service).then(confirm =>
+                confirm && removeService(service)
+            );
         }
 
         function edit(service) {
-            return editingForm(service)
-                .then(open)
+            return modals.showEdit(service)
                 .then(modified => copyServiceFields(modified, service))
                 .then(update);
         }
@@ -86,20 +56,6 @@
             target.frequency = source.frequency;
 
             return target;
-        }
-
-        function editingForm(service) {
-            return ModalService.showModal({
-                templateUrl: "service.view.html",
-                controllerAs: 'vm',
-                controller: "EditController",
-                inputs: {service: angular.copy(service)}
-            });
-        }
-
-        function open(modal) {
-            modal.element.modal();
-            return modal.close;
         }
 
         function setUp(subscriber) {
