@@ -15,6 +15,9 @@
 
         function activate() {
             vm.service = {
+                name: undefined,
+                address: undefined,
+                description: undefined,
                 settings: {
                     frequency: SERVICE_CONFIG.DEFAULT_FREQUENCY
                 }
