@@ -44,7 +44,6 @@
             );
             services.forEach(statistics.register);
             services.forEach(pingService.register);
-            statistics.subscribeOnSummaryChanges(refresh);
         }
 
         function start() {

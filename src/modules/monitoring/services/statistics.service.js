@@ -5,12 +5,11 @@
         .module('ngServiceGallery.monitoring')
         .factory('statistics', statistics);
 
-    statistics.$inject = ['SERVICE_CONFIG', 'notificationService'];
+    statistics.$inject = ['$rootScope', 'SERVICE_CONFIG', 'notificationService'];
 
-    function statistics(SERVICE_CONFIG, notificationService) {
+    function statistics($rootScope, SERVICE_CONFIG, notificationService) {
 
         let statistics = new Map();
-        let subscribers = [];
 
         let summary = {fast: 0, medium: 0, slow: 0};
 
@@ -20,11 +19,10 @@
             remove: remove,
             getSummary: getSummary,
             register: register,
-            subscribeOnSummaryChanges: subscribeOnSummaryChanges
         };
 
-        function subscribeOnSummaryChanges(subscriber) {
-            subscribers.push(subscriber);
+        function getSummary() {
+            return summary;
         }
 
         function register(service) {
@@ -39,10 +37,6 @@
 
         function remove(service) {
             return service && statistics.delete(service.id);
-        }
-
-        function getSummary() {
-            return summary;
         }
 
         function update(serviceId, ping) {
@@ -67,22 +61,27 @@
                 statistic.fails += 1;
             }
 
-            updateSummary();
+            $rootScope.$apply(updateSummary);
         }
 
         function updateSummary() {
+            let fast = 0, medium = 0, slow = 0;
+
             for (let statistic of statistics.values()) {
                 const avg = statistic.avg;
 
                 if (avg < SERVICE_CONFIG.FAST_SPEED) {
-                    summary.fast += 1;
+                    fast += 1;
                 } else if (avg < SERVICE_CONFIG.MEDIUM_SPEED) {
-                    summary.medium += 1;
+                    medium += 1;
                 } else if (avg < SERVICE_CONFIG.SLOW_SPEED) {
-                    summary.slow += 1;
+                    slow += 1;
                 }
             }
-            subscribers.forEach(subscriber => subscriber());
+
+            summary.fast = fast;
+            summary.slow = slow;
+            summary.medium = medium;
         }
 
         function emptyStatistics(service) {
