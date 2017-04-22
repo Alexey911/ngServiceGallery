@@ -5,9 +5,9 @@
         .module('ngServiceGallery.monitoring')
         .factory('serviceManager', serviceManager);
 
-    serviceManager.$inject = ['MONITORING_CONFIG', 'modals', 'storageService', 'notificationService'];
+    serviceManager.$inject = ['SERVICE_CONFIG', 'modals', 'storageService', 'notificationService'];
 
-    function serviceManager(MONITORING_CONFIG, modals, storageService, notificationService) {
+    function serviceManager(SERVICE_CONFIG, modals, storageService, notificationService) {
 
         let services = null;
 
@@ -25,7 +25,7 @@
         }
 
         function getAll() {
-            services = services || storageService.get(MONITORING_CONFIG.SERVICES, []);
+            services = services || storageService.get(SERVICE_CONFIG.STORAGE_PLACE, []);
             return services;
         }
 
@@ -51,7 +51,7 @@
             service.id = new Date().getTime();
 
             services.push(service);
-            storageService.save(MONITORING_CONFIG.SERVICES, services);
+            storageService.save(SERVICE_CONFIG.STORAGE_PLACE, services);
             notificationService.showMessage('REGISTERED_NEW_SERVICE', service);
 
             return service;
@@ -61,7 +61,7 @@
             let index = services.indexOf(service);
             services.splice(index, 1);
 
-            storageService.save(MONITORING_CONFIG.SERVICES, services);
+            storageService.save(SERVICE_CONFIG.STORAGE_PLACE, services);
             notificationService.showMessage('SERVICE_WAS_REMOVED', service);
 
             return service;

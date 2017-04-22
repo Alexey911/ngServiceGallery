@@ -3,8 +3,8 @@
 
     angular
         .module('ngServiceGallery.monitoring')
-        .constant('MONITORING_CONFIG', {
-            'SERVICES': 'services',
+        .constant('SERVICE_CONFIG', {
+            'STORAGE_PLACE': 'services',
             'DEFAULT_FREQUENCY': 2500
         });
 })();
