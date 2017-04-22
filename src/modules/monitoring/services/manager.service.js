@@ -86,7 +86,7 @@
             target.name = source.name;
             target.address = source.address;
             target.description = source.description;
-            target.frequency = source.frequency;
+            target.settings.frequency = source.settings.frequency;
 
             return target;
         }

@@ -47,7 +47,7 @@
 
             for (let service of services.values()) {
                 if (!scheduler.hasExecutor(service.task)) {
-                    service.task = scheduler.schedule(() => sendPing(service), service.owner.frequency);
+                    service.task = scheduler.schedule(() => sendPing(service), service.owner.settings.frequency);
                 }
             }
         }
@@ -60,7 +60,7 @@
             if (!scheduler.hasExecutor(service.task)) {
                 sendPing(config);
             } else {
-                scheduler.update(service.task, config.owner.frequency);
+                scheduler.update(service.task, config.owner.settings.frequency);
             }
         }
 

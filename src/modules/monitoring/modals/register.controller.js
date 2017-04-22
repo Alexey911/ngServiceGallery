@@ -14,7 +14,11 @@
         activate();
 
         function activate() {
-            vm.service = {frequency: SERVICE_CONFIG.DEFAULT_FREQUENCY};
+            vm.service = {
+                settings: {
+                    frequency: SERVICE_CONFIG.DEFAULT_FREQUENCY
+                }
+            };
             vm.mode = 'register';
         }
 
