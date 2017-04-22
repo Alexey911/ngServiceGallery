@@ -50,7 +50,7 @@
 
             service.id = new Date().getTime();
 
-            services.push(service);
+            services.unshift(service);
             storageService.save(SERVICE_CONFIG.STORAGE_PLACE, services);
             notificationService.showMessage('REGISTERED_NEW_SERVICE', service);
 

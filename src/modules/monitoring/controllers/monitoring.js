@@ -68,8 +68,8 @@
 
         function edit(service) {
             serviceManager.edit(service)
-                .then(statistics.reset)
                 .then(pingService.reset)
+                .then(statistics.reset)
                 .then(refresh);
         }
 

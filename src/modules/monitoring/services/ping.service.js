@@ -60,11 +60,17 @@
 
             let config = configurations.get(service.id);
 
+            config.url = service.address;
+            config.name = service.name;
+            config.frequency  = service.settings.frequency;
+
             if (!scheduler.hasExecutor(config.task)) {
                 sendPing(config);
             } else {
                 scheduler.update(config.task, config.frequency);
             }
+
+            return service;
         }
 
         function stop() {
@@ -79,6 +85,8 @@
 
             scheduler.stop(config.task);
             configurations.delete(config.id);
+
+            return service;
         }
 
         function sendPing(config) {

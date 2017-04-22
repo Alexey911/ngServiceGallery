@@ -26,17 +26,25 @@
         }
 
         function register(service) {
+            if (!service) return;
+
             statistics.set(service.id, emptyStatistics(service));
             return service;
         }
 
         function reset(service) {
+            if (!service) return;
+
             statistics.set(service.id, emptyStatistics(service));
             return service;
         }
 
         function remove(service) {
-            return service && statistics.delete(service.id);
+            if (service && statistics.has(service.id)) {
+                statistics.delete(service.id);
+                updateSummary();
+            }
+            return service;
         }
 
         function update(serviceId, ping) {

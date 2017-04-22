@@ -5,11 +5,11 @@
         .module('ngServiceGallery.monitoring')
         .factory('scheduler', scheduler);
 
-    scheduler.$inject = ['$interval'];
+    scheduler.$inject = ['$log', '$interval'];
 
-    function scheduler($interval) {
+    function scheduler($log, $interval) {
 
-        let nextScheduleId = 0;
+        let nextScheduleId = 1;
         let schedulers = new Map();
 
         return {
@@ -21,9 +21,10 @@
         };
 
         function schedule(task, frequency, count) {
-            if (hasExecutor(task)) return;
-
             const executor = $interval(task, frequency, count);
+
+            if (count === 1) return;
+
             const scheduler = {
                 task: task,
                 count: count,
@@ -33,6 +34,8 @@
 
             const id = nextScheduleId++;
             schedulers.set(id, scheduler);
+
+            $log.debug(`Task[id=${id},frequency=${frequency}] was started`);
 
             return id;
         }
@@ -51,12 +54,16 @@
 
         function stop(task) {
             if (!task) return;
-            
+
             const scheduler = schedulers.get(task);
 
             if (isRunning(scheduler.executor)) {
                 $interval.cancel(scheduler.executor);
             }
+
+            schedulers.delete(task);
+
+            $log.debug(`Task[id=${task}] was stopped`);
         }
 
         function hasExecutor(task) {
