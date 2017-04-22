@@ -16,7 +16,7 @@
             ng-attr-title="{{service.address}}">
             <td class="col-sm-2" ng-cloak ng-click="vm.show(service)">{{service.name}}</td>
             <td class="col-sm-2" ng-cloak ng-click="vm.show(service)">
-                <span ng-show="service.ping" ng-style="service.color">{{service.ping}}</span>
+                <span ng-show="service.ping" ng-style="vm.color(service)">{{service.ping}}</span>
                 <span ng-show="service.ping" style="color: grey;" translate>MILLISECOND</span>
                 <span ng-show="!service.ping" style="color: lightgrey" translate>UNKNOWN</span>
                 <span ng-show="service.ping === -1" style="color: indianred" translate>FAILED</span>

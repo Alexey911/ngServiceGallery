@@ -10,9 +10,9 @@
             controller: MonitoringController,
         });
 
-    MonitoringController.$inject = ['NgTableParams', 'pingService', 'serviceManager'];
+    MonitoringController.$inject = ['NgTableParams', 'pingService', 'statistics', 'serviceManager', 'painter'];
 
-    function MonitoringController(NgTableParams, pingService, serviceManager) {
+    function MonitoringController(NgTableParams, pingService, statistics, serviceManager, painter) {
         let vm = this;
 
         vm.stop = stop;
@@ -20,13 +20,14 @@
         vm.edit = edit;
         vm.start = start;
         vm.force = force;
+        vm.color = color;
         vm.remove = remove;
         vm.register = register;
 
         activate();
 
         function activate() {
-            vm.summary = undefined;
+            vm.summary = statistics.getSummary();
 
             const services = serviceManager.getAll();
 
@@ -41,8 +42,9 @@
                     dataset: services
                 }
             );
-            pingService.subscribe(refresh);
+            services.forEach(statistics.register);
             services.forEach(pingService.register);
+            statistics.subscribeOnSummaryChanges(refresh);
         }
 
         function start() {
@@ -57,27 +59,31 @@
             serviceManager.show(service);
         }
 
-        function force(){
+        function force() {
             pingService.force();
         }
 
+        function color(service) {
+            return painter.color(service);
+        }
+
         function edit(service) {
-            serviceManager
-                .edit(service)
+            serviceManager.edit(service)
+                .then(statistics.reset)
                 .then(pingService.reset)
                 .then(refresh);
         }
 
         function remove(service) {
-            serviceManager
-                .remove(service)
+            serviceManager.remove(service)
                 .then(pingService.remove)
+                .then(statistics.remove)
                 .then(refresh);
         }
 
         function register() {
-            serviceManager
-                .register()
+            serviceManager.register()
+                .then(statistics.register)
                 .then(pingService.register)
                 .then(refresh);
         }
@@ -93,7 +99,6 @@
                 }
             }
             vm.services.reload();
-            vm.summary = pingService.getSummary();
         }
     }
 })();

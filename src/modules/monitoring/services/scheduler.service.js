@@ -50,6 +50,8 @@
         }
 
         function stop(task) {
+            if (!task) return;
+            
             const scheduler = schedulers.get(task);
 
             if (isRunning(scheduler.executor)) {
