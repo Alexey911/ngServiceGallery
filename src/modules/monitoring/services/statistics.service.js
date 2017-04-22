@@ -51,13 +51,13 @@
             let statistic = statistics.get(serviceId);
             let service = statistic.service;
 
-            service.ping = ping;
+            service.ping = ping || -1;
 
             if (ping >= SERVICE_CONFIG.SLOW_SPEED) {
                 notificationService.showMessage('WEAK_RESPONSE', service)
             }
 
-            if (ping) {
+            if (ping > 0) {
                 statistic.attempts += 1;
                 statistic.commonTime += ping;
 

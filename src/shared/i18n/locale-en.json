@@ -20,7 +20,7 @@
   "REGISTERED_NEW_SERVICE": "Service {{name}} was saved",
   "SERVICE_WAS_REMOVED": "Service {{name}} was removed",
   "WEAK_RESPONSE": "Service {{name}} has weak response",
-  "UNKNOWN": "unknown",
+  "COMPUTING": "computing...",
   "FAILED": "failed",
   "SERVICES": "WEB Services",
   "WATCH": "Watch",
