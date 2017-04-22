@@ -3,9 +3,9 @@
         .module('ngServiceGallery')
         .controller('RegistrationController', RegistrationController);
 
-    RegistrationController.$inject = ['close', 'MONITORING_CONFIG'];
+    RegistrationController.$inject = ['SERVICE_CONFIG', 'close'];
 
-    function RegistrationController(close, MONITORING_CONFIG) {
+    function RegistrationController(SERVICE_CONFIG, close) {
         let vm = this;
 
         vm.cancel = onCancel;
@@ -14,7 +14,14 @@
         activate();
 
         function activate() {
-            vm.service = {frequency: MONITORING_CONFIG.DEFAULT_FREQUENCY};
+            vm.service = {
+                name: undefined,
+                address: undefined,
+                description: undefined,
+                settings: {
+                    frequency: SERVICE_CONFIG.DEFAULT_FREQUENCY
+                }
+            };
             vm.mode = 'register';
         }
 

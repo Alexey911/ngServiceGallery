@@ -16,9 +16,9 @@
             ng-attr-title="{{service.address}}">
             <td class="col-sm-2" ng-cloak ng-click="vm.show(service)">{{service.name}}</td>
             <td class="col-sm-2" ng-cloak ng-click="vm.show(service)">
-                <span ng-show="service.ping" ng-style="vm.color(service.ping)">{{service.ping}}</span>
-                <span ng-show="service.ping" style="color: grey;" translate>MILLISECOND</span>
-                <span ng-show="!service.ping" style="color: lightgrey" translate>UNKNOWN</span>
+                <span ng-show="service.ping > 0" ng-style="vm.color(service)">{{service.ping}}</span>
+                <span ng-show="service.ping > 0" style="color: grey;" translate>MILLISECOND</span>
+                <span ng-hide="service.ping" style="color: lightgrey" translate>COMPUTING</span>
                 <span ng-show="service.ping === -1" style="color: indianred" translate>FAILED</span>
             </td>
             <td class="col-sm-4"
@@ -27,7 +27,7 @@
                 ng-click="vm.show(service)">{{service.description | limitTo:30}}
             </td>
             <td class="col-sm-4" style="text-align:right">
-                <button class="btn-link btn-xs" ng-click="vm.update(service)" translate>EDIT</button>
+                <button class="btn-link btn-xs" ng-click="vm.edit(service)" translate>EDIT</button>
                 <button class="btn-link btn-xs" ng-click="vm.remove(service)" translate>REMOVE</button>
             </td>
         </tr>
@@ -48,7 +48,7 @@
         </button>
         <button type="submit"
                 class="btn btn-info"
-                ng-click="vm.pause()" translate>PAUSE
+                ng-click="vm.stop()" translate>PAUSE
         </button>
     </div>
 </div>

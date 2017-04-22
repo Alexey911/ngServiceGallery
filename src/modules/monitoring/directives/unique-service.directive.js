@@ -3,15 +3,15 @@
         .module('ngServiceGallery.monitoring')
         .directive('uniqueService', uniqueService);
 
-    uniqueService.$inject = ['monitoringService', '$stateParams'];
+    uniqueService.$inject = ['serviceManager', '$stateParams'];
 
-    function uniqueService(monitoringService, $stateParams) {
+    function uniqueService(serviceManager, $stateParams) {
 
-        let isValidServiceAddress = address => monitoringService.isFreeAddress(address, $stateParams.owner);
+        let isValidServiceAddress = address => !serviceManager.isBusyAddress(address, $stateParams.owner);
 
         return {
             require: 'ngModel',
-            restrict: "A",
+            restrict: 'A',
             link: function ($scope, element, attributes, ctrl) {
                 ctrl.$validators.unique = isValidServiceAddress;
             }

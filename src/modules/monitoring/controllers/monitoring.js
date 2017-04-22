@@ -10,75 +10,81 @@
             controller: MonitoringController,
         });
 
-    MonitoringController.$inject = ['ModalService', 'NgTableParams', 'monitoringService'];
+    MonitoringController.$inject = ['NgTableParams', 'pingService', 'statistics', 'serviceManager', 'painter'];
 
-    function MonitoringController(ModalService, NgTableParams, monitoringService) {
+    function MonitoringController(NgTableParams, pingService, statistics, serviceManager, painter) {
         let vm = this;
 
+        vm.stop = stop;
         vm.show = show;
+        vm.edit = edit;
+        vm.start = start;
         vm.force = force;
+        vm.color = color;
         vm.remove = remove;
         vm.register = register;
-        vm.update = update;
-        vm.pause = pause;
-        vm.start = start;
-        vm.color = color;
-        vm.$onInit = subscribeOnNotifications;
 
         activate();
 
         function activate() {
+            vm.summary = statistics.getSummary();
+
+            const services = serviceManager.getAll();
+
             vm.services = new NgTableParams(
                 {
                     count: 5
                 },
                 {
-                    dataset: getAll(),
                     counts: [5, 10, 25],
                     paginationMinBlocks: 1,
-                    paginationMaxBlocks: 5
+                    paginationMaxBlocks: 5,
+                    dataset: services
                 }
             );
-            vm.summary = undefined;
-        }
-
-        function subscribeOnNotifications() {
-            monitoringService.setUp(refresh);
-        }
-
-        function color(ping) {
-            let red = {color: "red"};
-            let dark = {color: "darkRed"};
-            let green = {color: "green"};
-            let orange = {color: "orange"};
-
-            if (ping === -1) {
-                return red;
-            } else if (ping < 350.0) {
-                return green;
-            } else if (ping < 1000.0) {
-                return orange;
-            } else if (ping < 2000.0) {
-                return red;
-            }
-
-            return dark;
-        }
-
-        function force() {
-            monitoringService.refresh();
+            services.forEach(statistics.register);
+            services.forEach(pingService.register);
         }
 
         function start() {
-            monitoringService.start();
+            pingService.start();
         }
 
-        function getAll() {
-            return monitoringService.getAll();
+        function stop() {
+            pingService.stop();
         }
 
-        function pause() {
-            monitoringService.pause();
+        function show(service) {
+            serviceManager.show(service);
+        }
+
+        function force() {
+            pingService.force();
+        }
+
+        function color(service) {
+            return painter.color(service);
+        }
+
+        function edit(service) {
+            serviceManager.edit(service)
+                .then(pingService.reset)
+                .then(statistics.reset)
+                .then(refresh);
+        }
+
+        function remove(service) {
+            serviceManager.remove(service)
+                .then(pingService.remove)
+                .then(statistics.remove)
+                .then(refresh);
+        }
+
+        function register() {
+            serviceManager.register()
+                .then(statistics.register)
+                .then(pingService.register)
+                .then(refresh);
         }
 
         function refresh() {
@@ -92,68 +98,6 @@
                 }
             }
             vm.services.reload();
-            vm.summary = monitoringService.getCommonStatistic();
-        }
-
-        function register() {
-            ModalService.showModal({
-                templateUrl: "service.view.html",
-                controllerAs: 'vm',
-                controller: "RegistrationController"
-            }).then(function (modal) {
-                modal.element.modal();
-                modal.close
-                    .then(monitoringService.addService)
-                    .then(refresh);
-            });
-        }
-
-        function show(service) {
-            ModalService.showModal({
-                templateUrl: "info.view.html",
-                controllerAs: 'vm',
-                controller: "ServiceInfoController",
-                inputs: {service: service}
-            }).then(function (modal) {
-                modal.element.modal();
-            });
-        }
-
-        function remove(service) {
-            ModalService.showModal({
-                templateUrl: "delete.view.html",
-                controllerAs: 'vm',
-                controller: "DeletionController",
-                inputs: {service: service}
-            }).then(function (modal) {
-                modal.element.modal();
-                modal.close
-                    .then(confirm => confirm && monitoringService.removeService(service))
-                    .then(refresh);
-            });
-        }
-
-        function update(service) {
-            ModalService.showModal({
-                templateUrl: "service.view.html",
-                controllerAs: 'vm',
-                controller: "EditController",
-                inputs: {service: angular.copy(service)}
-            }).then(function (modal) {
-                modal.element.modal();
-                modal.close
-                    .then(function (modified) {
-                        if (!modified) return;
-
-                        service.name = modified.name;
-                        service.address = modified.address;
-                        service.description = modified.description;
-                        service.frequency = modified.frequency;
-
-                        monitoringService.update(service);
-                    })
-                    .then(refresh);
-            });
         }
     }
 })();

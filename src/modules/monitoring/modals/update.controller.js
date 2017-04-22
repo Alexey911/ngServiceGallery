@@ -3,9 +3,9 @@
         .module('ngServiceGallery')
         .controller('EditController', EditController);
 
-    EditController.$inject = ['close', '$stateParams', 'service'];
+    EditController.$inject = ['$stateParams', 'close', 'service'];
 
-    function EditController(close, $stateParams, service) {
+    function EditController($stateParams, close, service) {
         let vm = this;
 
         vm.cancel = onCancel;
