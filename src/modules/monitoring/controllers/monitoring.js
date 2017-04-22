@@ -19,6 +19,7 @@
         vm.show = show;
         vm.edit = edit;
         vm.start = start;
+        vm.force = force;
         vm.remove = remove;
         vm.register = register;
 
@@ -26,6 +27,8 @@
 
         function activate() {
             vm.summary = undefined;
+
+            const services = monitoringService.getAll();
 
             vm.services = new NgTableParams(
                 {
@@ -35,11 +38,11 @@
                     counts: [5, 10, 25],
                     paginationMinBlocks: 1,
                     paginationMaxBlocks: 5,
-                    dataset: monitoringService.getAll()
+                    dataset: services
                 }
             );
-
-            monitoringService.subscribe(refresh)
+            pingService.subscribe(refresh);
+            services.forEach(pingService.register);
         }
 
         function start() {
@@ -54,21 +57,28 @@
             monitoringService.show(service);
         }
 
+        function force(){
+            pingService.force();
+        }
+
         function edit(service) {
             monitoringService
                 .edit(service)
+                .then(pingService.reset)
                 .then(refresh);
         }
 
         function remove(service) {
             monitoringService
                 .remove(service)
+                .then(pingService.remove)
                 .then(refresh);
         }
 
         function register() {
             monitoringService
                 .register()
+                .then(pingService.register)
                 .then(refresh);
         }
 

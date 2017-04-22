@@ -5,13 +5,11 @@
         .module('ngServiceGallery.monitoring')
         .factory('monitoringService', monitoringService);
 
-    monitoringService.$inject = ['MONITORING_CONFIG', 'modals', 'notificationService', 'storageService', 'pingService'];
+    monitoringService.$inject = ['MONITORING_CONFIG', 'modals', 'notificationService', 'storageService'];
 
-    function monitoringService(MONITORING_CONFIG, modals, notificationService, storageService, pingService) {
+    function monitoringService(MONITORING_CONFIG, modals, notificationService, storageService) {
 
         let services = null;
-
-        setUp();
 
         return {
             show: show,
@@ -19,13 +17,8 @@
             getAll: getAll,
             remove: remove,
             register: register,
-            subscribe: subscribe,
             isBusyAddress: isBusyAddress
         };
-
-        function setUp() {
-            getAll().forEach(pingService.register);
-        }
 
         function show(service) {
             return modals.showSummary(service);
@@ -34,10 +27,6 @@
         function getAll() {
             services = services || storageService.get(MONITORING_CONFIG.SERVICES, []);
             return services;
-        }
-
-        function subscribe(subscriber) {
-            pingService.subscribe(subscriber);
         }
 
         function register() {
@@ -51,8 +40,7 @@
 
         function edit(service) {
             return modals.showEdit(service)
-                .then(modified => copyServiceFields(modified, service))
-                .then(pingService.reset);
+                .then(modified => copyServiceFields(modified, service));
         }
 
         function save(service) {
@@ -63,30 +51,26 @@
             service.id = new Date().getMilliseconds();
 
             services.push(service);
-            saveChanges();
-            pingService.register(service);
-
+            storageService.save(MONITORING_CONFIG.SERVICES, services);
             notificationService.showMessage('REGISTERED_NEW_SERVICE', service);
+
+            return service;
         }
 
         function unregisterAndRemove(service) {
-            pingService.remove(service);
-
             let index = services.indexOf(service);
             services.splice(index, 1);
 
-            saveChanges();
+            storageService.save(MONITORING_CONFIG.SERVICES, services);
             notificationService.showMessage('SERVICE_WAS_REMOVED', service);
+
+            return service;
         }
 
         function isBusyAddress(address, owner) {
             return address !== owner && services
                     .filter(registered => registered.address === address)
                     .length > 0;
-        }
-
-        function saveChanges() {
-            storageService.save(MONITORING_CONFIG.SERVICES, services);
         }
 
         function extractDomain(url) {

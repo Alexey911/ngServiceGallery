@@ -24,6 +24,7 @@
   "FAILED": "failed",
   "SERVICES": "WEB Services",
   "WATCH": "Watch",
+  "FORCE": "Force",
   "PAUSE": "Pause",
   "FREQUENCY": "Frequency time",
   "MILLISECOND": " ms.",

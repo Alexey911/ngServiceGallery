@@ -24,6 +24,7 @@
   "FAILED": "недоступен",
   "SERVICES": "WEB Сервисы",
   "WATCH": "Начать",
+  "FORCE": "Обновить",
   "PAUSE": "Приостановить",
   "FREQUENCY": "Частота опроса",
   "MILLISECOND": " мс.",

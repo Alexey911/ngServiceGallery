@@ -17,6 +17,7 @@
             stop: stop,
             start: start,
             reset: reset,
+            force: force,
             remove: remove,
             register: register,
             subscribe: subscribe,
@@ -28,7 +29,7 @@
         }
 
         function register(service) {
-            if (services.has(service.id)) return;
+            if (!service || services.has(service.id)) return;
 
             $log.debug(`Service[name=${service.name}] was registered for ping`);
 
@@ -50,14 +51,18 @@
             services.set(service.id, config);
         }
 
+        function force() {
+            for (let config of services.values()) {
+                sendPing(config);
+            }
+        }
+
         function start() {
             $log.info(`Start ping`);
 
             for (let config of services.values()) {
                 if (!scheduler.hasExecutor(config.task)) {
                     config.task = scheduler.schedule(() => sendPing(config), config.original.frequency);
-                } else {
-                    sendPing(config);
                 }
             }
         }
@@ -82,6 +87,8 @@
         }
 
         function remove(service) {
+            if (!service) return;
+
             scheduler.stop(service.task);
             services.delete(service.id);
         }
