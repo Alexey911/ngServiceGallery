@@ -9,7 +9,7 @@
 
     function pingService($log, scheduler, statistics) {
 
-        let services = new Map();
+        let configurations = new Map();
 
         return {
             stop: stop,
@@ -21,33 +21,36 @@
         };
 
         function register(service) {
-            if (!service || services.has(service.id)) return;
+            if (!service || configurations.has(service.id)) return;
 
             $log.debug(`Service[name=${service.name}] was registered for ping`);
 
-            const data = {
+            const config = {
+                id: service.id,
                 task: undefined,
-                owner: service
+                name: service.name,
+                url: service.address,
+                frequency: service.settings.frequency,
             };
 
-            scheduler.schedule(() => sendPing(data), 500, 1);
-            services.set(service.id, data);
+            scheduler.schedule(() => sendPing(config), 500, 1);
+            configurations.set(service.id, config);
 
             return service;
         }
 
         function force() {
-            for (let service of services.values()) {
-                sendPing(service);
+            for (let config of configurations.values()) {
+                sendPing(config);
             }
         }
 
         function start() {
             $log.info(`Start ping`);
 
-            for (let service of services.values()) {
-                if (!scheduler.hasExecutor(service.task)) {
-                    service.task = scheduler.schedule(() => sendPing(service), service.owner.settings.frequency);
+            for (let config of configurations.values()) {
+                if (!scheduler.hasExecutor(config.task)) {
+                    config.task = scheduler.schedule(() => sendPing(config), config.frequency);
                 }
             }
         }
@@ -55,12 +58,12 @@
         function reset(service) {
             if (!service) return;
 
-            service = services.get(service.id);
+            let config = configurations.get(service.id);
 
-            if (!scheduler.hasExecutor(service.task)) {
+            if (!scheduler.hasExecutor(config.task)) {
                 sendPing(config);
             } else {
-                scheduler.update(service.task, config.owner.settings.frequency);
+                scheduler.update(config.task, config.frequency);
             }
         }
 
@@ -72,19 +75,19 @@
         function remove(service) {
             if (!service) return;
 
-            scheduler.stop(service.task);
-            services.delete(service.id);
+            let config = configurations.get(service.id);
+
+            scheduler.stop(config.task);
+            configurations.delete(config.id);
         }
 
         function sendPing(config) {
-            let service = config.owner;
+            $log.debug(`Staring ping for Service[name=${config.name}]`);
 
-            $log.debug(`Staring ping for Service[name=${service.name}]`);
-
-            ping(service.address).then(function (delta) {
-                statistics.update(service, delta);
+            ping(config.url).then(function (delta) {
+                statistics.update(config.id, delta);
             }).catch(function (/*TODO: never called*/) {
-                statistics.update(service);
+                statistics.update(config.id);
             });
         }
     }
