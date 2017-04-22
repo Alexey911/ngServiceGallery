@@ -16,7 +16,6 @@
         return {
             stop: stop,
             start: start,
-            force: force,
             reset: reset,
             remove: remove,
             register: register,
@@ -57,12 +56,10 @@
             for (let config of services.values()) {
                 if (!scheduler.hasExecutor(config.task)) {
                     config.task = scheduler.schedule(() => sendPing(config), config.original.frequency);
+                } else {
+                    sendPing(config);
                 }
             }
-        }
-
-        function force() {
-            for (let config of services.values()) sendPing(config);
         }
 
         function reset(service) {

@@ -9,7 +9,7 @@
 
     function scheduler($interval) {
 
-        let lastScheduleId = 0;
+        let nextScheduleId = 0;
         let schedulers = new Map();
 
         return {
@@ -31,7 +31,7 @@
                 frequency: frequency
             };
 
-            const id = lastScheduleId++;
+            const id = nextScheduleId++;
             schedulers.set(id, scheduler);
 
             return id;

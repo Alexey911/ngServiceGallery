@@ -22,7 +22,6 @@
   "WEAK_RESPONSE": "Service {{name}} has weak response",
   "UNKNOWN": "unknown",
   "FAILED": "failed",
-  "FORCE": "Force",
   "SERVICES": "WEB Services",
   "WATCH": "Watch",
   "PAUSE": "Pause",

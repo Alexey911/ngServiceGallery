@@ -19,7 +19,6 @@
         vm.show = show;
         vm.edit = edit;
         vm.start = start;
-        vm.force = force;
         vm.remove = remove;
         vm.register = register;
 
@@ -53,10 +52,6 @@
 
         function show(service) {
             monitoringService.show(service);
-        }
-
-        function force() {
-            pingService.force();
         }
 
         function edit(service) {
