@@ -10,9 +10,9 @@
             controller: MonitoringController,
         });
 
-    MonitoringController.$inject = ['NgTableParams', 'pingService', 'monitoringService'];
+    MonitoringController.$inject = ['NgTableParams', 'pingService', 'serviceManager'];
 
-    function MonitoringController(NgTableParams, pingService, monitoringService) {
+    function MonitoringController(NgTableParams, pingService, serviceManager) {
         let vm = this;
 
         vm.stop = stop;
@@ -28,7 +28,7 @@
         function activate() {
             vm.summary = undefined;
 
-            const services = monitoringService.getAll();
+            const services = serviceManager.getAll();
 
             vm.services = new NgTableParams(
                 {
@@ -54,7 +54,7 @@
         }
 
         function show(service) {
-            monitoringService.show(service);
+            serviceManager.show(service);
         }
 
         function force(){
@@ -62,21 +62,21 @@
         }
 
         function edit(service) {
-            monitoringService
+            serviceManager
                 .edit(service)
                 .then(pingService.reset)
                 .then(refresh);
         }
 
         function remove(service) {
-            monitoringService
+            serviceManager
                 .remove(service)
                 .then(pingService.remove)
                 .then(refresh);
         }
 
         function register() {
-            monitoringService
+            serviceManager
                 .register()
                 .then(pingService.register)
                 .then(refresh);

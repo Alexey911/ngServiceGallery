@@ -3,11 +3,11 @@
 
     angular
         .module('ngServiceGallery.monitoring')
-        .factory('monitoringService', monitoringService);
+        .factory('serviceManager', serviceManager);
 
-    monitoringService.$inject = ['MONITORING_CONFIG', 'modals', 'notificationService', 'storageService'];
+    serviceManager.$inject = ['MONITORING_CONFIG', 'modals', 'storageService', 'notificationService'];
 
-    function monitoringService(MONITORING_CONFIG, modals, notificationService, storageService) {
+    function serviceManager(MONITORING_CONFIG, modals, storageService, notificationService) {
 
         let services = null;
 
@@ -35,7 +35,7 @@
 
         function remove(service) {
             return modals.showRemove(service)
-                .then(confirm => confirm && unregisterAndRemove(service));
+                .then(confirm => confirm && clean(service));
         }
 
         function edit(service) {
@@ -57,7 +57,7 @@
             return service;
         }
 
-        function unregisterAndRemove(service) {
+        function clean(service) {
             let index = services.indexOf(service);
             services.splice(index, 1);
 
