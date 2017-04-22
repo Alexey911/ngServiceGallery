@@ -5,9 +5,9 @@
         .module('ngServiceGallery.monitoring')
         .factory('pingService', pingService);
 
-    pingService.$inject = ['$log', '$interval', 'notificationService'];
+    pingService.$inject = ['$log', 'notificationService', 'scheduler'];
 
-    function pingService($log, $interval, notificationService) {
+    function pingService($log, notificationService, scheduler) {
 
         let services = new Map();
 
@@ -34,7 +34,7 @@
             $log.debug(`Service[name=${service.name}] was registered for ping`);
 
             const config = {
-                timer: undefined,
+                task: undefined,
                 original: service,
                 statistics: {
                     fails: 0,
@@ -45,29 +45,20 @@
                     max: undefined,
                 }
             };
-            resetPing(config);
-            services.set(service.id, config);
 
-            $interval(() => sendPing(config), 500, 1);
+            resetPing(config);
+            scheduler.schedule(() => sendPing(config), 500, 1);
+            services.set(service.id, config);
         }
 
         function start() {
             $log.info(`Start ping`);
 
             for (let config of services.values()) {
-                startTimer(config);
+                if (!scheduler.hasExecutor(config.task)) {
+                    config.task = scheduler.schedule(() => sendPing(config), config.original.frequency);
+                }
             }
-        }
-
-        function startTimer(config) {
-            if (!hasExecutor(config)) {
-                config.timer = $interval(() => sendPing(config), config.original.frequency);
-            }
-        }
-
-        function hasExecutor(config) {
-            let id = config.original.id;
-            return services.has(id) && angular.isDefined(services.get(id).timer);
         }
 
         function force() {
@@ -75,42 +66,27 @@
         }
 
         function reset(service) {
+            if (!service) return;
+
             const config = services.get(service.id);
 
             resetPing(config);
 
-            if (!hasExecutor(config)) {
+            if (!scheduler.hasExecutor(config.task)) {
                 sendPing(config);
             } else {
-                tryStopPing(config);
-                startTimer(config);
+                scheduler.update(service.task, config.original.frequency);
             }
         }
 
         function stop() {
             $log.info(`Stop ping`);
-
-            for (let config of services.values()) {
-                tryStopPing(config);
-            }
+            scheduler.shutDown();
         }
 
         function remove(service) {
-            if (!services.has(service.id)) return;
-
-            let config = services.get(service.id);
-            tryStopPing(config);
+            scheduler.stop(service.task);
             services.delete(service.id);
-        }
-
-        function tryStopPing(config) {
-            const timer = config.timer;
-
-            if (angular.isDefined(timer)) {
-                $interval.cancel(timer);
-            }
-
-            config.timer = undefined;
         }
 
         function sendPing(config) {
