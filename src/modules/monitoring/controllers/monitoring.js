@@ -10,9 +10,9 @@
             controller: MonitoringController,
         });
 
-    MonitoringController.$inject = ['NgTableParams', 'monitoringService', 'pingService'];
+    MonitoringController.$inject = ['NgTableParams', 'pingService', 'monitoringService'];
 
-    function MonitoringController(NgTableParams, monitoringService, pingService) {
+    function MonitoringController(NgTableParams, pingService, monitoringService) {
         let vm = this;
 
         vm.stop = stop;
