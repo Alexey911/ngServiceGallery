@@ -48,7 +48,7 @@
 
             if (!service.name) service.name = extractDomain(service.address);
 
-            service.id = new Date().getMilliseconds();
+            service.id = new Date().getTime();
 
             services.push(service);
             storageService.save(MONITORING_CONFIG.SERVICES, services);
