@@ -28,16 +28,12 @@
         }
 
         function register(service) {
-            service.ping = undefined;
-
-            statistics.set(service.id, emptyStatistics());
+            statistics.set(service.id, emptyStatistics(service));
             return service;
         }
 
         function reset(service) {
-            service.ping = undefined;
-
-            statistics.set(service.id, emptyStatistics());
+            statistics.set(service.id, emptyStatistics(service));
             return service;
         }
 
@@ -49,34 +45,34 @@
             return summary;
         }
 
-        function update(service, ping) {
+        function update(serviceId, ping) {
+            let statistic = statistics.get(serviceId);
+            let service = statistic.service;
+
             service.ping = ping;
 
             if (ping >= SERVICE_CONFIG.SLOW_SPEED) {
                 notificationService.showMessage('WEAK_RESPONSE', service)
             }
 
-            let data = statistics.get(service.id);
-
             if (ping) {
-                data.attempts += 1;
-                data.commonTime += ping;
+                statistic.attempts += 1;
+                statistic.commonTime += ping;
 
-                data.avg = data.commonTime / data.attempts;
+                statistic.avg = statistic.commonTime / statistic.attempts;
 
-                if (ping > data.max || !data.max) data.max = ping;
-                if (ping < data.min || !data.min) data.min = ping;
+                if (ping > statistic.max || !statistic.max) statistic.max = ping;
+                if (ping < statistic.min || !statistic.min) statistic.min = ping;
             } else {
-                data.fails += 1;
+                statistic.fails += 1;
             }
 
             updateSummary();
-            return service;
         }
 
         function updateSummary() {
-            for (let data of statistics.values()) {
-                const avg = data.avg;
+            for (let statistic of statistics.values()) {
+                const avg = statistic.avg;
 
                 if (avg < SERVICE_CONFIG.FAST_SPEED) {
                     summary.fast += 1;
@@ -89,7 +85,9 @@
             subscribers.forEach(subscriber => subscriber());
         }
 
-        function emptyStatistics() {
+        function emptyStatistics(service) {
+            service.ping = undefined;
+
             return {
                 fails: 0,
                 attempts: 0,
@@ -97,6 +95,7 @@
                 min: undefined,
                 avg: undefined,
                 max: undefined,
+                service: service,
             };
         }
     }
