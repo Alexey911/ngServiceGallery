@@ -24,7 +24,6 @@
         };
 
         function setUp() {
-            getAll().forEach(resetPing);
             getAll().forEach(pingService.register);
         }
 
@@ -53,7 +52,6 @@
         function edit(service) {
             return modals.showEdit(service)
                 .then(modified => copyServiceFields(modified, service))
-                .then(resetPing)
                 .then(pingService.reset);
         }
 
@@ -89,11 +87,6 @@
 
         function saveChanges() {
             storageService.save(MONITORING_CONFIG.SERVICES, services);
-        }
-
-        function resetPing(service) {
-            service.ping = undefined;
-            return service;
         }
 
         function extractDomain(url) {

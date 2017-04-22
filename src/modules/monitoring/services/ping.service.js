@@ -45,8 +45,10 @@
                     max: undefined,
                 }
             };
+            resetPing(config);
             services.set(service.id, config);
-            sendPing(config);
+
+            $interval(() => sendPing(config), 500, 1);
         }
 
         function start() {
@@ -75,8 +77,14 @@
         function reset(service) {
             const config = services.get(service.id);
 
-            tryStopPing(config);
-            startTimer(config);
+            resetPing(config);
+
+            if (!hasExecutor(config)) {
+                sendPing(config);
+            } else {
+                tryStopPing(config);
+                startTimer(config);
+            }
         }
 
         function stop() {
@@ -160,6 +168,10 @@
             } else {
                 statistics.fails += 1;
             }
+        }
+
+        function resetPing(config) {
+            config.original.ping = undefined;
         }
 
         function getSummary() {
