@@ -39,8 +39,8 @@
   "MIN_TIME": "Мин время",
   "MAX_TIME": "Мах время",
   "AVERAGE_TIME": "Среднее время",
-  "FREQUENCY": "Вероятность, %",
+  "FREQUENCY": "Вероятность",
+  "FREQUENCY_AXES": "Вероятность, %",
   "REAL_TIME": "В реальном времени",
-  "DISTRIBUTION": "Распределение ответов",
-  "RESPONSE_COUNT": "Кол-во ответов"
+  "DISTRIBUTION": "Распределение ответов"
 }

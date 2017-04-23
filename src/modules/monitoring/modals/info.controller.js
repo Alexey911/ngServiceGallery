@@ -30,7 +30,7 @@
 
             vm.labels = distribution.scale;
             vm.history = [distribution.frequencies];
-            vm.series = [translationService.translate('RESPONSE_COUNT')];
+            vm.series = [translationService.translate('FREQUENCY')];
 
 
             vm.datasetOverride = [{yAxisID: 'ping'}];
@@ -68,7 +68,7 @@
         }
 
         function frequencyTitle() {
-            return translationService.translate('FREQUENCY');
+            return translationService.translate('FREQUENCY_AXES');
         }
     }
 })();
