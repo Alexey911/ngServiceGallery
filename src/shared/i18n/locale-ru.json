@@ -41,5 +41,6 @@
   "AVERAGE_TIME": "Среднее время",
   "FREQUENCY": "Вероятность, %",
   "REAL_TIME": "В реальном времени",
-  "DISTRIBUTION": "Распределение ответов"
+  "DISTRIBUTION": "Распределение ответов",
+  "RESPONSE_COUNT": "Кол-во ответов"
 }

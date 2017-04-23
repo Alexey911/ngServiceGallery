@@ -30,6 +30,8 @@
 
             vm.labels = distribution.scale;
             vm.history = [distribution.frequencies];
+            vm.series = [translationService.translate('RESPONSE_COUNT')];
+
 
             vm.datasetOverride = [{yAxisID: 'ping'}];
             vm.options = {
