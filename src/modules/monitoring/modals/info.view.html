@@ -9,58 +9,52 @@
                 </button>
                 <a href="{{vm.service.address}}"
                    target="_blank"
-                   class="modal-title alert-link"
-                   style="font-size: larger; padding-left: 15px">{{vm.service.name}}</a>
+                   class="modal-title alert-link h2"
+                   style="padding-left: 15px; text-decoration: none; color: midnightblue;">{{vm.service.name}}</a>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="address" class="col-sm-3 control-label" translate>SERVICE_ADDRESS</label>
-                        <div class="col-sm-9">
-                            <input type="url"
-                                   class="form-control"
-                                   id="address"
-                                   ng-value="vm.service.address" readonly>
-                        </div>
+
+                <h4 style="text-align: center;">{{vm.service.description}}</h4>
+
+                <div class="form-horizontal">
+                    <div>
+                        <p class="col-sm-4" translate>MIN_TIME</p>
+                        <p ng-style="vm.color(vm.statistics.min)"
+                           style="padding-right:5px; display:inline; float:left">
+                            {{vm.statistics.min | number:0}}
+                        </p>
+                        <p translate>MILLISECOND</p>
                     </div>
-                    <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label" translate required>SERVICE_NAME</label>
-                        <div class="col-sm-9">
-                            <input type="text"
-                                   class="form-control"
-                                   id="name"
-                                   ng-value="vm.service.name" readonly>
-                        </div>
+                    <div>
+                        <p class="col-sm-4" translate>MAX_TIME</p>
+                        <p ng-style="vm.color(vm.statistics.max)"
+                           style="padding-right:5px; display:inline; float:left">
+                            {{vm.statistics.max | number:0}}</p>
+                        <p translate>MILLISECOND</p>
                     </div>
-                    <div class="form-group">
-                        <label for="description" class="col-sm-3 control-label" translate>SERVICE_DESCRIPTION</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control"
-                                   id="description"
-                                   ng-value="vm.service.description"
-                                   readonly>
-                        </div>
+                    <div>
+                        <p class="col-sm-4" style="white-space: nowrap" translate>AVERAGE_TIME</p>
+                        <p ng-style="vm.color(vm.statistics.avg)"
+                           style="padding-right:5px; display:inline; float:left">
+                            {{vm.statistics.avg | number:0}}
+                        </p>
+                        <p translate>MILLISECOND</p>
                     </div>
-                    <div class="form-group">
-                        <label for="frequency" class="col-sm-3 control-label" translate>FREQUENCY</label>
-                        <div class="col-sm-3" style="padding-right: 5px">
-                            <input type="number"
-                                   class="form-control"
-                                   id="frequency"
-                                   ng-value="vm.service.settings.frequency" readonly>
-                        </div>
-                        <div class="col-sm-1" style="margin-top: 15px; padding: 0">
-                            <span translate>MILLISECOND</span>
-                        </div>
+                    <div>
+                        <p class="col-sm-4" translate>ATTEMPTS</p>
+                        <p style="padding-right:5px; display:inline; float:left">
+                            {{vm.statistics.attempts + vm.statistics.fails}}
+                        </p>
+                        <p translate>TIMES</p>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button"
-                        class="btn"
-                        data-dismiss="modal"
-                        translate>CLOSE
-                </button>
+                    <div>
+                        <p class="col-sm-4" translate>FAILS</p>
+                        <p style="padding-right:5px; display:inline; float:left">
+                            {{vm.statistics.fails}}
+                        </p>
+                        <p translate>TIMES</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

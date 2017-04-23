@@ -32,5 +32,11 @@
   "YES": "Да",
   "NO": "Нет",
   "RESPONSE_TIME_WARNING": "Примечание: указывайте наиболее быстрые методы api для получения наилучших приближений ping",
-  "COMMON_SERVICE_STATISTICS": "быстрых {{fast}}, нормальных {{medium}}, медленных {{slow}}"
+  "COMMON_SERVICE_STATISTICS": "быстрых {{fast}}, нормальных {{medium}}, медленных {{slow}}",
+  "FAILS": "Неуспешно",
+  "TIMES": "раз",
+  "ATTEMPTS": "Попыток",
+  "MIN_TIME": "Мин время",
+  "MAX_TIME": "Мах время",
+  "AVERAGE_TIME": "Среднее время"
 }

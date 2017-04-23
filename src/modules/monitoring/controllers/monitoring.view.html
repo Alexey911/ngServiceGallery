@@ -3,7 +3,7 @@
         <div class="col-sm-4">
             <h3 style="color:dimgrey;white-space:nowrap" translate>SERVICES</h3>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-8">
             <span ng-show="vm.summary" ng-cloak style="float: right; color: darkgrey" class="h6">
                 {{'COMMON_SERVICE_STATISTICS' | translate:vm.summary}}
             </span>
@@ -16,7 +16,7 @@
             ng-attr-title="{{service.address}}">
             <td class="col-sm-2" ng-cloak ng-click="vm.show(service)">{{service.name}}</td>
             <td class="col-sm-2" ng-cloak ng-click="vm.show(service)">
-                <span ng-show="service.ping > 0" ng-style="vm.color(service)">{{service.ping}}</span>
+                <span ng-show="service.ping > 0" ng-style="vm.color(service.ping)">{{service.ping | number:0}}</span>
                 <span ng-show="service.ping > 0" style="color: grey;" translate>MILLISECOND</span>
                 <span ng-hide="service.ping" style="color: lightgrey" translate>COMPUTING</span>
                 <span ng-show="service.ping === -1" style="color: indianred" translate>FAILED</span>

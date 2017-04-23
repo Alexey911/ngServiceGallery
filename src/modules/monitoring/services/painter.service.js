@@ -19,9 +19,7 @@
             color: color
         };
 
-        function color(service) {
-            let ping = service.ping;
-
+        function color(ping) {
             if (ping === -1) {
                 return colors.red;
             } else if (ping < SERVICE_CONFIG.FAST_SPEED) {

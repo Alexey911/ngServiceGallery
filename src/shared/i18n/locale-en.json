@@ -26,11 +26,17 @@
   "WATCH": "Watch",
   "FORCE": "Force",
   "PAUSE": "Pause",
-  "FREQUENCY": "Frequency time",
+  "FREQUENCY": "Frequency",
   "MILLISECOND": " ms.",
   "CLOSE": "Close",
   "YES": "Yes",
   "NO": "No",
   "RESPONSE_TIME_WARNING": "Warning: it would be better to use fastest methods of api for better approximation responses as ping",
-  "COMMON_SERVICE_STATISTICS": "fast {{fast}}, medium {{medium}}, slow {{slow}}"
+  "COMMON_SERVICE_STATISTICS": "fast {{fast}}, medium {{medium}}, slow {{slow}}",
+  "FAILS": "Fails",
+  "TIMES": "times",
+  "ATTEMPTS": "Attempts",
+  "MIN_TIME": "Min time",
+  "MAX_TIME": "Max time",
+  "AVERAGE_TIME": "Average time"
 }

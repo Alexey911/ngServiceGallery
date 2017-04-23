@@ -17,8 +17,9 @@
             reset: reset,
             update: update,
             remove: remove,
-            getSummary: getSummary,
             register: register,
+            getSummary: getSummary,
+            getStatistics: getStatistics
         };
 
         function getSummary() {
@@ -45,6 +46,10 @@
                 updateSummary();
             }
             return service;
+        }
+
+        function getStatistics(service) {
+            return statistics.get(service.id);
         }
 
         function update(serviceId, ping) {
