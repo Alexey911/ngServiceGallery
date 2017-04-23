@@ -62,7 +62,7 @@
 
             config.url = service.address;
             config.name = service.name;
-            config.frequency  = service.settings.frequency;
+            config.frequency = service.settings.frequency;
 
             if (!scheduler.hasExecutor(config.task)) {
                 sendPing(config);
@@ -75,7 +75,11 @@
 
         function stop() {
             $log.info(`Stop ping`);
-            scheduler.shutDown();
+
+            for (let config of configurations) {
+                scheduler.stop(config.task);
+                config.task = undefined;
+            }
         }
 
         function remove(service) {
