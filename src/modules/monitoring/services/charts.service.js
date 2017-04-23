@@ -14,18 +14,24 @@
         };
 
         function distribution(service) {
-            return new DistributionChart(service);
+            const chart = new DistributionChart(service, 10);
+            chart.refresh();
+            return chart;
         }
 
-        function DistributionChart(service) {
+        function DistributionChart(service, selection) {
             const statistic = statistics.getStatistics(service);
 
-            this.data = [distributions.calculate(statistic, 10)];
+            this.data = [[]];
             this.series = [translationService.translate('FREQUENCY')];
             this.datasetOverride = [{yAxisID: 'frequency'}, {xAxisID: 'response'}];
 
             this.refresh = () => {
-                merge(this.data[0], distributions.calculate(statistic, 10));
+                merge(this.data[0], distributions.calculate(statistic, selection));
+
+                let ticks = this.options.scales.xAxes[0].ticks;
+                ticks.min = statistic.min;
+                ticks.max = statistic.max;
             };
 
             this.options = {
@@ -50,7 +56,8 @@
                             display: true,
                             position: 'bottom',
                             ticks: {
-                                min: statistic.min
+                                min: statistic.min,
+                                max: statistic.max
                             },
                             scaleLabel: {
                                 display: true,
@@ -71,7 +78,9 @@
         }
 
         function merge(target, source) {
-            for (let i = 0; i < source.length; ++i) {
+            const same = Math.min(target.length, source.length);
+
+            for (let i = 0; i < same; ++i) {
                 const o = target[i];
                 const v = source[i];
 
@@ -81,6 +90,14 @@
                 } else if (o.y !== v.y) {
                     o.y = v.y;
                 }
+            }
+
+            for (let i = same; i < source.length; ++i) {
+                target[i] = source[i];
+            }
+
+            if (target.length > source.length) {
+                target.splice(source.length, target.length - source.length);
             }
         }
     }
