@@ -13,7 +13,6 @@
                    style="padding-left: 15px; text-decoration: none; color: midnightblue;">{{vm.service.name}}</a>
             </div>
             <div class="modal-body">
-
                 <h4 style="text-align: center;">{{vm.service.description}}</h4>
 
                 <div class="form-horizontal">
@@ -54,6 +53,15 @@
                         </p>
                         <p translate>TIMES</p>
                     </div>
+                </div>
+
+                <div ng-show="vm.statistics.history.length > 10">
+                    <canvas class="chart chart-line"
+                            chart-data="vm.history"
+                            chart-labels="vm.labels"
+                            chart-options="vm.options"
+                            chart-dataset-override="vm.datasetOverride">
+                    </canvas>
                 </div>
             </div>
         </div>

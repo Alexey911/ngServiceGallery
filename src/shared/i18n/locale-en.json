@@ -26,7 +26,7 @@
   "WATCH": "Watch",
   "FORCE": "Force",
   "STOP": "Stop",
-  "FREQUENCY": "Frequency",
+  "FREQUENCY_TIME": "Frequency",
   "MILLISECOND": " ms.",
   "CLOSE": "Close",
   "YES": "Yes",
@@ -38,5 +38,6 @@
   "ATTEMPTS": "Attempts",
   "MIN_TIME": "Min time",
   "MAX_TIME": "Max time",
-  "AVERAGE_TIME": "Average time"
+  "AVERAGE_TIME": "Average time",
+  "FREQUENCY": "Frequency, %"
 }

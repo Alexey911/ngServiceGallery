@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="frequency" class="col-sm-2 control-label" translate>FREQUENCY</label>
+                        <label for="frequency" class="col-sm-2 control-label" translate>FREQUENCY_TIME</label>
                         <div class="col-sm-2" style="padding-right: 5px">
                             <input type="number"
                                    class="form-control"
@@ -88,7 +88,7 @@
                         data-dismiss="modal"
                         ng-click="vm.submit()"
                         ng-disabled="registerForm.$invalid"
-                        ng-cloak>{{(vm.mode === 'register' ? 'REGISTER' : 'UPDATE') | translate}}
+                        ng-cloak>{{(vm.mode === 'register' ? 'ADD' : 'UPDATE') | translate}}
                 </button>
                 <button type="button"
                         ng-click="vm.cancel()"

@@ -3,9 +3,9 @@
         .module('ngServiceGallery')
         .controller('ServiceInfoController', ServiceInfoController);
 
-    ServiceInfoController.$inject = ['statistics', 'painter', 'service'];
+    ServiceInfoController.$inject = ['$scope', 'statistics', 'painter', 'translationService', 'distributions', 'service'];
 
-    function ServiceInfoController(statistics, painter, service) {
+    function ServiceInfoController($scope, statistics, painter, translationService, distributions, service) {
         let vm = this;
 
         activate();
@@ -15,6 +15,58 @@
         function activate() {
             vm.service = service;
             vm.statistics = statistics.getStatistics(service);
+
+            drawChart();
+            $scope.$watch('vm.statistics.avg', updateChart)
+        }
+
+        function drawChart() {
+            let distribution = distributions.calculate(vm.statistics);
+
+            vm.snapshot = {
+                min: distribution.min,
+                max: distribution.max
+            };
+
+            vm.labels = distribution.scale;
+            vm.history = [distribution.frequencies];
+
+            vm.datasetOverride = [{yAxisID: 'ping'}];
+            vm.options = {
+                scales: {
+                    yAxes: [
+                        {
+                            id: 'ping',
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            ticks: {min: 0},
+                            scaleLabel: {
+                                display: true,
+                                labelString: frequencyTitle()
+                            }
+                        }
+                    ]
+                }
+            };
+        }
+
+        function updateChart() {
+            let distribution = distributions.calculate(vm.statistics);
+
+            if (distribution.min !== vm.snapshot.min || distribution.max !== vm.snapshot.max) {
+                vm.labels = distribution.scale;
+            }
+
+            vm.snapshot = {min: distribution.min, max: distribution.max};
+
+            for (let i = 0; i < 10; ++i) {
+                vm.history[0][i] = distribution.frequencies[i];
+            }
+        }
+
+        function frequencyTitle() {
+            return translationService.translate('FREQUENCY');
         }
     }
 })();

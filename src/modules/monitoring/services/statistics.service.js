@@ -57,6 +57,7 @@
             let service = statistic.service;
 
             service.ping = ping || -1;
+            statistic.history.push({time: new Date(), ping: service.ping});
 
             if (ping >= SERVICE_CONFIG.SLOW_SPEED) {
                 notificationService.showMessage('WEAK_RESPONSE', service)
@@ -108,6 +109,7 @@
                 avg: undefined,
                 max: undefined,
                 service: service,
+                history: []
             };
         }
     }
