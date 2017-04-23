@@ -13,7 +13,7 @@
             calculate: calculate
         };
 
-        function calculate(statistics) {
+        function calculate(statistics, selection) {
             const snapshot = {
                 min: statistics.min,
                 max: statistics.max,
@@ -21,33 +21,15 @@
                 history: statistics.history
             };
 
-            return {
-                min: snapshot.min,
-                max: snapshot.max,
-                scale: getScale(snapshot),
-                frequencies: getFrequencies(snapshot)
-            };
+            return getDistribution(snapshot, selection);
         }
 
-        function getScale(statistics) {
-            const delta = (statistics.max - statistics.min) / 9;
-
-            const responses = Array.apply(null, Array(10)).map(Number.prototype.valueOf, 0);
-
-            let prev = statistics.min;
-            for (let i = 0; i < 10; ++i) {
-                responses[i] = Math.floor(prev);
-                prev += delta;
-            }
-            return responses;
-        }
-
-        function getFrequencies(statistics) {
+        function getDistribution(statistics, selection) {
             const min = statistics.min;
             const count = statistics.count;
-            const delta = (statistics.max - min) / 9;
+            const delta = (statistics.max - min) / (selection - 1);
 
-            const frequencies = Array.apply(null, Array(10)).map(Number.prototype.valueOf, 0);
+            const frequencies = range(selection);
 
             for (let i = 0; i < count; ++i) {
                 let point = statistics.history[i];
@@ -55,10 +37,21 @@
                 frequencies[pos]++;
             }
 
-            for (let i = 0; i < count; ++i) {
-                frequencies[i] = Math.floor(100 * frequencies[i] / count);
+            const distribution = range(selection);
+            let prev = statistics.min;
+
+            for (let i = 0; i < selection; ++i) {
+                const frequency = Math.floor(100 * frequencies[i] / count);
+                const response = Math.floor(prev);
+
+                distribution[i] = {y: frequency, x: response};
+                prev += delta;
             }
-            return frequencies;
+            return distribution;
+        }
+
+        function range(count) {
+            return Array.apply(null, Array(count)).map(Number.prototype.valueOf, 0);
         }
     }
 })();

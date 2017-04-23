@@ -21,17 +21,10 @@
         }
 
         function drawChart() {
-            let distribution = distributions.calculate(vm.statistics);
+            let distribution = distributions.calculate(vm.statistics, 10);
 
-            vm.snapshot = {
-                min: distribution.min,
-                max: distribution.max
-            };
-
-            vm.labels = distribution.scale;
-            vm.history = [distribution.frequencies];
+            vm.history = [distribution];
             vm.series = [translationService.translate('FREQUENCY')];
-
 
             vm.datasetOverride = [{yAxisID: 'frequency'}, {xAxisID: 'response'}];
             vm.options = {
@@ -55,6 +48,9 @@
                             type: 'linear',
                             display: true,
                             position: 'bottom',
+                            ticks: {
+                                min: vm.statistics.min,
+                            },
                             scaleLabel: {
                                 display: true,
                                 labelString: responseTimeAxesTitle()
@@ -66,16 +62,21 @@
         }
 
         function updateChart() {
-            let distribution = distributions.calculate(vm.statistics);
+            const updated = distributions.calculate(vm.statistics, 10);
+            merge(vm.history[0], updated);
+        }
 
-            if (distribution.min !== vm.snapshot.min || distribution.max !== vm.snapshot.max) {
-                vm.labels = distribution.scale;
-            }
+        function merge(target, source) {
+            for (let i = 0; i < source.length; ++i) {
+                const o = target[i];
+                const v = source[i];
 
-            vm.snapshot = {min: distribution.min, max: distribution.max};
-
-            for (let i = 0; i < 10; ++i) {
-                vm.history[0][i] = distribution.frequencies[i];
+                if (o.x !== v.x) {
+                    o.x = v.x;
+                    o.y = v.y;
+                } else if (o.y !== v.y) {
+                    o.y = v.y;
+                }
             }
         }
 
