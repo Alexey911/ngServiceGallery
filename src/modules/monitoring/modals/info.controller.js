@@ -33,19 +33,31 @@
             vm.series = [translationService.translate('FREQUENCY')];
 
 
-            vm.datasetOverride = [{yAxisID: 'ping'}];
+            vm.datasetOverride = [{yAxisID: 'frequency'}, {xAxisID: 'response'}];
             vm.options = {
                 scales: {
                     yAxes: [
                         {
-                            id: 'ping',
+                            id: 'frequency',
                             type: 'linear',
                             display: true,
                             position: 'left',
                             ticks: {min: 0},
                             scaleLabel: {
                                 display: true,
-                                labelString: frequencyTitle()
+                                labelString: frequencyAxesTitle()
+                            }
+                        }
+                    ],
+                    xAxes: [
+                        {
+                            id: 'response',
+                            type: 'linear',
+                            display: true,
+                            position: 'bottom',
+                            scaleLabel: {
+                                display: true,
+                                labelString: responseTimeAxesTitle()
                             }
                         }
                     ]
@@ -67,8 +79,12 @@
             }
         }
 
-        function frequencyTitle() {
+        function frequencyAxesTitle() {
             return translationService.translate('FREQUENCY_AXES');
+        }
+
+        function responseTimeAxesTitle() {
+            return translationService.translate('RESPONSE_TIME_AXES');
         }
     }
 })();

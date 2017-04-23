@@ -41,6 +41,7 @@
   "AVERAGE_TIME": "Average time",
   "FREQUENCY": "Frequency",
   "FREQUENCY_AXES": "Frequency, %",
+  "RESPONSE_TIME_AXES": "Response time, ms",
   "REAL_TIME": "Real time",
   "DISTRIBUTION": "Response distribution"
 }

@@ -41,6 +41,7 @@
   "AVERAGE_TIME": "Среднее время",
   "FREQUENCY": "Вероятность",
   "FREQUENCY_AXES": "Вероятность, %",
+  "RESPONSE_TIME_AXES": "Время ответа, мс",
   "REAL_TIME": "В реальном времени",
   "DISTRIBUTION": "Распределение ответов"
 }
