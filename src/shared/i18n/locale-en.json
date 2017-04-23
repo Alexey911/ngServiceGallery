@@ -39,5 +39,7 @@
   "MIN_TIME": "Min time",
   "MAX_TIME": "Max time",
   "AVERAGE_TIME": "Average time",
-  "FREQUENCY": "Frequency, %"
+  "FREQUENCY": "Frequency, %",
+  "REAL_TIME": "Real time",
+  "DISTRIBUTION": "Response distribution"
 }

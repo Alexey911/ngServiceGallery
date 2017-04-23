@@ -56,6 +56,11 @@
                 </div>
 
                 <div ng-show="vm.statistics.history.length > 10">
+                    <div style="text-align:center">
+                        <button class="btn-link btn-xs active" style="text-decoration: none" translate>REAL_TIME</button>
+                        <button class="btn-link btn-xs" style="text-decoration: none" translate>DISTRIBUTION</button>
+                    </div>
+
                     <canvas class="chart chart-line"
                             chart-data="vm.history"
                             chart-labels="vm.labels"
