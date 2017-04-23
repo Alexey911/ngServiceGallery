@@ -76,7 +76,7 @@
         function stop() {
             $log.info(`Stop ping`);
 
-            for (let config of configurations) {
+            for (let config of configurations.values()) {
                 scheduler.stop(config.task);
                 config.task = undefined;
             }
