@@ -28,6 +28,7 @@
 
         function activate() {
             vm.summary = statistics.getSummary();
+            vm.active = false;
 
             const services = serviceManager.getAll();
 
@@ -48,10 +49,12 @@
 
         function start() {
             pingService.start();
+            vm.active = true;
         }
 
         function stop() {
             pingService.stop();
+            vm.active = false;
         }
 
         function show(service) {
