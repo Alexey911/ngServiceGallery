@@ -33,7 +33,7 @@
                 frequency: service.settings.frequency,
             };
 
-            scheduler.schedule(() => sendPing(config), 500, 1);
+            scheduler.schedule(() => sendPing(config), 1500, 1);
             configurations.set(service.id, config);
 
             return service;
