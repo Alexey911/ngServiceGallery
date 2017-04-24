@@ -43,5 +43,10 @@
   "FREQUENCY_AXES": "Frequency, %",
   "RESPONSE_TIME_AXES": "Response time, ms",
   "REAL_TIME": "Real time",
-  "DISTRIBUTION": "Response distribution"
+  "DISTRIBUTION": "Response distribution",
+  "SETTINGS": "Settings",
+  "FAST_RESPONSE": "Fast response",
+  "SLOW_RESPONSE": "Slow response",
+  "MEDIUM_RESPONSE": "Medium response",
+  "COMPLETE_SETTINGS_UPDATE": "All new settings was applied"
 }

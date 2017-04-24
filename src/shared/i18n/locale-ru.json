@@ -43,5 +43,10 @@
   "FREQUENCY_AXES": "Вероятность, %",
   "RESPONSE_TIME_AXES": "Время ответа, мс",
   "REAL_TIME": "В реальном времени",
-  "DISTRIBUTION": "Распределение ответов"
+  "DISTRIBUTION": "Распределение ответов",
+  "SETTINGS": "Настройки",
+  "FAST_RESPONSE": "Быстрый запрос",
+  "SLOW_RESPONSE": "Медленный запрос",
+  "MEDIUM_RESPONSE": "Нормальный запрос",
+  "COMPLETE_SETTINGS_UPDATE": "Изменения настроек вступили в силу"
 }

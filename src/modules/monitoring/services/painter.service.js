@@ -5,9 +5,9 @@
         .module('ngServiceGallery.monitoring')
         .factory('painter', painter);
 
-    painter.$inject = ['SERVICE_CONFIG'];
+    painter.$inject = ['RESPONSE_SPEED'];
 
-    function painter(SERVICE_CONFIG) {
+    function painter(RESPONSE_SPEED) {
 
         const colors = {
             red: {color: "red"},
@@ -20,13 +20,13 @@
         };
 
         function color(ping) {
-            if (ping === -1) {
+            if (ping === RESPONSE_SPEED.UNKNOWN) {
                 return colors.red;
-            } else if (ping < SERVICE_CONFIG.FAST_SPEED) {
+            } else if (ping < RESPONSE_SPEED.FAST) {
                 return colors.green;
-            } else if (ping < SERVICE_CONFIG.MEDIUM_SPEED) {
+            } else if (ping < RESPONSE_SPEED.MEDIUM) {
                 return colors.orange;
-            } else if (ping < SERVICE_CONFIG.SLOW_SPEED) {
+            } else if (ping < RESPONSE_SPEED.SLOW) {
                 return colors.red;
             }
 

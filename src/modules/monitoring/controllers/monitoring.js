@@ -23,6 +23,7 @@
         vm.color = color;
         vm.remove = remove;
         vm.register = register;
+        vm.settings = settings;
 
         activate();
 
@@ -52,6 +53,10 @@
 
         function stop() {
             pingService.stop();
+        }
+
+        function settings() {
+            serviceManager.configure();
         }
 
         function show(service) {

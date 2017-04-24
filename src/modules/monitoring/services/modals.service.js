@@ -13,7 +13,8 @@
             showEdit: showEdit,
             showRemove: showRemove,
             showSummary: showSummary,
-            showRegistry: showRegistry
+            showRegistry: showRegistry,
+            showSettings: showSettings
         };
 
         function showEdit(service) {
@@ -30,6 +31,10 @@
 
         function showRegistry() {
             return registryModal().then(show);
+        }
+
+        function showSettings() {
+            return settingsModal().then(show);
         }
 
         function removeModal(service) {
@@ -64,6 +69,14 @@
                 templateUrl: 'service.view.html',
                 controllerAs: 'vm',
                 controller: 'RegistrationController'
+            });
+        }
+
+        function settingsModal() {
+            return ModalService.showModal({
+                templateUrl: 'settings.view.html',
+                controllerAs: 'vm',
+                controller: 'SettingsController'
             });
         }
 

@@ -5,9 +5,9 @@
         .module('ngServiceGallery.monitoring')
         .factory('statistics', statistics);
 
-    statistics.$inject = ['$rootScope', 'SERVICE_CONFIG', 'notificationService'];
+    statistics.$inject = ['$rootScope', 'RESPONSE_SPEED', 'notificationService'];
 
-    function statistics($rootScope, SERVICE_CONFIG, notificationService) {
+    function statistics($rootScope, RESPONSE_SPEED, notificationService) {
 
         let statistics = new Map();
 
@@ -56,10 +56,10 @@
             let statistic = statistics.get(serviceId);
             let service = statistic.service;
 
-            service.ping = ping || -1;
+            service.ping = ping || RESPONSE_SPEED.UNKNOWN;
             statistic.history.push({time: new Date(), ping: service.ping});
 
-            if (ping >= SERVICE_CONFIG.SLOW_SPEED) {
+            if (ping >= RESPONSE_SPEED.SLOW) {
                 notificationService.showMessage('WEAK_RESPONSE', service)
             }
 
@@ -84,11 +84,11 @@
             for (let statistic of statistics.values()) {
                 const avg = statistic.avg;
 
-                if (avg < SERVICE_CONFIG.FAST_SPEED) {
+                if (avg < RESPONSE_SPEED.FAST) {
                     fast += 1;
-                } else if (avg < SERVICE_CONFIG.MEDIUM_SPEED) {
+                } else if (avg < RESPONSE_SPEED.MEDIUM) {
                     medium += 1;
-                } else if (avg < SERVICE_CONFIG.SLOW_SPEED) {
+                } else if (avg < RESPONSE_SPEED.SLOW) {
                     slow += 1;
                 }
             }

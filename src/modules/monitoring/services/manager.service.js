@@ -17,6 +17,7 @@
             getAll: getAll,
             remove: remove,
             register: register,
+            configure: configure,
             isBusyAddress: isBusyAddress
         };
 
@@ -27,6 +28,10 @@
         function getAll() {
             services = services || storageService.get(SERVICE_CONFIG.STORAGE_PLACE, []);
             return services;
+        }
+
+        function configure() {
+            modals.showSettings();
         }
 
         function register() {
