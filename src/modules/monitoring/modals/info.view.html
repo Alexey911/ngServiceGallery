@@ -32,6 +32,14 @@
                         <p translate>MILLISECOND</p>
                     </div>
                     <div>
+                        <p class="col-sm-4" style="white-space: nowrap" translate>EXPECTED_TIME</p>
+                        <p ng-style="vm.color(vm.statistics.expected)"
+                           style="padding-right:5px; display:inline; float:left">
+                            {{vm.statistics.expected | number:0}}
+                        </p>
+                        <p translate>MILLISECOND</p>
+                    </div>
+                    <div>
                         <p class="col-sm-4" style="white-space: nowrap" translate>AVERAGE_TIME</p>
                         <p ng-style="vm.color(vm.statistics.avg)"
                            style="padding-right:5px; display:inline; float:left">

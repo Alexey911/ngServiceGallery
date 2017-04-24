@@ -21,10 +21,10 @@
                 history: statistics.history
             };
 
-            return getDistribution(snapshot, selection);
+            return getStatistic(snapshot, selection);
         }
 
-        function getDistribution(statistics, selection) {
+        function getStatistic(statistics, selection) {
             const min = statistics.min;
             const count = statistics.count;
             const delta = (statistics.max - min) / (selection - 1);
@@ -37,17 +37,24 @@
                 frequencies[pos]++;
             }
 
+            let expected = 0;
             const distribution = range(selection);
             let prev = statistics.min;
 
             for (let i = 0; i < selection; ++i) {
+                expected += prev * frequencies[i] / count;
+
                 const frequency = Math.floor(100 * frequencies[i] / count);
                 const response = Math.floor(prev);
 
                 distribution[i] = {y: frequency, x: response};
                 prev += delta;
             }
-            return distribution;
+
+            return {
+                expected: expected,
+                distribution: distribution,
+            };
         }
 
         function range(count) {

@@ -27,7 +27,10 @@
             this.datasetOverride = [{yAxisID: 'frequency'}, {xAxisID: 'response'}];
 
             this.refresh = () => {
-                merge(this.data[0], distributions.calculate(statistic, selection));
+                const data = distributions.calculate(statistic, selection);
+                merge(this.data[0], data.distribution);
+
+                statistic.expected = data.expected;
 
                 let ticks = this.options.scales.xAxes[0].ticks;
                 ticks.min = statistic.min;

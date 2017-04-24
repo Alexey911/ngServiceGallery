@@ -48,5 +48,6 @@
   "FAST_RESPONSE": "Fast response",
   "SLOW_RESPONSE": "Slow response",
   "MEDIUM_RESPONSE": "Medium response",
-  "COMPLETE_SETTINGS_UPDATE": "All new settings was applied"
+  "COMPLETE_SETTINGS_UPDATE": "All new settings was applied",
+  "EXPECTED_TIME": "Expected time"
 }
