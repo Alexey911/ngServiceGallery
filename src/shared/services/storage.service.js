@@ -20,7 +20,7 @@
             let saved = $localStorage[key];
             let value = saved ? saved : defaultValue;
             $log.debug(`Data[key="${key}"] was loaded`);
-            return value;
+            return angular.copy(value);
         }
 
         function save(key, value) {

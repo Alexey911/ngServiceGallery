@@ -45,7 +45,7 @@
 
         function edit(service) {
             return modals.showEdit(service)
-                .then(modified => copyServiceFields(modified, service));
+                .then(modified => saveChanges(modified, service));
         }
 
         function save(service) {
@@ -85,15 +85,17 @@
             return url.substr(s, f - s);
         }
 
-        function copyServiceFields(source, target) {
+        function saveChanges(source, original) {
             if (!source) return;
 
-            target.name = source.name;
-            target.address = source.address;
-            target.description = source.description;
-            target.settings.frequency = source.settings.frequency;
+            original.name = source.name;
+            original.address = source.address;
+            original.description = source.description;
+            original.settings.frequency = source.settings.frequency;
 
-            return target;
+            storageService.save(SERVICE_CONFIG.STORAGE_PLACE, services);
+
+            return original;
         }
     }
 })();
