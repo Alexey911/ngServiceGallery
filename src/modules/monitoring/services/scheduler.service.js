@@ -41,11 +41,12 @@
         }
 
         function update(task, frequency) {
-            if (hasExecutor(task) && schedulers.get(task).frequency !== frequency) {
-                const settings = schedulers.get(task);
-                stop(task);
-                schedule(settings.task, frequency, settings.count);
-            }
+            if (!hasExecutor(task)) return undefined;
+            if (schedulers.get(task).frequency === frequency) return task;
+
+            const settings = schedulers.get(task);
+            stop(task);
+            return schedule(settings.task, frequency, settings.count);
         }
 
         function shutDown() {

@@ -67,7 +67,7 @@
             if (!scheduler.hasExecutor(config.task)) {
                 sendPing(config);
             } else {
-                scheduler.update(config.task, config.frequency);
+                config.task = scheduler.update(config.task, config.frequency);
             }
 
             return service;
