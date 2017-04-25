@@ -71,6 +71,7 @@
                             type: 'linear',
                             display: true,
                             position: 'left',
+                            ticks: {min: 0},
                             scaleLabel: {
                                 display: true,
                                 labelString: responseTimeAxesTitle()
