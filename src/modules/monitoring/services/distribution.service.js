@@ -5,9 +5,9 @@
         .module('ngServiceGallery.monitoring')
         .factory('distributions', distributions);
 
-    distributions.$inject = [];
+    distributions.$inject = ['$log'];
 
-    function distributions() {
+    function distributions($log) {
 
         return {
             calculate: calculate
@@ -20,7 +20,7 @@
                 count: statistics.history.length,
                 history: statistics.history
             };
-
+            $log.debug('getting distribution');
             return getStatistic(snapshot, selection);
         }
 
