@@ -4,6 +4,7 @@
             <div class="modal-header">
                 <button type="button"
                         class="close"
+                        ng-click="vm.exit()"
                         data-dismiss="modal"
                         aria-hidden="true">&times;
                 </button>
@@ -63,12 +64,20 @@
                     </div>
                 </div>
 
-                <div ng-show="vm.statistics.history.length > 10">
-                    <div style="text-align:center">
-                        <button class="btn-link btn-xs" style="text-decoration: none" translate>DISTRIBUTION</button>
-                        <button class="btn-link btn-xs active" style="text-decoration: none" translate>REAL_TIME</button>
-                    </div>
+                <div style="text-align:center">
+                    <button ng-click="vm.drawChart(true)"
+                            class="btn-link btn-xs active"
+                            style="text-decoration: none"
+                            translate>REAL_TIME
+                    </button>
+                    <button ng-click="vm.drawChart(false)"
+                            class="btn-link btn-xs"
+                            style="text-decoration: none"
+                            translate>DISTRIBUTION
+                    </button>
+                </div>
 
+                <div ng-show="vm.chart.dynamic || vm.statistics.history.length > 10">
                     <canvas class="chart chart-line"
                             chart-data="vm.chart.data"
                             chart-series="vm.chart.series"
