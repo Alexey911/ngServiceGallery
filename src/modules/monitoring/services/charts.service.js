@@ -19,9 +19,7 @@
         }
 
         function distribution(service) {
-            const chart = new DistributionChart(service, 10);
-            chart.refresh();
-            return chart;
+            return new DistributionChart(service, 10);
         }
 
         function RealTimeChart(service, selection) {
@@ -121,8 +119,11 @@
                 statistic.expected = data.expected;
 
                 let ticks = this.options.scales.xAxes[0].ticks;
-                ticks.min = statistic.min;
-                ticks.max = statistic.max;
+
+                const error = (data.max - data.min) * 0.15;
+
+                if (Math.abs(ticks.min - data.min) > error) ticks.min = data.min;
+                if (Math.abs(ticks.max - data.max) > error) ticks.max = data.max;
             };
 
             this.options = {
@@ -133,7 +134,10 @@
                             type: 'linear',
                             display: true,
                             position: 'left',
-                            ticks: {min: 0},
+                            ticks: {
+                                min: 0,
+                                max: 100
+                            },
                             scaleLabel: {
                                 display: true,
                                 labelString: frequencyAxesTitle()
@@ -147,8 +151,8 @@
                             display: true,
                             position: 'bottom',
                             ticks: {
-                                min: statistic.min,
-                                max: statistic.max
+                                min: 0,
+                                max: 300
                             },
                             scaleLabel: {
                                 display: true,
