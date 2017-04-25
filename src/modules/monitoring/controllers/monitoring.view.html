@@ -17,7 +17,7 @@
             ng-repeat="service in $data"
             style="cursor:pointer"
             ng-attr-title="{{service.address}}">
-            <td class="col-sm-2" ng-cloak ng-click="vm.show(service)">{{service.name}}</td>
+            <td class="col-sm-3" ng-cloak ng-click="vm.show(service)">{{service.name}}</td>
             <td class="col-sm-2" ng-cloak ng-click="vm.show(service)">
                 <span ng-show="service.ping > 0" ng-style="vm.color(service.ping)">{{service.ping | number:0}}</span>
                 <span ng-show="service.ping > 0" style="color: grey;" translate>MILLISECOND</span>
@@ -29,7 +29,7 @@
                 style="color: grey"
                 ng-click="vm.show(service)">{{service.description | limitTo:30}}
             </td>
-            <td class="col-sm-4" style="text-align:right">
+            <td class="col-sm-3" style="text-align:right">
                 <button class="btn-link btn-xs" ng-click="vm.edit(service)" translate>EDIT</button>
                 <button class="btn-link btn-xs" ng-click="vm.remove(service)" translate>REMOVE</button>
             </td>

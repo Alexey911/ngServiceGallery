@@ -20,7 +20,7 @@
   "REGISTERED_NEW_SERVICE": "Сервис {{name}} сохранен",
   "SERVICE_WAS_REMOVED": "Сервис {{name}} был удален",
   "WEAK_RESPONSE": "Сервис {{name}} медленно отвечает",
-  "COMPUTING": "вычисление...",
+  "COMPUTING": "расчет...",
   "FAILED": "недоступен",
   "SERVICES": "WEB Сервисы",
   "WATCH": "Начать",
