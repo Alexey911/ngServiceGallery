@@ -54,6 +54,8 @@
 
         function update(serviceId, ping) {
             let statistic = statistics.get(serviceId);
+            if (!statistic) return;
+
             let service = statistic.service;
 
             service.ping = ping || RESPONSE_SPEED.UNKNOWN;
