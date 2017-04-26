@@ -61,7 +61,7 @@
                 controllerAs: 'vm',
                 controller: 'ServiceInfoController',
                 inputs: {service: service}
-            })
+            }).then(carefulClosing);
         }
 
         function registryModal() {
@@ -83,6 +83,12 @@
         function show(modal) {
             modal.element.modal();
             return modal.close;
+        }
+
+        function carefulClosing(modal) {
+            const closer = () => (modal.controller.exit && modal.controller.exit());
+            modal.element.one('hidden.bs.modal', closer);
+            return modal;
         }
     }
 })();
