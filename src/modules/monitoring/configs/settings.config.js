@@ -26,7 +26,7 @@
 
     function defaultSpeedSettings(SERVICE_CONFIG) {
         return {
-            UNKNOWN: -1,
+            UNKNOWN: 0,
             FAST: SERVICE_CONFIG.DEFAULT_RESPONSE_SPEED.FAST,
             SLOW: SERVICE_CONFIG.DEFAULT_RESPONSE_SPEED.SLOW,
             MEDIUM: SERVICE_CONFIG.DEFAULT_RESPONSE_SPEED.MEDIUM

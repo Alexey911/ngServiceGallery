@@ -101,7 +101,7 @@
         }
 
         function emptyStatistics(service) {
-            service.ping = undefined;
+            service.ping = -1;
 
             return {
                 fails: 0,
