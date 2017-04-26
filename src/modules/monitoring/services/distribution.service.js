@@ -12,8 +12,20 @@
         const MAX_DISTRIBUTION_SELECTION = 40;
 
         return {
-            calculate: calculate
+            calculate: calculate,
+            getExpected: getExpected
         };
+
+        function getExpected(statistics, count) {
+            let s = 0, f = statistics.history.length;
+
+            if (f >= count) s = f - count;
+
+            let sum = 0;
+            for (let i = s; i < f; ++i) sum += statistics.history[i].ping;
+
+            return sum / (f - s);
+        }
 
         function calculate(statistics, selection) {
             $log.debug('getting distribution');
@@ -77,8 +89,6 @@
 
         function getSnapshot(statistics) {
             const snapshot = {
-                min: 0,
-                max: 0,
                 avg: 0,
                 start: 0,
                 finish: statistics.history.length,
@@ -88,35 +98,9 @@
             if (snapshot.finish > MAX_DISTRIBUTION_SELECTION) {
                 snapshot.start = snapshot.finish - MAX_DISTRIBUTION_SELECTION;
             }
-
-            const borders = getBorders(snapshot);
-
-            snapshot.min = borders.min;
-            snapshot.max = borders.max;
-            snapshot.avg = borders.avg;
+            snapshot.avg = getExpected(statistics, MAX_DISTRIBUTION_SELECTION);
 
             return snapshot;
-        }
-
-        function getBorders(statistics) {
-            let min = undefined, max = undefined, sum = 0;
-
-            for (let i = statistics.start; i < statistics.finish; ++i) {
-                let val = statistics.history[i].ping;
-
-                sum += val;
-
-                if (val > max || !max) max = val;
-                if (val < min || !min) min = val;
-            }
-
-            const avg = sum / (statistics.finish - statistics.start);
-
-            return {
-                min: min,
-                max: max,
-                avg: avg
-            };
         }
 
         function range(count) {

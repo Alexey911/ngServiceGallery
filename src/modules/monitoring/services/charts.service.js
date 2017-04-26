@@ -15,7 +15,7 @@
         };
 
         function realTime(service) {
-            return new RealTimeChart(service, 10);
+            return new RealTimeChart(service, 20);
         }
 
         function distribution(service) {
@@ -23,8 +23,9 @@
         }
 
         function RealTimeChart(service, selection) {
-            const STEP_SIZE = 10;
-            const STEP_COUNT = 20;
+            const STEP_COUNT = selection;
+            const STEP_SIZE = 200 / selection;
+            const EXPECTED_WITHIN = Math.floor(Math.max(10, 5000 / service.settings.frequency));
 
             function grid() {
                 const grid = [];
@@ -58,7 +59,7 @@
                 const point = step <= STEP_COUNT ? step++ : STEP_COUNT;
                 points[point].y = statistic.history[last].ping;
 
-                statistic.expected = distributions.calculate(statistic, selection).expected;
+                statistic.expected = distributions.getExpected(statistic, EXPECTED_WITHIN);
             };
 
             this.options = {
@@ -84,7 +85,7 @@
                             position: 'bottom',
                             ticks: {
                                 min: 0,
-                                max: STEP_COUNT * STEP_SIZE,
+                                max: 200,
                                 stepSize: STEP_SIZE
                             }
                         }
