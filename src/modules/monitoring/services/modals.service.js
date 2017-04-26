@@ -39,10 +39,14 @@
 
         function removeModal(service) {
             return ModalService.showModal({
-                templateUrl: 'delete.view.html',
+                templateUrl: 'confirm.view.html',
                 controllerAs: 'vm',
-                controller: 'DeletionController',
-                inputs: {service: service}
+                controller: 'ConfirmController',
+                inputs: {
+                    title: 'SERVICE_DELETION',
+                    message: 'SERVICE_DELETION_CONFIRM',
+                    data: service
+                }
             });
         }
 
@@ -86,7 +90,7 @@
         }
 
         function carefulClosing(modal) {
-            const closer = () => (modal.controller.exit && modal.controller.exit());
+            const closer = () => !modal.controller.closed && modal.controller.exit();
             modal.element.one('hidden.bs.modal', closer);
             return modal;
         }

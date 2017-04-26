@@ -33,7 +33,7 @@
             delete $localStorage[key];
         }
 
-        function reset(){
+        function reset() {
             $localStorage.$reset();
         }
     }

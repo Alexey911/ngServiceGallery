@@ -8,16 +8,16 @@
                         data-dismiss="modal"
                         aria-hidden="true">&times;
                 </button>
-                <h4 class="modal-title" translate>SERVICE_DELETION</h4>
+                <h4 class="modal-title" translate="{{vm.title}}"></h4>
             </div>
             <div class="modal-body">
-                <p ng-cloak>{{'SERVICE_DELETION_CONFIRM' | translate:vm.service}}</p>
+                <p ng-cloak>{{vm.message | translate:vm.data}}</p>
             </div>
             <div class="modal-footer">
                 <button type="button"
                         class="btn btn-primary"
                         data-dismiss="modal"
-                        ng-click="vm.remove()"
+                        ng-click="vm.confirm()"
                         translate>YES
                 </button>
                 <button type="button"

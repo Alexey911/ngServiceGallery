@@ -40,6 +40,7 @@
 
         function exit() {
             close(null, 500);
+            vm.closed = true;
         }
     }
 })();
