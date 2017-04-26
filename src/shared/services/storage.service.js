@@ -24,7 +24,7 @@
         }
 
         function save(key, value) {
-            $localStorage[key] = value;
+            $localStorage[key] = angular.copy(value);
             $log.debug(`Data[key="${key}"] was saved`);
         }
 
