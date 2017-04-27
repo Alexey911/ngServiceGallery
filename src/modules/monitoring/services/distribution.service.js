@@ -16,10 +16,33 @@
 
         function getExpected(statistics, count) {
             const borders = getBorders(statistics, count);
-            return expected(statistics, borders)
+
+            const frequencies = range(count);
+            const min = statistics.min;
+            const delta = (statistics.max - min) / (count - 1);
+
+            for (let i = borders.start; i < borders.finish; ++i) {
+                const ping = statistics.history[i].ping;
+                const pos = Math.round((ping - min) / delta);
+                frequencies[pos]++;
+            }
+
+            let maxPos = 0;
+            let maxVal = 0;
+
+            for (let i = 0; i < count; ++i) {
+                let val = frequencies[i];
+
+                if (val >= maxVal) {
+                    maxPos = i;
+                    maxVal = val;
+                }
+            }
+
+            return min + delta * (0.5 + maxPos);
         }
 
-        function expected(data, borders) {
+        function getMiddle(data, borders) {
             const s = borders.start, f = borders.finish;
 
             let sum = 0;
@@ -72,24 +95,23 @@
                 min: min,
                 max: max,
                 distribution: distribution,
-                expected: statistics.expected
+                expected: getExpected(data, statistics.finish - statistics.start)
             };
         }
 
         function getStatistics(data, selection) {
             const borders = getBorders(data, selection);
-            const avg = expected(data, borders);
-            const delta = 1.5 * getDeviation(data, borders, avg);
+            const middle = getMiddle(data, borders);
+            const delta = 1.5 * getDeviation(data, borders, middle);
 
-            const min = Math.max(avg - delta, 0);
-            const max = avg + delta;
+            const min = Math.max(middle - delta, 0);
+            const max = middle + delta;
 
             return {
                 min: min,
                 max: max,
                 start: borders.start,
-                finish: borders.finish,
-                expected: avg
+                finish: borders.finish
             }
         }
 
