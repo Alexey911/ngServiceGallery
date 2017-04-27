@@ -9,47 +9,47 @@
 
     function distributions($log) {
 
-        const MAX_DISTRIBUTION_SELECTION = 40;
-
         return {
             calculate: calculate,
             getExpected: getExpected
         };
 
         function getExpected(statistics, count) {
-            let s = 0, f = statistics.history.length;
+            const borders = getBorders(statistics, count);
+            return expected(statistics, borders)
+        }
 
-            if (f >= count) s = f - count;
+        function expected(data, borders) {
+            const s = borders.start, f = borders.finish;
 
             let sum = 0;
-            for (let i = s; i < f; ++i) sum += statistics.history[i].ping;
+            for (let i = s; i < f; ++i) sum += data.history[i].ping;
 
             return sum / (f - s);
         }
 
-        function calculate(statistics, selection) {
+        function calculate(data, selection, expected) {
             $log.debug('getting distribution');
 
-            if (statistics.history.length <= 1) {
-                return {expected: statistics.avg, distribution: []};
+            if (data.history.length <= 1) {
+                return {expected: data.avg, distribution: []};
             }
 
-            const snapshot = getSnapshot(statistics);
-            return getStatistic(snapshot, selection);
+            const statistics = getStatistics(data, selection);
+            return getDistribution(data, statistics, expected);
         }
 
-        function getStatistic(statistics, selection) {
-            const deviation = 1.5 * getDeviation(statistics);
+        function getDistribution(data, statistics, expected) {
+            const frequencies = range(expected);
 
-            const min = (statistics.avg - deviation) > 0 ? (statistics.avg - deviation) : 0;
-            const max = statistics.avg + deviation;
+            const delta = (statistics.max - statistics.min) / (expected - 1);
+            const min = statistics.min;
+            const max = statistics.max;
 
-            const frequencies = range(selection);
-            const delta = (max - min) / (selection - 1);
             let count = 0;
 
             for (let i = statistics.start; i < statistics.finish; ++i) {
-                const ping = statistics.history[i].ping;
+                const ping = data.history[i].ping;
 
                 if (ping >= min && ping <= max) {
                     const pos = Math.round((ping - min) / delta);
@@ -58,10 +58,10 @@
                 }
             }
 
-            const distribution = range(selection);
+            const distribution = range(expected);
             let prev = min;
 
-            for (let i = 0; i < selection; ++i) {
+            for (let i = 0; i < expected; ++i) {
                 const frequency = 100 * frequencies[i] / count;
 
                 distribution[i] = {y: frequency.toFixed(2), x: prev.toFixed(2)};
@@ -71,36 +71,45 @@
             return {
                 min: min,
                 max: max,
-                expected: statistics.avg,
-                distribution: distribution
+                distribution: distribution,
+                expected: statistics.expected
             };
         }
 
-        function getDeviation(statistics) {
+        function getStatistics(data, selection) {
+            const borders = getBorders(data, selection);
+            const avg = expected(data, borders);
+            const delta = 1.5 * getDeviation(data, borders, avg);
+
+            const min = Math.max(avg - delta, 0);
+            const max = avg + delta;
+
+            return {
+                min: min,
+                max: max,
+                start: borders.start,
+                finish: borders.finish,
+                expected: avg
+            }
+        }
+
+        function getDeviation(data, borders, expected) {
             let deviation = 0;
 
-            for (let i = statistics.start; i < statistics.finish; ++i) {
-                let diff = statistics.history[i].ping - statistics.avg;
+            for (let i = borders.start; i < borders.finish; ++i) {
+                let diff = data.history[i].ping - expected;
                 deviation += diff * diff;
             }
 
-            return Math.sqrt(deviation / (statistics.finish - statistics.start));
+            return Math.sqrt(deviation / (borders.finish - borders.start));
         }
 
-        function getSnapshot(statistics) {
-            const snapshot = {
-                avg: 0,
-                start: 0,
-                finish: statistics.history.length,
-                history: statistics.history
-            };
+        function getBorders(data, count) {
+            let s = 0, f = data.history.length;
 
-            if (snapshot.finish > MAX_DISTRIBUTION_SELECTION) {
-                snapshot.start = snapshot.finish - MAX_DISTRIBUTION_SELECTION;
-            }
-            snapshot.avg = getExpected(statistics, MAX_DISTRIBUTION_SELECTION);
+            if (f >= count) s = f - count;
 
-            return snapshot;
+            return {start: s, finish: f};
         }
 
         function range(count) {

@@ -42,6 +42,7 @@
   "FREQUENCY": "Вероятность",
   "FREQUENCY_AXES": "Вероятность, %",
   "RESPONSE_TIME_AXES": "Время ответа, мс",
+  "RESPONSE_TIME": "Время ответа",
   "REAL_TIME": "В реальном времени",
   "DISTRIBUTION": "Распределение ответов",
   "SETTINGS": "Настройки",

@@ -42,6 +42,7 @@
   "FREQUENCY": "Frequency",
   "FREQUENCY_AXES": "Frequency, %",
   "RESPONSE_TIME_AXES": "Response time, ms",
+  "RESPONSE_TIME": "Response time",
   "REAL_TIME": "Real time",
   "DISTRIBUTION": "Response distribution",
   "SETTINGS": "Settings",

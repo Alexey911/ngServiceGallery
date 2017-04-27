@@ -34,7 +34,7 @@
 
             if (chart !== vm.chart) {
                 if (vm.refresher) vm.refresher();
-                vm.refresher = $scope.$watch('vm.service.ping', vm.chart.refresh);
+                vm.refresher = $scope.$watch('vm.statistics.commonTime', vm.chart.refresh);
             }
         }
 

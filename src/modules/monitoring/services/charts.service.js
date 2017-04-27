@@ -5,9 +5,9 @@
         .module('ngServiceGallery.monitoring')
         .factory('charts', charts);
 
-    charts.$inject = ['distributions', 'statistics', 'translationService'];
+    charts.$inject = ['$log', 'distributions', 'statistics', 'translationService'];
 
-    function charts(distributions, statistics, translationService) {
+    function charts($log, distributions, statistics, translationService) {
 
         return {
             realTime: realTime,
@@ -15,23 +15,23 @@
         };
 
         function realTime(service) {
-            return new RealTimeChart(service, 20);
+            return new RealTimeChart(service);
         }
 
         function distribution(service) {
-            return new DistributionChart(service, 10);
+            return new DistributionChart(service);
         }
 
-        function RealTimeChart(service, selection) {
-            const STEP_COUNT = selection;
-            const STEP_SIZE = 200 / selection;
-            const EXPECTED_WITHIN = Math.floor(Math.max(10, 5000 / service.settings.frequency));
+        function RealTimeChart(service) {
+            const STEP_COUNT = 20;
+            const STEP_SIZE = 10;
+            const EXPECTED_WITHIN = getSelection(service, STEP_COUNT);
 
             function grid() {
-                const grid = [];
+                const grid = new Array(STEP_COUNT);
 
                 for (let i = 0; i <= STEP_COUNT; i++) {
-                    grid.push({x: STEP_SIZE * i, y: undefined});
+                    grid[i] = ({x: STEP_SIZE * i, y: undefined});
                 }
                 return grid;
             }
@@ -40,7 +40,7 @@
 
             this.dynamic = true;
             this.data = [grid()];
-            this.series = ['response time'];
+            this.series = [translationService.translate('RESPONSE_TIME')];
             this.datasetOverride = [{yAxisID: 'response'}, {xAxisID: 'time'}];
 
             let step = 0;
@@ -85,7 +85,7 @@
                             position: 'bottom',
                             ticks: {
                                 min: 0,
-                                max: 200,
+                                max: STEP_SIZE * STEP_COUNT,
                                 stepSize: STEP_SIZE
                             }
                         }
@@ -105,16 +105,19 @@
             fill(STEP_COUNT);
         }
 
-        function DistributionChart(service, selection) {
+        function DistributionChart(service) {
+            const POINT_COUNT = 10;
+            const SELECTION_COUNT = getSelection(service, POINT_COUNT);
+
             const statistic = statistics.getStatistics(service);
 
             this.dynamic = false;
-            this.data = [distributions.calculate(statistic, selection).distribution];
-            this.series = [translationService.translate('FREQUENCY')];
+            this.data = [distributions.calculate(statistic, SELECTION_COUNT, POINT_COUNT).distribution];
+            this.series = [responseTime()];
             this.datasetOverride = [{yAxisID: 'frequency'}, {xAxisID: 'response'}];
 
             this.refresh = () => {
-                const data = distributions.calculate(statistic, selection);
+                const data = distributions.calculate(statistic, SELECTION_COUNT, POINT_COUNT);
                 merge(this.data[0], data.distribution);
 
                 statistic.expected = data.expected;
@@ -165,6 +168,14 @@
             };
         }
 
+        function getSelection(service, minAvailable) {
+            const selection = 20000 / service.settings.frequency;
+            const result = Math.floor(Math.max(selection, minAvailable));
+
+            $log.info(`selection within ${result} last values`);
+            return result;
+        }
+
         function merge(target, source) {
             for (let i = 0; i < target.length; ++i) {
                 const o = target[i];
@@ -177,6 +188,10 @@
                     o.y = v.y;
                 }
             }
+        }
+
+        function responseTime() {
+            return translationService.translate('FREQUENCY');
         }
 
         function frequencyAxesTitle() {
