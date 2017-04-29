@@ -120,7 +120,7 @@
                 const data = distributions.calculate(statistic, SELECTION_COUNT, POINT_COUNT);
                 merge(this.data[0], data.distribution);
 
-                statistic.expected = data.expected;
+                statistic.expected = distributions.getExpected(statistic, SELECTION_COUNT);
 
                 let ticks = this.options.scales.xAxes[0].ticks;
 
@@ -169,7 +169,7 @@
         }
 
         function getSelection(service, minAvailable) {
-            const selection = 20000 / service.settings.frequency;
+            const selection = 4000 / service.settings.frequency;
             const result = Math.floor(Math.max(selection, minAvailable));
 
             $log.info(`selection within ${result} last values`);

@@ -17,29 +17,14 @@
         function getExpected(statistics, count) {
             const borders = getBorders(statistics, count);
 
-            const frequencies = range(count);
-            const min = statistics.min;
-            const delta = (statistics.max - min) / (count - 1);
+            const delta = 1 / (borders.finish - borders.start - 1);
+            let factor = 0, expected = 0;
 
             for (let i = borders.start; i < borders.finish; ++i) {
-                const ping = statistics.history[i].ping;
-                const pos = Math.round((ping - min) / delta);
-                frequencies[pos]++;
+                expected += (0.5 + factor) * statistics.history[i].ping;
+                factor += delta;
             }
-
-            let maxPos = 0;
-            let maxVal = 0;
-
-            for (let i = 0; i < count; ++i) {
-                let val = frequencies[i];
-
-                if (val >= maxVal) {
-                    maxPos = i;
-                    maxVal = val;
-                }
-            }
-
-            return min + delta * (0.5 + maxPos);
+            return expected / (borders.finish - borders.start);
         }
 
         function getMiddle(data, borders) {
@@ -94,8 +79,7 @@
             return {
                 min: min,
                 max: max,
-                distribution: distribution,
-                expected: getExpected(data, statistics.finish - statistics.start)
+                distribution: distribution
             };
         }
 
