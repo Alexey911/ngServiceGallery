@@ -50,5 +50,7 @@
   "SLOW_RESPONSE": "Медленный запрос",
   "MEDIUM_RESPONSE": "Нормальный запрос",
   "COMPLETE_SETTINGS_UPDATE": "Изменения настроек вступили в силу",
-  "EXPECTED_TIME": "Ожидаемое время"
+  "EXPECTED_TIME": "Ожидаемое время",
+  "WORK_IN_NONACTIVE": "Работать в неактивном окне",
+  "WATCH_RESUMPTION": "Работа мониторинга возобновлена"
 }

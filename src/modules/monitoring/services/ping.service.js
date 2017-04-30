@@ -10,6 +10,7 @@
     function pingService($log, scheduler, statistics) {
 
         let configurations = new Map();
+        let running = false;
 
         return {
             stop: stop,
@@ -18,7 +19,12 @@
             force: force,
             remove: remove,
             register: register,
+            isRunning: isRunning
         };
+
+        function isRunning() {
+            return configurations.size > 0 && running;
+        }
 
         function register(service) {
             if (!service || configurations.has(service.id)) return;
@@ -51,6 +57,7 @@
             for (let config of configurations.values()) {
                 if (!scheduler.hasExecutor(config.task)) {
                     config.task = scheduler.schedule(() => sendPing(config), config.frequency);
+                    running = true;
                 }
             }
         }
@@ -80,6 +87,7 @@
                 scheduler.stop(config.task);
                 config.task = undefined;
             }
+            running = false;
         }
 
         function remove(service) {

@@ -60,6 +60,16 @@
                             <span translate>MILLISECOND</span>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inactive" class="col-sm-9 control-label" style="white-space: nowrap" translate>WORK_IN_NONACTIVE</label>
+                        <div class="col-sm-1" style="padding-right: 5px">
+                            <input type="checkbox"
+                                   style="margin-top: 10px; padding: 0"
+                                   id="inactive"
+                                   name="inactive"
+                                   ng-model="vm.settings.offline">
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

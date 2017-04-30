@@ -6,6 +6,7 @@
         .constant('SERVICE_CONFIG', {
             "SPEED_PLACE": 'speeds',
             'STORAGE_PLACE': 'services',
+            'SETTINGS_PLACE': 'settings',
             'DEFAULT_FREQUENCY': 2500,
             "DEFAULT_RESPONSE_SPEED": {
                 "MIN": 65,

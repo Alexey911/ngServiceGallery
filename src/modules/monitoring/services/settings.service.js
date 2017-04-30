@@ -5,9 +5,9 @@
         .module('ngServiceGallery.monitoring')
         .factory('settings', settings);
 
-    settings.$inject = ['SERVICE_CONFIG', 'RESPONSE_SPEED', 'storageService', 'notificationService'];
+    settings.$inject = ['SERVICE_CONFIG', 'RESPONSE_SPEED', 'PING_SETTINGS', 'storageService', 'notificationService'];
 
-    function settings(SERVICE_CONFIG, RESPONSE_SPEED, storageService, notificationService) {
+    function settings(SERVICE_CONFIG, RESPONSE_SPEED, PING_SETTINGS, storageService, notificationService) {
 
         return {
             get: get,
@@ -18,7 +18,8 @@
             return {
                 fast: RESPONSE_SPEED.FAST,
                 slow: RESPONSE_SPEED.SLOW,
-                medium: RESPONSE_SPEED.MEDIUM
+                medium: RESPONSE_SPEED.MEDIUM,
+                offline: PING_SETTINGS.OFFLINE
             }
         }
 
@@ -27,7 +28,11 @@
             RESPONSE_SPEED.SLOW = settings.slow;
             RESPONSE_SPEED.MEDIUM = settings.medium;
 
+            PING_SETTINGS.OFFLINE = settings.offline;
+
             storageService.save(SERVICE_CONFIG.SPEED_PLACE, RESPONSE_SPEED);
+            storageService.save(SERVICE_CONFIG.SETTINGS_PLACE, PING_SETTINGS);
+
             notificationService.showMessage('COMPLETE_SETTINGS_UPDATE');
         }
     }

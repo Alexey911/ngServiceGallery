@@ -50,5 +50,7 @@
   "SLOW_RESPONSE": "Slow response",
   "MEDIUM_RESPONSE": "Medium response",
   "COMPLETE_SETTINGS_UPDATE": "All new settings was applied",
-  "EXPECTED_TIME": "Expected time"
+  "EXPECTED_TIME": "Expected time",
+  "WORK_IN_NONACTIVE": "Work in nonactive window",
+  "WATCH_RESUMPTION": "Service monitoring resumption"
 }

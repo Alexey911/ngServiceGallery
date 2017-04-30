@@ -10,9 +10,9 @@
             controller: MonitoringController,
         });
 
-    MonitoringController.$inject = ['NgTableParams', 'pingService', 'statistics', 'serviceManager', 'painter'];
+    MonitoringController.$inject = ['NgTableParams', 'pingService', 'statistics', 'serviceManager', 'painter', 'events'];
 
-    function MonitoringController(NgTableParams, pingService, statistics, serviceManager, painter) {
+    function MonitoringController(NgTableParams, pingService, statistics, serviceManager, painter, events) {
         let vm = this;
 
         vm.stop = stop;
@@ -45,6 +45,9 @@
             );
             services.forEach(statistics.register);
             services.forEach(pingService.register);
+
+            events.registerBlur();
+            events.registerFocus();
         }
 
         function start() {
