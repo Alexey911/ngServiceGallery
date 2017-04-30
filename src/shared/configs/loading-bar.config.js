@@ -1,9 +1,9 @@
 (function () {
     'use strict';
 
-    angular
-        .module('ngServiceGallery.common')
-        .config(loadingBarConfig);
+/*
+    angular.module('ngServiceGallery.common').config(loadingBarConfig);
+*/
 
     loadingBarConfig.$inject = ['cfpLoadingBarProvider'];
 
