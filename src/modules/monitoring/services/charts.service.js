@@ -7,6 +7,7 @@
 
     charts.$inject = ['$log', 'distributions', 'statistics', 'translationService'];
 
+    //TODO: change chart update on independent timer (e.g, after each 1 sec)
     function charts($log, distributions, statistics, translationService) {
 
         return {
