@@ -4,7 +4,6 @@
             [
                 'ngTable',
                 'chart.js',
-                'ui.router',
                 'angularModalService',
                 'ngServiceGallery.common'
             ]);

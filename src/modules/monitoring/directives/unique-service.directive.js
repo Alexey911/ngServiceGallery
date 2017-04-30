@@ -3,11 +3,11 @@
         .module('ngServiceGallery.monitoring')
         .directive('uniqueService', uniqueService);
 
-    uniqueService.$inject = ['serviceManager', '$stateParams'];
+    uniqueService.$inject = ['serviceManager', 'stateParams'];
 
-    function uniqueService(serviceManager, $stateParams) {
+    function uniqueService(serviceManager, stateParams) {
 
-        let isValidServiceAddress = address => !serviceManager.isBusyAddress(address, $stateParams.owner);
+        let isValidServiceAddress = address => !serviceManager.isBusyAddress(address, stateParams.owner);
 
         return {
             require: 'ngModel',

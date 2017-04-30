@@ -72,9 +72,13 @@
             return service;
         }
 
+        function areEquals(a, b) {
+            return a === b || a.substring(0, a.length - 1) === b || b.substring(0, b.length - 1) === a;
+        }
+
         function isBusyAddress(address, owner) {
             return address !== owner && services
-                    .filter(registered => registered.address === address)
+                    .filter(registered => areEquals(registered.address, address))
                     .length > 0;
         }
 

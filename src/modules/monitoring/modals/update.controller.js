@@ -3,9 +3,9 @@
         .module('ngServiceGallery')
         .controller('EditController', EditController);
 
-    EditController.$inject = ['$stateParams', 'close', 'service'];
+    EditController.$inject = ['stateParams', 'close', 'service'];
 
-    function EditController($stateParams, close, service) {
+    function EditController(stateParams, close, service) {
         let vm = this;
 
         vm.cancel = onCancel;
@@ -16,7 +16,7 @@
         function activate() {
             vm.service = service;
             vm.mode = 'editing';
-            $stateParams.owner = service.address;
+            stateParams.owner = service.address;
         }
 
         function onCancel() {
@@ -28,7 +28,7 @@
         }
 
         function exit(service) {
-            $stateParams.owner = undefined;
+            stateParams.owner = undefined;
             close(service, 500);
         }
     }
