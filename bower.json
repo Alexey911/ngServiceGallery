@@ -8,7 +8,6 @@
   "dependencies": {
     "ng-table": "2.0.2",
     "angular-translate": "v2.15.1",
-    "angular-translate-loader-static-files": "v2.15.1",
     "bootstrap": "latest",
     "angular-modal-service": "latest",
     "angular-growl-notifications": "latest",
