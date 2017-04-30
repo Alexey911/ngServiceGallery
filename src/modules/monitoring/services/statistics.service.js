@@ -5,9 +5,9 @@
         .module('ngServiceGallery.monitoring')
         .factory('statistics', statistics);
 
-    statistics.$inject = ['$rootScope', 'RESPONSE_SPEED', 'notificationService'];
+    statistics.$inject = ['RESPONSE_SPEED', 'notificationService'];
 
-    function statistics($rootScope, RESPONSE_SPEED, notificationService) {
+    function statistics(RESPONSE_SPEED, notificationService) {
 
         let statistics = new Map();
 
@@ -79,7 +79,7 @@
                 statistic.fails += 1;
             }
 
-            $rootScope.$apply(updateSummary);
+            updateSummary();
         }
 
         function updateSummary() {

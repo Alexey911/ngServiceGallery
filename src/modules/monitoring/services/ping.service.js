@@ -5,9 +5,9 @@
         .module('ngServiceGallery.monitoring')
         .factory('pingService', pingService);
 
-    pingService.$inject = ['$log', 'scheduler', 'statistics'];
+    pingService.$inject = ['$log', 'scheduler', 'statistics', 'ping'];
 
-    function pingService($log, scheduler, statistics) {
+    function pingService($log, scheduler, statistics, ping) {
 
         let configurations = new Map();
         let running = false;
@@ -104,9 +104,9 @@
         function sendPing(config) {
             $log.debug(`Staring ping for Service[name=${config.name}]`);
 
-            ping(config.url).then(function (delta) {
+            ping.send(config.url).then(function (delta) {
                 statistics.update(config.id, delta);
-            }).catch(function (/*TODO: never called*/) {
+            }).catch(function () {
                 statistics.update(config.id);
             });
         }
