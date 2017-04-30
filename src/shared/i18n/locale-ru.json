@@ -52,5 +52,6 @@
   "COMPLETE_SETTINGS_UPDATE": "Изменения настроек вступили в силу",
   "EXPECTED_TIME": "Ожидаемое время",
   "WORK_IN_NONACTIVE": "Мониторинг в неактивном окне",
-  "WATCH_RESUMPTION": "Возобновление мониторинга"
+  "WATCH_RESUMPTION": "Возобновление мониторинга",
+  "NETWORK_FAIL": "Ошибка сети, мониторинг остановлен"
 }

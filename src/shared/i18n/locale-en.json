@@ -52,5 +52,6 @@
   "COMPLETE_SETTINGS_UPDATE": "All new settings was applied",
   "EXPECTED_TIME": "Expected time",
   "WORK_IN_NONACTIVE": "Work in nonactive window",
-  "WATCH_RESUMPTION": "Service monitoring resumption"
+  "WATCH_RESUMPTION": "Service monitoring resumption",
+  "NETWORK_FAIL": "Monitoring was stopped, occurred network exception"
 }

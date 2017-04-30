@@ -4,7 +4,7 @@
             [
                 'ngStorage',
                 'growlNotifications',
-                'angular-loading-bar',
+                // 'angular-loading-bar',
                 'pascalprecht.translate'
             ]);
 })();

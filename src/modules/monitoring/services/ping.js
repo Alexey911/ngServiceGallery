@@ -10,11 +10,12 @@
     function ping($http) {
 
         return {
-            send: send
+            send: send,
+            random: random
         };
 
         function random() {
-            return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+            return '?random-no-cache=' + Math.floor((1 + Math.random()) * 0x10000).toString(16);
         }
 
         function getResponseTime(response) {
@@ -22,7 +23,7 @@
         }
 
         function send(url) {
-            return $http.get(url + '?random-no-cache=' + random()).then(getResponseTime, getResponseTime);
+            return $http.get(url + random()).then(getResponseTime, getResponseTime);
         }
     }
 })();

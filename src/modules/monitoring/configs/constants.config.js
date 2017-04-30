@@ -14,6 +14,7 @@
                 "FAST": 350,
                 "SLOW": 3500,
                 "MEDIUM": 1000
-            }
+            },
+            "TEST_SERVICE": 'http://gfx2.hotmail.com/mail/uxp/w4/m4/pr014/h/s7.png'
         });
 })();
