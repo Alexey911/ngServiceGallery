@@ -39,8 +39,8 @@
   "MIN_TIME": "Мин время",
   "MAX_TIME": "Мах время",
   "AVERAGE_TIME": "Среднее время",
-  "FREQUENCY": "Вероятность",
-  "FREQUENCY_AXES": "Вероятность, %",
+  "FREQUENCY": "Частота",
+  "FREQUENCY_AXES": "Частота, %",
   "RESPONSE_TIME_AXES": "Время ответа, мс",
   "RESPONSE_TIME": "Время ответа",
   "REAL_TIME": "В реальном времени",
@@ -51,6 +51,6 @@
   "MEDIUM_RESPONSE": "Нормальный запрос",
   "COMPLETE_SETTINGS_UPDATE": "Изменения настроек вступили в силу",
   "EXPECTED_TIME": "Ожидаемое время",
-  "WORK_IN_NONACTIVE": "Работать в неактивном окне",
-  "WATCH_RESUMPTION": "Работа мониторинга возобновлена"
+  "WORK_IN_NONACTIVE": "Мониторинг в неактивном окне",
+  "WATCH_RESUMPTION": "Возобновление мониторинга"
 }

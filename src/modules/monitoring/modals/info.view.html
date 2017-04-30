@@ -18,7 +18,7 @@
 
                 <div class="form-horizontal">
                     <div>
-                        <p class="col-sm-4" translate>MIN_TIME</p>
+                        <p class="col-sm-5" translate>MIN_TIME</p>
                         <p ng-style="vm.color(vm.statistics.min)"
                            style="padding-right:5px; display:inline; float:left">
                             {{vm.statistics.min | number:0}}
@@ -26,14 +26,14 @@
                         <p translate>MILLISECOND</p>
                     </div>
                     <div>
-                        <p class="col-sm-4" translate>MAX_TIME</p>
+                        <p class="col-sm-5" translate>MAX_TIME</p>
                         <p ng-style="vm.color(vm.statistics.max)"
                            style="padding-right:5px; display:inline; float:left">
                             {{vm.statistics.max | number:0}}</p>
                         <p translate>MILLISECOND</p>
                     </div>
                     <div>
-                        <p class="col-sm-4" style="white-space: nowrap" translate>EXPECTED_TIME</p>
+                        <p class="col-sm-5" translate>EXPECTED_TIME</p>
                         <p ng-style="vm.color(vm.statistics.expected)"
                            style="padding-right:5px; display:inline; float:left">
                             {{vm.statistics.expected | number:0}}
@@ -41,7 +41,7 @@
                         <p translate>MILLISECOND</p>
                     </div>
                     <div>
-                        <p class="col-sm-4" style="white-space: nowrap" translate>AVERAGE_TIME</p>
+                        <p class="col-sm-5" translate>AVERAGE_TIME</p>
                         <p ng-style="vm.color(vm.statistics.avg)"
                            style="padding-right:5px; display:inline; float:left">
                             {{vm.statistics.avg | number:0}}
@@ -49,14 +49,14 @@
                         <p translate>MILLISECOND</p>
                     </div>
                     <div>
-                        <p class="col-sm-4" translate>ATTEMPTS</p>
+                        <p class="col-sm-5" translate>ATTEMPTS</p>
                         <p style="padding-right:5px; display:inline; float:left">
                             {{vm.statistics.attempts + vm.statistics.fails}}
                         </p>
                         <p translate>TIMES</p>
                     </div>
                     <div>
-                        <p class="col-sm-4" translate>FAILS</p>
+                        <p class="col-sm-5" translate>FAILS</p>
                         <p style="padding-right:5px; display:inline; float:left">
                             {{vm.statistics.fails}}
                         </p>
