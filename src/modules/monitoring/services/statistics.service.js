@@ -36,7 +36,9 @@
         function reset(service) {
             if (!service) return;
 
-            statistics.set(service.id, emptyStatistics(service));
+            if (statistics.get(service.id).settings.address !== service.address) {
+                statistics.set(service.id, emptyStatistics(service));
+            }
             return service;
         }
 
@@ -111,7 +113,10 @@
                 avg: undefined,
                 max: undefined,
                 service: service,
-                history: []
+                history: [],
+                settings: {
+                    address: service.address
+                }
             };
         }
     }
