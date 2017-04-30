@@ -1,8 +1,6 @@
-.center {
-    margin: auto;
-    width: 50%;
+.borders {
     border: 1px solid lightgrey;
-    padding: 10px;
+    padding: 4px 20px 4px 20px;
 }
 
 body {

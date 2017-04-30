@@ -1,35 +1,36 @@
-<div>
+<div class="row">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-4 col-sm-offset-1">
             <h3 ng-click="vm.settings()"
-                style="color:midnightblue; white-space:nowrap; cursor: pointer"
+                style="color:midnightblue; cursor: pointer; margin: 0"
                 translate>SERVICES
             </h3>
         </div>
-        <div class="col-sm-8">
-            <span ng-show="vm.summary" ng-cloak style="float: right; color: darkgrey" class="h6">
+        <div style="float: right; padding-right: 20px">
+            <span ng-show="vm.summary" ng-cloak style="color: darkgrey" class="h6">
                 {{'COMMON_SERVICE_STATISTICS' | translate:vm.summary}}
             </span>
         </div>
+        <div style="clear: right"></div>
     </div>
     <table ng-table="vm.services" class="table table-condensed table-striped general-view">
         <tr class="row"
             ng-repeat="service in $data"
             style="cursor:pointer"
             ng-attr-title="{{service.address}}">
-            <td class="col-sm-3" ng-cloak ng-click="vm.show(service)">{{service.name}}</td>
-            <td class="col-sm-2" ng-cloak ng-click="vm.show(service)">
+            <td class="col-3" ng-cloak ng-click="vm.show(service)">{{service.name}}</td>
+            <td class="col-2" ng-cloak ng-click="vm.show(service)">
                 <span ng-show="service.ping > 0" ng-style="vm.color(service.ping)">{{service.ping | number:0}}</span>
                 <span ng-show="service.ping > 0" style="color: grey;" translate>MILLISECOND</span>
                 <span ng-show="service.ping === -1" style="color: lightgrey" translate>COMPUTING</span>
                 <span ng-show="!service.ping" style="color: indianred" translate>FAILED</span>
             </td>
-            <td class="col-sm-4"
+            <td class="col-4"
                 ng-cloak
                 style="color: grey"
                 ng-click="vm.show(service)">{{service.description | limitTo:30}}
             </td>
-            <td class="col-sm-3" style="text-align:right">
+            <td class="col-3" style="text-align:right">
                 <button class="btn-link btn-xs" ng-click="vm.edit(service)" translate>EDIT</button>
                 <button class="btn-link btn-xs" ng-click="vm.remove(service)" translate>REMOVE</button>
             </td>
