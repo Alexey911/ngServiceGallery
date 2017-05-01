@@ -1,4 +1,6 @@
 (function () {
+    'use strict';
+
     angular
         .module('ngServiceGallery.monitoring')
         .directive('uniqueService', uniqueService);
