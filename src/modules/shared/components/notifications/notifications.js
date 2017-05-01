@@ -4,7 +4,7 @@
     angular
         .module('ngServiceGallery.common')
         .component('notifications', {
-            templateUrl: 'notifications.directive.html',
+            templateUrl: 'notifications.html',
             restrict: 'E',
             controllerAs: 'vm',
             controller: NotificationController,

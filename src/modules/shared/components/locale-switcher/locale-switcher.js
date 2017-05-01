@@ -3,8 +3,8 @@
 
     angular
         .module('ngServiceGallery.common')
-        .component('langSwitcher', {
-            templateUrl: 'lang-switcher.directive.html',
+        .component('localeSwitcher', {
+            templateUrl: 'locale-switcher.html',
             restrict: 'E',
             controllerAs: 'vm',
             controller: LangSwitcherController,

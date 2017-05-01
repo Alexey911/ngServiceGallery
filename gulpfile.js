@@ -31,7 +31,7 @@ let paths = {
     templates: {
         crud: ['src/modules/crud/*.html'],
         common: [
-            'src/modules/shared/components/lang-switcher/*.html',
+            'src/modules/shared/components/locale-switcher/*.html',
             'src/modules/shared/components/notifications/*.html'
         ],
         monitoring: [
