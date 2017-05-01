@@ -5,10 +5,11 @@
         .module('ngServiceGallery.monitoring')
         .factory('internetChecker', internetChecker);
 
-    internetChecker.$inject = ['SERVICE_CONFIG', 'scheduler', 'pingService', 'notificationService', 'ping'];
+    internetChecker.$inject = ['SERVICE_CONFIG', 'scheduler', 'notificationService', 'ping'];
 
-    function internetChecker(SERVICE_CONFIG, scheduler, pingService, notificationService, ping) {
+    function internetChecker(SERVICE_CONFIG, scheduler, notificationService, ping) {
 
+        let actor = undefined;
         let checker = undefined;
 
         return {
@@ -16,7 +17,10 @@
             stop: stop
         };
 
-        function start() {
+        function start(owner) {
+            if (checker || !owner.isRunning()) return;
+
+            actor = owner;
             checker = scheduler.schedule(checkAccess, 2500);
         }
 
@@ -27,14 +31,16 @@
         }
 
         function notifyOnFail() {
-            if (pingService.isRunning()) {
+            if (actor.isRunning()) {
                 notificationService.showMessage('NETWORK_FAIL');
-                pingService.stop();
+                actor.stop();
+                stop();
             }
         }
 
         function stop() {
             scheduler.stop(checker);
+            actor = undefined;
             checker = undefined;
         }
     }

@@ -5,14 +5,14 @@
         .module('ngServiceGallery.monitoring')
         .factory('pingService', pingService);
 
-    pingService.$inject = ['$log', 'scheduler', 'statistics', 'ping'];
+    pingService.$inject = ['$log', 'scheduler', 'statistics', 'ping', 'internetChecker'];
 
-    function pingService($log, scheduler, statistics, ping) {
+    function pingService($log, scheduler, statistics, ping, internetChecker) {
 
         let configurations = new Map();
         let running = false;
 
-        return {
+        let self = {
             stop: stop,
             start: start,
             reset: reset,
@@ -21,6 +21,8 @@
             register: register,
             isRunning: isRunning
         };
+
+        return self;
 
         function isRunning() {
             return configurations.size > 0 && running;
@@ -58,6 +60,7 @@
                 if (!scheduler.hasExecutor(config.task)) {
                     config.task = scheduler.schedule(() => sendPing(config), config.frequency);
                     running = true;
+                    internetChecker.start(self);
                 }
             }
         }
@@ -88,6 +91,7 @@
                 config.task = undefined;
             }
             running = false;
+            internetChecker.stop();
         }
 
         function remove(service) {

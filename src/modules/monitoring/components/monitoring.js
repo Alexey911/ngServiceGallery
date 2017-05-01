@@ -10,9 +10,9 @@
             controller: MonitoringController,
         });
 
-    MonitoringController.$inject = ['NgTableParams', 'pingService', 'statistics', 'serviceManager', 'painter', 'events', 'internetChecker'];
+    MonitoringController.$inject = ['NgTableParams', 'pingService', 'statistics', 'serviceManager', 'painter', 'events'];
 
-    function MonitoringController(NgTableParams, pingService, statistics, serviceManager, painter, events, internetChecker) {
+    function MonitoringController(NgTableParams, pingService, statistics, serviceManager, painter, events) {
         let vm = this;
 
         vm.stop = stop;
@@ -48,8 +48,6 @@
 
             events.registerBlur();
             events.registerFocus();
-
-            internetChecker.start();
         }
 
         function start() {
