@@ -15,6 +15,7 @@ let del = require('del'),
 
 let paths = {
     scripts: [
+        '!src/**/*test.js',
         'src/*.js',
         'src/modules/shared/*.js',
         'src/modules/shared/configs/*.js',
