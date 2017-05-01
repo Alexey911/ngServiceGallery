@@ -16,7 +16,7 @@
   "SERVICE_DESCRIPTION": "Description",
   "SERVICE_ALREADY_EXISTS": "Service with such name already exists!",
   "CANCEL": "Cancel",
-  "REQUIRED_SERVICE_ADDRESS": "Please input valid service address",
+  "REQUIRED_SERVICE_ADDRESS": "Please input valid service url",
   "REGISTERED_NEW_SERVICE": "Service {{name}} was saved",
   "SERVICE_WAS_REMOVED": "Service {{name}} was removed",
   "WEAK_RESPONSE": "Service {{name}} has weak response",
@@ -49,9 +49,9 @@
   "FAST_RESPONSE": "Fast response",
   "SLOW_RESPONSE": "Slow response",
   "MEDIUM_RESPONSE": "Medium response",
-  "COMPLETE_SETTINGS_UPDATE": "All new settings was applied",
+  "COMPLETE_SETTINGS_UPDATE": "All new settings will be applied",
   "EXPECTED_TIME": "Expected time",
-  "WORK_IN_NONACTIVE": "Work in nonactive window",
-  "WATCH_RESUMPTION": "Service monitoring resumption",
-  "NETWORK_FAIL": "Monitoring was stopped, occurred network exception"
+  "WORK_IN_NONACTIVE": "Work in inactive browser tab",
+  "WATCH_RESUMPTION": "Monitoring restarting",
+  "NETWORK_FAIL": "Occurred network error, monitoring was stopped"
 }

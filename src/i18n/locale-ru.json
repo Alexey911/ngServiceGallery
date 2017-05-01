@@ -49,7 +49,7 @@
   "FAST_RESPONSE": "Быстрый запрос",
   "SLOW_RESPONSE": "Медленный запрос",
   "MEDIUM_RESPONSE": "Нормальный запрос",
-  "COMPLETE_SETTINGS_UPDATE": "Изменения настроек вступили в силу",
+  "COMPLETE_SETTINGS_UPDATE": "Изменения настроек вступят в силу",
   "EXPECTED_TIME": "Ожидаемое время",
   "WORK_IN_NONACTIVE": "Мониторинг в неактивном окне",
   "WATCH_RESUMPTION": "Возобновление мониторинга",
