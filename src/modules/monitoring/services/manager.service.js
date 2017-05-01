@@ -14,6 +14,7 @@
         return {
             show: show,
             edit: edit,
+            save: save,
             getAll: getAll,
             remove: remove,
             register: register,

@@ -2,17 +2,17 @@
 
     angular
         .module('app', ['ngServiceGallery'])
-        .config(setUp)
         .run(startUp);
 
-    setUp.$inject = ['$galleryProvider'];
+    function startUp($log, $gallery) {
+        let service = {
+            name: 'test service',
+            address: 'https://google.com',
+            description: 'service example',
+            settings: {frequency: 1500}
+        };
+        $gallery.setDefaultServices([service]);
 
-    function setUp($galleryProvider) {
-    }
-
-    startUp.$inject = ['$log'];
-
-    function startUp($log) {
         $log.info('App is running');
     }
 })();

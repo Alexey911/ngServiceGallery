@@ -13,8 +13,20 @@
     $galleryProvider.$inject = [];
 
     function $galleryProvider() {
-        this.$get = function () {
-            return {};
+        this.$get = gallery;
+    }
+
+    gallery.$inject = ['serviceManager'];
+
+    function gallery(serviceManager) {
+        return {
+            setDefaultServices: setDefaultServices
         };
+
+        function setDefaultServices(services) {
+            if (!serviceManager.getAll().length) {
+                services.forEach(serviceManager.save);
+            }
+        }
     }
 })();
