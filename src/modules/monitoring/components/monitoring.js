@@ -4,7 +4,7 @@
     angular
         .module('ngServiceGallery.monitoring')
         .component('monitoring', {
-            templateUrl: 'monitoring.view.html',
+            templateUrl: 'monitoring.html',
             restrict: 'E',
             controllerAs: 'vm',
             controller: MonitoringController,

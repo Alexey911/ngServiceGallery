@@ -36,7 +36,7 @@ let paths = {
         ],
         monitoring: [
             'src/modules/monitoring/modals/*.html',
-            'src/modules/monitoring/controllers/*.html'
+            'src/modules/monitoring/components/*.html'
         ]
     },
     translations: [
