@@ -4,9 +4,14 @@ module.exports = function(config) {
     basePath: './src',
 
     files: [
-      'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js'
-      /*TODO: ADD TESTING FOLDERS*/
+        'bower_components/angular/angular.js',
+        'bower_components/ngstorage/ngStorage.js',
+        'bower_components/angular-translate/angular-translate.min.js',
+        'bower_components/angular-growl-notifications/dist/angular-growl-notifications.min.js',
+        'bower_components/angular-mocks/angular-mocks.js',
+        'modules/shared/ngServiceGallery.common.module.js',
+        'modules/shared/configs/*.js',
+        'modules/shared/services/*.js'
     ],
 
     autoWatch: true,
