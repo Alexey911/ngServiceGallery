@@ -4,12 +4,17 @@
             [
                 'ngServiceGallery.crud',
                 'ngServiceGallery.monitoring'
-            ])
-        .run(startUp);
+            ]);
 
-    startUp.$inject = ['$log'];
+    angular
+        .module('ngServiceGallery')
+        .provider('$gallery', $galleryProvider);
 
-    function startUp($log) {
-        $log.info('ServiceGallery is running');
+    $galleryProvider.$inject = [];
+
+    function $galleryProvider() {
+        this.$get = function () {
+            return {};
+        };
     }
 })();
