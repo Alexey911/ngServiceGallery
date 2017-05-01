@@ -78,12 +78,12 @@ function concatAllSources() {
                 module: 'ngServiceGallery.monitoring',
                 standalone: false
             }))
-    ).pipe(concat('ngServiceGallery.js'))
+    ).pipe(concat('ngServiceGallery.js')
+    ).pipe(gulp.dest(srcDest));
 }
 
 gulp.task('build', ['clean'], function () {
-    concatAllSources()
-        .pipe(gulp.dest(srcDest));
+    concatAllSources();
 
     gulp.src(paths.styles)
         .pipe(concatCss("ngServiceGallery.css"))
@@ -114,7 +114,6 @@ gulp.task('watch', function () {
 
 gulp.task('minify', function () {
     concatAllSources()
-        .pipe(gulp.dest(srcDest))
         .pipe(rename({suffix: '.min'}))
         .pipe(babel({
             presets: ['es2015']
