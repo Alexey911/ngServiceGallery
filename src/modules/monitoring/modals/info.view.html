@@ -1,5 +1,5 @@
 <div class="modal fade">
-    <div class="modal-dialog modal-lg" style="width: 30%">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button"
@@ -17,54 +17,43 @@
                 <h4 style="text-align:center; margin-top:0">{{vm.service.description}}</h4>
 
                 <div class="form-horizontal">
-                    <div>
-                        <p class="col-sm-5" translate>MIN_TIME</p>
-                        <p ng-style="vm.color(vm.statistics.min)"
-                           style="padding-right:5px; display:inline; float:left">
-                            {{vm.statistics.min | number:0}}
-                        </p>
-                        <p translate>MILLISECOND</p>
+                    <div class="row">
+                        <div class="col-sm-7" translate>MIN_TIME</div>
+                        <div class="col-sm-2" ng-style="vm.color(vm.statistics.min)">{{vm.statistics.min | number:0}}
+                        </div>
+                        <div class="col-sm-1" translate>MILLISECOND</div>
                     </div>
-                    <div>
-                        <p class="col-sm-5" translate>MAX_TIME</p>
-                        <p ng-style="vm.color(vm.statistics.max)"
-                           style="padding-right:5px; display:inline; float:left">
-                            {{vm.statistics.max | number:0}}</p>
-                        <p translate>MILLISECOND</p>
+                    <div class="row">
+                        <div class="col-sm-7" translate>MAX_TIME</div>
+                        <div class="col-sm-2" ng-style="vm.color(vm.statistics.max)">{{vm.statistics.max | number:0}}
+                        </div>
+                        <div class="col-sm-1" translate>MILLISECOND</div>
                     </div>
-                    <div>
-                        <p class="col-sm-5" translate>EXPECTED_TIME</p>
-                        <p ng-style="vm.color(vm.statistics.expected)"
-                           style="padding-right:5px; display:inline; float:left">
-                            {{vm.statistics.expected | number:0}}
-                        </p>
-                        <p translate>MILLISECOND</p>
+                    <div class="row">
+                        <div class="col-sm-7" translate>EXPECTED_TIME</div>
+                        <div class="col-sm-2" ng-style="vm.color(vm.statistics.expected)">{{vm.statistics.expected | number:0}}
+                        </div>
+                        <div class="col-sm-1" translate>MILLISECOND</div>
                     </div>
-                    <div>
-                        <p class="col-sm-5" translate>AVERAGE_TIME</p>
-                        <p ng-style="vm.color(vm.statistics.avg)"
-                           style="padding-right:5px; display:inline; float:left">
-                            {{vm.statistics.avg | number:0}}
-                        </p>
-                        <p translate>MILLISECOND</p>
+                    <div class="row">
+                        <div class="col-sm-7" translate>AVERAGE_TIME</div>
+                        <div class="col-sm-2" ng-style="vm.color(vm.statistics.avg)">{{vm.statistics.avg | number:0}}
+                        </div>
+                        <div class="col-sm-1" translate>MILLISECOND</div>
                     </div>
-                    <div>
-                        <p class="col-sm-5" translate>ATTEMPTS</p>
-                        <p style="padding-right:5px; display:inline; float:left">
-                            {{vm.statistics.attempts + vm.statistics.fails}}
-                        </p>
-                        <p translate>TIMES</p>
+                    <div class="row">
+                        <div class="col-sm-7" translate>ATTEMPTS</div>
+                        <div class="col-sm-2">{{vm.statistics.attempts + vm.statistics.fails}}</div>
+                        <div class="col-sm-1" translate>TIMES</div>
                     </div>
-                    <div>
-                        <p class="col-sm-5" translate>FAILS</p>
-                        <p style="padding-right:5px; display:inline; float:left">
-                            {{vm.statistics.fails}}
-                        </p>
-                        <p translate>TIMES</p>
+                    <div class="row">
+                        <div class="col-sm-7" translate>FAILS</div>
+                        <div class="col-sm-2">{{vm.statistics.fails}}</div>
+                        <div class="col-sm-1" translate>TIMES</div>
                     </div>
                 </div>
 
-                <div style="text-align:center">
+                <div style="text-align:center; padding-top: 10px">
                     <button ng-click="vm.drawChart(true)"
                             class="btn-link btn-xs active"
                             style="text-decoration: none"

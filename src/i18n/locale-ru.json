@@ -37,7 +37,7 @@
   "TIMES": "раз",
   "ATTEMPTS": "Попыток",
   "MIN_TIME": "Мин время",
-  "MAX_TIME": "Мах время",
+  "MAX_TIME": "Макс время",
   "AVERAGE_TIME": "Среднее время",
   "FREQUENCY": "Частота",
   "FREQUENCY_AXES": "Частота, %",
