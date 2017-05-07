@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery.monitoring')
+        .module('ngServiceGallery.common')
         .factory('scheduler', scheduler);
 
     scheduler.$inject = ['$log', '$interval'];
