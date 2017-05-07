@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.monitoring')
         .controller('SettingsController', SettingsController);
 
     SettingsController.$inject = ['close', 'settings'];

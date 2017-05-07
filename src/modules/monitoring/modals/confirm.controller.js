@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.monitoring')
         .controller('ConfirmController', ConfirmController);
 
     ConfirmController.$inject = ['close', 'title', 'message', 'data'];

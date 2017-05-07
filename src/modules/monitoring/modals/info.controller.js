@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.monitoring')
         .controller('ServiceInfoController', ServiceInfoController);
 
     ServiceInfoController.$inject = ['$scope', 'close', 'statistics', 'painter', 'service', 'charts'];

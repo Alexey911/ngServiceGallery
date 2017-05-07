@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.monitoring')
         .controller('EditController', EditController);
 
     EditController.$inject = ['stateParams', 'close', 'service'];

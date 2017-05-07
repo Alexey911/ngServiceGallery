@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ngServiceGallery')
+        .module('ngServiceGallery.monitoring')
         .controller('RegistrationController', RegistrationController);
 
     RegistrationController.$inject = ['SERVICE_CONFIG', 'close'];
