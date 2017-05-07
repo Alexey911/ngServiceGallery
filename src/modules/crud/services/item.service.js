@@ -44,7 +44,8 @@
         function extend(items) {
             const item = {
                 name: "",
-                value: undefined
+                value: undefined,
+                type: 'text'
             };
 
             items.push(item);
@@ -55,7 +56,7 @@
         }
 
         function filter(items) {
-            return items.filter(item => !isEmpty(item));
+            return angular.copy(items.filter(item => !isEmpty(item)));
         }
     }
 })();

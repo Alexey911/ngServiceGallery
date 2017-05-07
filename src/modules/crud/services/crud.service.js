@@ -10,8 +10,9 @@
     function crudService($http, $httpParamSerializerJQLike) {
 
         return {
-            methods: methods,
             send: send,
+            methods: methods,
+            dataTypes: dataTypes,
             contentTypes: contentTypes
         };
 
@@ -19,17 +20,22 @@
             return ['GET', 'POST'];
         }
 
+        function dataTypes() {
+            return [
+                {name: 'TEXT', value: 'text'},
+                {name: 'FILE', value: 'file'}
+            ];
+        }
+
         function contentTypes() {
-            return ['application/x-www-form-urlencoded'];
+            return ['application/x-www-form-urlencoded', 'multipart/form-data'];
         }
 
         function send(request) {
-            const headers = transformToFields(request.headers);
-
             const req = {
                 url: request.url,
-                headers: headers,
                 method: request.method,
+                headers: transformToFields(request.headers),
                 params: transformToFields(request.params)
             };
 
@@ -39,8 +45,13 @@
         }
 
         function setUpBody(request, body) {
-            request.headers['Content-Type'] = body.contentType;
-            request.data = $httpParamSerializerJQLike(transformToFields(body.pairs));
+            if (body.contentType === 'multipart/form-data') {
+                request.headers['Content-Type'] = undefined;
+                request.data = transformToForm(body.pairs);
+            } else {
+                request.headers['Content-Type'] = body.contentType;
+                request.data = $httpParamSerializerJQLike(transformToFields(body.pairs));
+            }
         }
 
         function transformToFields(items) {
@@ -50,6 +61,15 @@
                 result[item.name] = item.value;
             }
             return result;
+        }
+
+        function transformToForm(items) {
+            let form = new FormData();
+
+            for (let item of items) {
+                form.append(item.name, item.value);
+            }
+            return form;
         }
     }
 })();

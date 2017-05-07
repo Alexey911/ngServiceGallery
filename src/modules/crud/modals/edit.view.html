@@ -94,36 +94,85 @@
                             <select class="form-control input-sm"
                                     ng-options="type for type in vm.contentTypes"
                                     id="contentType"
-                                    ng-model="vm.request.body.contentType">
+                                    ng-model="vm.request.body.contentType"
+                                    ng-change="vm.onContentTypeChange()">
                             </select>
                         </div>
 
                         <p translate>REQUEST_BODY</p>
 
-                        <ul style="list-style-type: none">
-                            <li ng-repeat="pair in vm.request.body.pairs">
-                                <div class="form-group">
-                                    <label for="entryName" class="col-sm-2 control-label" translate>NAME</label>
-                                    <div class="col-sm-4">
-                                        <input type="text"
-                                               class="form-control"
-                                               id="entryName"
-                                               name="entryName"
-                                               ng-model="pair.name"
-                                               autocomplete="off">
+                        <div ng-show="vm.request.body.contentType !== 'multipart/form-data'">
+                            <ul style="list-style-type: none">
+                                <li ng-repeat="pair in vm.request.body.pairs">
+                                    <div class="form-group">
+                                        <label for="entryName" class="col-sm-2 control-label" translate>NAME</label>
+                                        <div class="col-sm-4">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="entryName"
+                                                   name="entryName"
+                                                   ng-model="pair.name"
+                                                   autocomplete="off">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="entryValue"
+                                                   name="entryValue"
+                                                   ng-model="pair.value"
+                                                   autocomplete="off"
+                                                   title="{{'VALUE' | translate}}">
+                                        </div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <input type="text"
-                                               class="form-control"
-                                               id="entryValue"
-                                               name="entryValue"
-                                               ng-model="pair.value"
-                                               autocomplete="off"
-                                               title="{{'VALUE' | translate}}">
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div ng-show="vm.request.body.contentType === 'multipart/form-data'">
+                            <p>unique</p>
+                            <ul style="list-style-type: none">
+                                <li ng-repeat="pair in vm.request.body.pairs">
+                                    <div class="form-group">
+                                        <label for="entryName" class="col-sm-2 control-label" translate>NAME</label>
+                                        <div class="col-sm-4">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   id="entryName"
+                                                   name="entryName"
+                                                   ng-model="pair.name"
+                                                   autocomplete="off">
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select class="form-control input-sm"
+                                                    id="type"
+                                                    ng-model="pair.type"
+                                                    ng-change="vm.onParamChange(pair)">
+                                                <option ng-repeat="type in vm.dataTypes" value="{{type.value}}">
+                                                    {{type.name | translate}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div ng-show="pair.type === 'text'">
+                                            <div class="col-sm-4">
+                                                <input type="text"
+                                                       class="form-control"
+                                                       id="entryValue"
+                                                       name="entryValue"
+                                                       ng-model="pair.value"
+                                                       autocomplete="off"
+                                                       title="{{'VALUE' | translate}}">
+                                            </div>
+                                        </div>
+                                        <div ng-show="pair.type !== 'text'">
+                                            <input type="file"
+                                                   ng-model="vm.request.binaries[pair.$$hashKey]"
+                                                   ng-change="vm.onParamChange(pair)"
+                                                   upload>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </form>
                 <button ng-click="vm.send()" translate>SEND_REQUEST</button>

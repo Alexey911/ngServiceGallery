@@ -12,12 +12,15 @@
         let vm = this;
 
         vm.send = send;
+        vm.onParamChange = onParamChange;
         vm.onMethodChange = onMethodChange;
+        vm.onContentTypeChange = onContentTypeChange;
 
         activate();
 
         function activate() {
             vm.methods = crudService.methods();
+            vm.dataTypes = crudService.dataTypes();
             vm.contentTypes = crudService.contentTypes();
 
             vm.request = {
@@ -25,13 +28,24 @@
                 params: [],
                 headers: [],
                 body: undefined,
-                method: vm.methods[0],
+                binaries: {},
+                method: vm.methods[0]
             };
 
             itemService.extend(vm.request.params);
             itemService.extend(vm.request.headers);
             $scope.$watch('vm.request.params', itemService.onItemChange, true);
             $scope.$watch('vm.request.headers', itemService.onItemChange, true);
+        }
+
+        //TODO: temp solution
+        function onParamChange(param) {
+            param.value = (param.type === 'text') ? '' : 'file';
+        }
+
+        function onContentTypeChange() {
+            for (let param of vm.request.body.pairs) param.type = 'text';
+            vm.request.binaries = [];
         }
 
         function onMethodChange(method) {
@@ -57,12 +71,25 @@
         }
 
         function makeBody() {
-            const body = vm.request.body;
+            if (!vm.request.body)  return;
+            const data = vm.request.body;
 
-            if (body)  return {
-                contentType: body.contentType,
-                pairs: itemService.filter(body.pairs),
+            let body = {
+                contentType: data.contentType,
+                pairs: itemService.filter(data.pairs)
             };
+
+            for (let pair of body.pairs) {
+                if (pair.type === 'file') setUpFile(pair);
+            }
+            return body;
+        }
+
+        function setUpFile(pair) {
+            const key = vm.request.body.pairs.find(p => p.name === pair.name).$$hashKey;
+
+            const files = vm.request.binaries[key];
+            pair.value = files && files.length && files[0];
         }
 
         function emptyBodyTemplate() {

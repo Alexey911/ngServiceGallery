@@ -64,5 +64,7 @@
   "CONTENT_TYPE": "Content type",
   "KEY": "KEY",
   "VALUE": "Value",
-  "CREATE_REQUEST": "Request creation"
+  "CREATE_REQUEST": "Request creation",
+  "FILE": "file",
+  "TEXT": "text"
 }
