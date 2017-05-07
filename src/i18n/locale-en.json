@@ -62,7 +62,7 @@
   "HTTP_METHOD": "Method",
   "REQUEST_BODY": "Body",
   "CONTENT_TYPE": "Content type",
-  "KEY": "KEY",
+  "KEY": "Key",
   "VALUE": "Value",
   "CREATE_REQUEST": "Request creation",
   "FILE": "file",
