@@ -30,7 +30,10 @@ let paths = {
         'src/assets/css/**/*.css'
     ],
     templates: {
-        crud: ['src/modules/crud/*.html'],
+        crud: [
+            'src/modules/crud/modals/*.html',
+            'src/modules/crud/components/*.html'
+        ],
         common: [
             'src/modules/shared/components/locale-switcher/*.html',
             'src/modules/shared/components/notifications/*.html'

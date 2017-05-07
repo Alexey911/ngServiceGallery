@@ -53,5 +53,16 @@
   "EXPECTED_TIME": "Expected time",
   "WORK_IN_NONACTIVE": "Work in inactive browser tab",
   "WATCH_RESUMPTION": "Monitoring restarting",
-  "NETWORK_FAIL": "Occurred network error, monitoring was stopped"
+  "NETWORK_FAIL": "Occurred network error, monitoring was stopped",
+  "REQUEST_PARAMS": "Parameters",
+  "REQUEST_PARAM": "Param",
+  "REQUEST_HEADERS": "Headers",
+  "REQUEST_HEADER": "Header",
+  "SEND_REQUEST": "Send",
+  "HTTP_METHOD": "Method",
+  "REQUEST_BODY": "Body",
+  "CONTENT_TYPE": "Content type",
+  "KEY": "KEY",
+  "VALUE": "Value",
+  "CREATE_REQUEST": "Request creation"
 }
