@@ -34,6 +34,7 @@
                                    id="url"
                                    name="url"
                                    required
+                                   autocomplete="off"
                                    ng-model="vm.request.url">
                         </div>
                     </div>
@@ -155,7 +156,6 @@
                                                             ng-change="vm.onParamChange(pair)"
                                                             upload>
                                                 </span>
-
                                             </div>
                                         </div>
                                         <div ng-show="vm.request.body.contentType === 'multipart/form-data'">
