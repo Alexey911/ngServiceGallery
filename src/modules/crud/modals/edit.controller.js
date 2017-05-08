@@ -5,9 +5,9 @@
         .module('ngServiceGallery.crud')
         .controller('EditRequestController', EditRequestController);
 
-    EditRequestController.$inject = ['close', '$scope', 'crudService', 'itemService'];
+    EditRequestController.$inject = ['title', 'mode', 'request', 'close', '$scope', 'crudService', 'itemService'];
 
-    function EditRequestController(close, $scope, crudService, itemService) {
+    function EditRequestController(title, mode, request, close, $scope, crudService, itemService) {
 
         let vm = this;
 
@@ -20,24 +20,29 @@
         activate();
 
         function activate() {
+            vm.title = title;
             vm.methods = crudService.methods();
             vm.dataTypes = crudService.dataTypes();
             vm.contentTypes = crudService.contentTypes();
 
-            vm.request = {
+            vm.request = (mode === 'create') ? requestTemplate() : request;
+
+            itemService.extend(vm.request.params);
+            itemService.extend(vm.request.headers);
+
+            $scope.$watch('vm.request.params', itemService.onItemChange, true);
+            $scope.$watch('vm.request.headers', itemService.onItemChange, true);
+        }
+
+        function requestTemplate() {
+            return {
                 url: '',
                 name: '',
                 params: [],
                 headers: [],
                 body: undefined,
-                binaries: {},
                 method: vm.methods[0]
             };
-
-            itemService.extend(vm.request.params);
-            itemService.extend(vm.request.headers);
-            $scope.$watch('vm.request.params', itemService.onItemChange, true);
-            $scope.$watch('vm.request.headers', itemService.onItemChange, true);
         }
 
         function cancel() {

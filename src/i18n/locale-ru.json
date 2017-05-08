@@ -74,5 +74,6 @@
   "SERVICE_REQUESTS": "HTTP Запросы",
   "RESPONSE": "Ответ сервиса",
   "RESPONSE_STATUS": "Статус",
-  "RESPONSE_BODY": "Тело"
+  "RESPONSE_BODY": "Тело",
+  "EDIT_REQUEST": "Редактирование запроса"
 }

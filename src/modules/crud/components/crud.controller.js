@@ -17,6 +17,7 @@
         let vm = this;
 
         vm.show = show;
+        vm.edit = edit;
         vm.create = create;
         vm.remove = remove;
 
@@ -46,6 +47,11 @@
 
         function create() {
             crudService.create()
+                .then(refresh);
+        }
+
+        function edit(request) {
+            crudService.edit(request)
                 .then(refresh);
         }
 

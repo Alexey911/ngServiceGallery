@@ -74,5 +74,6 @@
   "SERVICE_REQUESTS": "HTTP Requests",
   "RESPONSE": "Response data",
   "RESPONSE_STATUS": "Status",
-  "RESPONSE_BODY": "Body"
+  "RESPONSE_BODY": "Body",
+  "EDIT_REQUEST": "Request edition"
 }

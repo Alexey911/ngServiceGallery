@@ -14,6 +14,7 @@
         return {
             send: send,
             show: show,
+            edit: edit,
             remove: remove,
             getAll: getAll,
             create: create,
@@ -49,6 +50,26 @@
         function create() {
             return crudModals.showCreateRequest()
                 .then(save);
+        }
+
+        function edit(request) {
+            return crudModals.showEditRequest(request)
+                .then(modified => saveChanges(modified, request));
+        }
+
+        function saveChanges(source, original) {
+            if (!source) return;
+
+            original.url = source.url;
+            original.name = source.name;
+            original.body = source.body;
+            original.method = source.method;
+            original.params = source.params;
+            original.headers = source.headers;
+
+            storageService.save(CRUD_CONFIG.REQUEST_PLACE, requests);
+
+            return original;
         }
 
         function save(request) {

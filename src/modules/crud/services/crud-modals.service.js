@@ -12,6 +12,7 @@
         return {
             showRemove: showRemove,
             showSummary: showSummary,
+            showEditRequest: showEditRequest,
             showCreateRequest: showCreateRequest,
         };
 
@@ -25,6 +26,10 @@
 
         function showCreateRequest() {
             return createRequestModal().then(show);
+        }
+
+        function showEditRequest(request) {
+            return createEditRequestModal(request).then(show);
         }
 
         function createRemoveModal(request) {
@@ -55,7 +60,25 @@
             return ModalService.showModal({
                 templateUrl: 'edit.view.html',
                 controllerAs: 'vm',
-                controller: 'EditRequestController'
+                controller: 'EditRequestController',
+                inputs: {
+                    mode: 'create',
+                    title: 'CREATE_REQUEST',
+                    request: undefined
+                }
+            });
+        }
+
+        function createEditRequestModal(request) {
+            return ModalService.showModal({
+                templateUrl: 'edit.view.html',
+                controllerAs: 'vm',
+                controller: 'EditRequestController',
+                inputs: {
+                    mode: 'edit',
+                    title: 'EDIT_REQUEST',
+                    request: angular.copy(request)
+                }
             });
         }
 

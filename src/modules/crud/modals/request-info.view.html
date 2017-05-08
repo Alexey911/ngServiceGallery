@@ -61,7 +61,7 @@
                             <tr ng-repeat="pair in vm.request.body.pairs">
                                 <td ng-show="pair.type === 'text'">{{pair.name}}={{pair.value}}</td>
                                 <td ng-show="pair.type === 'file'">
-                                    {{pair.name}}=
+                                    {{pair.name}} =
                                     <span class="btn btn-xs btn-file" style="color: black">
                                         {{vm.getFileName(pair.value) | translate | limitTo:13}}
                                                     <input type="file"
