@@ -67,5 +67,7 @@
   "TEXT": "text",
   "BROWSE": "Browse",
   "REQUEST_NAME": "Name",
-  "SAVE": "Save"
+  "SAVE": "Save",
+  "REQUEST_DELETION": "Request deletion",
+  "REQUEST_DELETION_CONFIRM": "Are you sure to remove {{name}}?"
 }

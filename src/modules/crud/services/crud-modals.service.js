@@ -10,11 +10,29 @@
     function crudModals(ModalService) {
 
         return {
+            showRemove: showRemove,
             showCreateRequest: showCreateRequest,
         };
 
-        function showCreateRequest(service) {
-            return createRequestModal(service).then(show);
+        function showRemove(request) {
+            return createRemoveModal(request).then(show);
+        }
+
+        function showCreateRequest() {
+            return createRequestModal().then(show);
+        }
+
+        function createRemoveModal(request) {
+            return ModalService.showModal({
+                templateUrl: 'confirm.view.html',
+                controllerAs: 'vm',
+                controller: 'ConfirmController',
+                inputs: {
+                    title: 'REQUEST_DELETION',
+                    message: 'REQUEST_DELETION_CONFIRM',
+                    data: request
+                }
+            });
         }
 
         function createRequestModal() {

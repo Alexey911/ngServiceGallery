@@ -13,6 +13,7 @@
 
         return {
             send: send,
+            remove: remove,
             getAll: getAll,
             create: create,
             methods: methods,
@@ -50,6 +51,20 @@
 
             requests.unshift(request);
             storageService.save(CRUD_CONFIG.REQUEST_PLACE, requests);
+            return request;
+        }
+
+        function remove(request) {
+            return crudModals.showRemove(request)
+                .then(confirm => confirm && clean(request));
+        }
+
+        function clean(request) {
+            let index = requests.indexOf(request);
+            requests.splice(index, 1);
+
+            storageService.save(CRUD_CONFIG.REQUEST_PLACE, requests);
+
             return request;
         }
 

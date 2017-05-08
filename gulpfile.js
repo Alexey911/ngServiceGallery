@@ -20,6 +20,7 @@ let paths = {
         'src/modules/shared/*.js',
         'src/modules/shared/configs/*.js',
         'src/modules/shared/services/*.js',
+        'src/modules/shared/modals/*.js',
         'src/modules/shared/components/**/*.js',
         'src/modules/crud/ngServiceGallery.crud.module.js',
         'src/modules/crud/configs/*.js',
@@ -36,6 +37,7 @@ let paths = {
             'src/modules/crud/components/*.html'
         ],
         common: [
+            'src/modules/shared/modals/*.html',
             'src/modules/shared/components/locale-switcher/*.html',
             'src/modules/shared/components/notifications/*.html'
         ],

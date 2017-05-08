@@ -67,5 +67,7 @@
   "TEXT": "текст",
   "BROWSE": "Выбрать",
   "REQUEST_NAME": "Имя",
-  "SAVE": "Сохранить"
+  "SAVE": "Сохранить",
+  "REQUEST_DELETION": "Удаление запроса",
+  "REQUEST_DELETION_CONFIRM": "Запрос {{name}} будет удален"
 }
