@@ -69,5 +69,6 @@
   "REQUEST_NAME": "Имя",
   "SAVE": "Сохранить",
   "REQUEST_DELETION": "Удаление запроса",
-  "REQUEST_DELETION_CONFIRM": "Запрос {{name}} будет удален"
+  "REQUEST_DELETION_CONFIRM": "Запрос {{name}} будет удален",
+  "SERVICE_REQUESTS": "HTTP Запросы"
 }

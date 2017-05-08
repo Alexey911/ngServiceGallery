@@ -23,19 +23,21 @@
         activate();
 
         function activate() {
-            const requests = crudService.getAll();
-
             vm.requests = new NgTableParams(
                 {
                     count: 5
                 },
                 {
-                    counts: [5, 10, 25],
+                    counts: [],
                     paginationMinBlocks: 1,
                     paginationMaxBlocks: 5,
-                    dataset: requests
+                    getData: load
                 }
             );
+        }
+
+        function load(settings) {
+            return crudService.getAll(settings);
         }
 
         function show(request) {

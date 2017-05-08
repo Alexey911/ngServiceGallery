@@ -1,18 +1,31 @@
-<table ng-table="vm.requests" class="table">
-    <tr class="row"
-        ng-repeat="request in $data"
-        style="cursor:pointer">
-        <td class="col-3" ng-click="vm.show(request)" ng-cloak>{{request.name}}</td>
-        <td class="col-3" style="text-align:right">
-            <button class="btn-link btn-xs" ng-click="vm.edit(request)" translate>EDIT</button>
-            <button class="btn-link btn-xs" ng-click="vm.remove(request)" translate>REMOVE</button>
-        </td>
-    </tr>
-</table>
+<div class="row">
+    <h3 style="color:midnightblue" translate>SERVICE_REQUESTS</h3>
 
-<div class="monitoring-actions">
-    <button type="submit"
-            class="btn btn-info"
-            ng-click="vm.create()" translate>CREATE
-    </button>
+    <div class="row">
+        <div class="col-sm-6">
+            <table ng-table="vm.requests" class="table  table-condensed table-bordered">
+                <tr ng-repeat="request in $data">
+                    <td data-title="'REQUEST_NAME' | translate"
+                        filter="{'name':'text'}">
+                        <button class="btn-link btn-xs"
+                                style="cursor: pointer; text-decoration: none"
+                                ng-click="vm.show(request)">
+                            {{request.name}}
+                        </button>
+                        <span style="float: right">
+                            <button class="btn-link btn-xs" ng-click="vm.edit(request)" translate>EDIT</button>
+                            <button class="btn-link btn-xs" ng-click="vm.remove(request)" translate>REMOVE</button>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="monitoring-actions">
+        <button type="submit"
+                class="btn btn-info"
+                ng-click="vm.create()" translate>CREATE
+        </button>
+    </div>
 </div>

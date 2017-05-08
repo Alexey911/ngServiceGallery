@@ -69,5 +69,6 @@
   "REQUEST_NAME": "Name",
   "SAVE": "Save",
   "REQUEST_DELETION": "Request deletion",
-  "REQUEST_DELETION_CONFIRM": "Are you sure to remove {{name}}?"
+  "REQUEST_DELETION_CONFIRM": "Are you sure to remove {{name}}?",
+  "SERVICE_REQUESTS": "HTTP Requests"
 }
