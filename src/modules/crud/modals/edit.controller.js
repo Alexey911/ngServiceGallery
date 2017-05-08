@@ -55,8 +55,8 @@
         }
 
         function onContentTypeChange() {
-            for (let param of vm.request.body.pairs) param.type = 'text';
             vm.request.binaries = [];
+            vm.request.body.pairs.forEach(param => param.type = 'text');
         }
 
         function onMethodChange(method) {
@@ -82,7 +82,7 @@
         }
 
         function makeBody() {
-            if (!vm.request.body)  return;
+            if (!vm.request.body) return;
             const data = vm.request.body;
 
             let body = {
