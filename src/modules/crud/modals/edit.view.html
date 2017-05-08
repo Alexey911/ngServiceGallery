@@ -159,18 +159,6 @@
                                                        placeholder="{{'VALUE' | translate}}">
                                             </div>
                                         </div>
-                                        <div ng-show="pair.type !== 'text'">
-                                            <div class="col-sm-3">
-                                                <span class="btn btn-default btn-file">
-                                                 {{vm.getFileName(pair) | translate | limitTo:13}}
-                                                    <input
-                                                            type="file" class="btn-link"
-                                                            ng-model="vm.request.binaries[pair.$$hashKey]"
-                                                            ng-change="vm.onParamChange(pair)"
-                                                            upload>
-                                                </span>
-                                            </div>
-                                        </div>
                                         <div ng-show="vm.request.body.contentType === 'multipart/form-data'">
                                             <div class="col-xs-3">
                                                 <select class="form-control input-sm"

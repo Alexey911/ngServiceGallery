@@ -51,6 +51,30 @@
                     </table>
                 </div>
 
+                <div ng-show="vm.request.body">
+                    <div class="row">
+                        <p class="col-xs-offset-1 col-xs-3" style="font-weight: bold" translate>REQUEST_BODY</p>
+                    </div>
+
+                    <div class="row">
+                        <table class="col-xs-offset-5">
+                            <tr ng-repeat="pair in vm.request.body.pairs">
+                                <td ng-show="pair.type === 'text'">{{pair.name}}={{pair.value}}</td>
+                                <td ng-show="pair.type === 'file'">
+                                    {{pair.name}}=
+                                    <span class="btn btn-xs btn-file" style="color: black">
+                                        {{vm.getFileName(pair.value) | translate | limitTo:13}}
+                                                    <input type="file"
+                                                           class="btn-link"
+                                                           ng-model="pair.value"
+                                                           upload>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
                 <div class="row" ng-show="vm.response">
                     <div class="row">
                         <h4 style="text-align: center;font-weight: bold" translate>RESPONSE</h4>

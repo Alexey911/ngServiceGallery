@@ -13,7 +13,6 @@
 
         vm.save = save;
         vm.cancel = cancel;
-        vm.getFileName = getFileName;
         vm.onParamChange = onParamChange;
         vm.onMethodChange = onMethodChange;
         vm.onContentTypeChange = onContentTypeChange;
@@ -50,11 +49,6 @@
             param.value = (param.type === 'text') ? '' : 'file';
         }
 
-        function getFileName(pair) {
-            const file = getFileByKey(pair.$$hashKey);
-            return file ? file.name : 'BROWSE';
-        }
-
         function onContentTypeChange() {
             vm.request.binaries = [];
             vm.request.body.pairs.forEach(param => param.type = 'text');
@@ -86,25 +80,10 @@
             if (!vm.request.body) return;
             const data = vm.request.body;
 
-            let body = {
+            return {
                 contentType: data.contentType,
                 pairs: itemService.filter(data.pairs)
             };
-
-            for (let pair of body.pairs) {
-                if (pair.type === 'file') pair.value = setUpFile(pair);
-            }
-            return body;
-        }
-
-        function setUpFile(pair) {
-            const key = vm.request.body.pairs.find(p => p.name === pair.name).$$hashKey;
-            return getFileByKey(key);
-        }
-
-        function getFileByKey(key) {
-            const files = vm.request.binaries[key];
-            return files && files.length && files[0];
         }
 
         function emptyBodyTemplate() {

@@ -12,6 +12,7 @@
 
         vm.exit = exit;
         vm.send = send;
+        vm.getFileName = getFileName;
 
         activate();
 
@@ -21,8 +22,22 @@
         }
 
         function send() {
-            crudService.send(request)
+            setUpFiles();
+
+            crudService.send(vm.request)
                 .then(response => vm.response = response);
+        }
+
+        function getFileName(files) {
+            return files && files.length && files[0].name || 'BROWSE';
+        }
+
+        function setUpFiles() {
+            if (!vm.request.body) return;
+
+            for (let pair of vm.request.body.pairs) {
+                if (pair.type === 'file') pair.value = pair.value[0];
+            }
         }
 
         function exit() {
