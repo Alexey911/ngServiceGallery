@@ -36,7 +36,9 @@
             if (!vm.request.body) return;
 
             for (let pair of vm.request.body.pairs) {
-                if (pair.type === 'file') pair.value = pair.value[0];
+                if (pair.type === 'file' && !pair.value.name) {
+                    pair.value = pair.value[0];
+                }
             }
         }
 
