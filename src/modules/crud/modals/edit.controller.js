@@ -5,13 +5,14 @@
         .module('ngServiceGallery.crud')
         .controller('EditRequestController', EditRequestController);
 
-    EditRequestController.$inject = ['$scope', 'crudService', 'itemService'];
+    EditRequestController.$inject = ['close', '$scope', 'crudService', 'itemService'];
 
-    function EditRequestController($scope, crudService, itemService) {
+    function EditRequestController(close, $scope, crudService, itemService) {
 
         let vm = this;
 
         vm.send = send;
+        vm.cancel = cancel;
         vm.getFileName = getFileName;
         vm.onParamChange = onParamChange;
         vm.onMethodChange = onMethodChange;
@@ -37,6 +38,10 @@
             itemService.extend(vm.request.headers);
             $scope.$watch('vm.request.params', itemService.onItemChange, true);
             $scope.$watch('vm.request.headers', itemService.onItemChange, true);
+        }
+
+        function cancel() {
+            close(null, 500)
         }
 
         //TODO: temp solution
