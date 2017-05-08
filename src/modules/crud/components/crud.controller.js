@@ -10,16 +10,39 @@
             controller: CrudController
         });
 
-    CrudController.$inject = ['crudModals'];
+    CrudController.$inject = ['NgTableParams', 'crudService', 'tableRefresher'];
 
-    function CrudController(crudModals) {
+    function CrudController(NgTableParams, crudService, tableRefresher) {
 
         let vm = this;
 
-        vm.open = open;
+        vm.create = create;
 
-        function open() {
-            crudModals.showCreateRequest();
+        activate();
+
+        function activate() {
+            const requests = crudService.getAll();
+
+            vm.requests = new NgTableParams(
+                {
+                    count: 5
+                },
+                {
+                    counts: [5, 10, 25],
+                    paginationMinBlocks: 1,
+                    paginationMaxBlocks: 5,
+                    dataset: requests
+                }
+            );
+        }
+
+        function create() {
+            crudService.create()
+                .then(refresh);
+        }
+
+        function refresh() {
+            tableRefresher.refresh(vm.requests);
         }
     }
 })();

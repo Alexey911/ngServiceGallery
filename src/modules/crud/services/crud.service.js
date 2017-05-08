@@ -5,12 +5,16 @@
         .module('ngServiceGallery.crud')
         .factory('crudService', crudService);
 
-    crudService.$inject = ['$http', 'requestBuilder'];
+    crudService.$inject = ['CRUD_CONFIG', '$http', 'requestBuilder', 'storageService', 'crudModals'];
 
-    function crudService($http, requestBuilder) {
+    function crudService(CRUD_CONFIG, $http, requestBuilder, storageService, crudModals) {
+
+        let requests = undefined;
 
         return {
             send: send,
+            getAll: getAll,
+            create: create,
             methods: methods,
             dataTypes: dataTypes,
             contentTypes: contentTypes
@@ -29,6 +33,24 @@
 
         function contentTypes() {
             return ['application/x-www-form-urlencoded', 'multipart/form-data'];
+        }
+
+        function getAll() {
+            requests = requests || storageService.get(CRUD_CONFIG.REQUEST_PLACE, []);
+            return requests;
+        }
+
+        function create() {
+            return crudModals.showCreateRequest()
+                .then(save);
+        }
+
+        function save(request) {
+            if (!request) return;
+
+            requests.unshift(request);
+            storageService.save(CRUD_CONFIG.REQUEST_PLACE, requests);
+            return request;
         }
 
         function send(data) {

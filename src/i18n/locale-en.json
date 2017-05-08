@@ -65,5 +65,7 @@
   "CREATE_REQUEST": "Request creation",
   "FILE": "file",
   "TEXT": "text",
-  "BROWSE": "Browse"
+  "BROWSE": "Browse",
+  "REQUEST_NAME": "Name",
+  "SAVE": "Save"
 }

@@ -11,7 +11,7 @@
 
         let vm = this;
 
-        vm.send = send;
+        vm.save = save;
         vm.cancel = cancel;
         vm.getFileName = getFileName;
         vm.onParamChange = onParamChange;
@@ -27,6 +27,7 @@
 
             vm.request = {
                 url: '',
+                name: '',
                 params: [],
                 headers: [],
                 body: undefined,
@@ -69,16 +70,16 @@
             }
         }
 
-        function send() {
+        function save() {
             let request = {
                 'url': vm.request.url,
+                'name': vm.request.name,
                 'method': vm.request.method,
                 'params': itemService.filter(vm.request.params),
                 'headers': itemService.filter(vm.request.headers),
                 'body': makeBody()
             };
-
-            crudService.send(request);
+            close(request, 500);
         }
 
         function makeBody() {

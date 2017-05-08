@@ -1,3 +1,18 @@
-<div>
-    <button ng-click="vm.open()">Open</button>
+<table ng-table="vm.requests" class="table">
+    <tr class="row"
+        ng-repeat="request in $data"
+        style="cursor:pointer">
+        <td class="col-3" ng-cloak>{{request.name}}</td>
+        <td class="col-3" style="text-align:right">
+            <button class="btn-link btn-xs" ng-click="vm.edit(request)" translate>EDIT</button>
+            <button class="btn-link btn-xs" ng-click="vm.remove(request)" translate>REMOVE</button>
+        </td>
+    </tr>
+</table>
+
+<div class="monitoring-actions">
+    <button type="submit"
+            class="btn btn-info"
+            ng-click="vm.create()" translate>CREATE
+    </button>
 </div>
