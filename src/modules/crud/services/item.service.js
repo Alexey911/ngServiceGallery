@@ -16,6 +16,8 @@
         };
 
         function onItemChange(curr, prev) {
+            if (!curr || !prev) return;
+
             let free = [];
             let hasChanges = false;
 
