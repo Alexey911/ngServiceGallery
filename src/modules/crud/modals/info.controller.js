@@ -17,10 +17,12 @@
 
         function activate() {
             vm.request = request;
+            vm.response = undefined;
         }
 
         function send() {
-            crudService.send(request);
+            crudService.send(request)
+                .then(response => vm.response = response);
         }
 
         function exit() {

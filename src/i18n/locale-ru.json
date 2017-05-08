@@ -67,8 +67,12 @@
   "TEXT": "текст",
   "BROWSE": "Выбрать",
   "REQUEST_NAME": "Имя",
+  "REQUEST_SETTINGS": "Настройки запроса",
   "SAVE": "Сохранить",
   "REQUEST_DELETION": "Удаление запроса",
   "REQUEST_DELETION_CONFIRM": "Запрос {{name}} будет удален",
-  "SERVICE_REQUESTS": "HTTP Запросы"
+  "SERVICE_REQUESTS": "HTTP Запросы",
+  "RESPONSE": "Ответ сервиса",
+  "RESPONSE_STATUS": "Статус",
+  "RESPONSE_BODY": "Тело"
 }

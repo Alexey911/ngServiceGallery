@@ -67,8 +67,12 @@
   "TEXT": "text",
   "BROWSE": "Browse",
   "REQUEST_NAME": "Name",
+  "REQUEST_SETTINGS": "Request settings",
   "SAVE": "Save",
   "REQUEST_DELETION": "Request deletion",
   "REQUEST_DELETION_CONFIRM": "Are you sure to remove {{name}}?",
-  "SERVICE_REQUESTS": "HTTP Requests"
+  "SERVICE_REQUESTS": "HTTP Requests",
+  "RESPONSE": "Response data",
+  "RESPONSE_STATUS": "Status",
+  "RESPONSE_BODY": "Body"
 }
