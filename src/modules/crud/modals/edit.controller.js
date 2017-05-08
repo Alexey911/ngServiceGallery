@@ -12,6 +12,7 @@
         let vm = this;
 
         vm.send = send;
+        vm.getFileName = getFileName;
         vm.onParamChange = onParamChange;
         vm.onMethodChange = onMethodChange;
         vm.onContentTypeChange = onContentTypeChange;
@@ -41,6 +42,11 @@
         //TODO: temp solution
         function onParamChange(param) {
             param.value = (param.type === 'text') ? '' : 'file';
+        }
+
+        function getFileName(pair) {
+            const files = vm.request.binaries[pair.$$hashKey];
+            return (files && files.length) ? files[0].name : 'BROWSE';
         }
 
         function onContentTypeChange() {

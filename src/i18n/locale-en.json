@@ -66,5 +66,6 @@
   "VALUE": "Value",
   "CREATE_REQUEST": "Request creation",
   "FILE": "file",
-  "TEXT": "text"
+  "TEXT": "text",
+  "BROWSE": "Browse"
 }
