@@ -5,9 +5,9 @@
         .module('ngServiceGallery.crud')
         .factory('crudService', crudService);
 
-    crudService.$inject = ['CRUD_CONFIG', 'storageService', 'crudModals', 'searchService'];
+    crudService.$inject = ['CRUD_CONFIG', 'storageService', 'crudModals', 'searchService', 'requestBuilder', '$http'];
 
-    function crudService(CRUD_CONFIG, storageService, crudModals, searchService) {
+    function crudService(CRUD_CONFIG, storageService, crudModals, searchService, requestBuilder, $http) {
 
         let requests = undefined;
 
@@ -75,7 +75,7 @@
 
         function send(data) {
             const request = requestBuilder.build(data);
-            $http(request);
+            return $http(request);
         }
     }
 })();

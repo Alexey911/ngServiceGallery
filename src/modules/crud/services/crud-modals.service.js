@@ -45,7 +45,9 @@
                 templateUrl: 'request-info.view.html',
                 controllerAs: 'vm',
                 controller: 'RequestInfoController',
-                inputs: {request: request}
+                inputs: {
+                    request: angular.copy(request)
+                }
             });
         }
 
