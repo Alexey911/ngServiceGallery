@@ -11,11 +11,16 @@
 
         return {
             showRemove: showRemove,
+            showSummary: showSummary,
             showCreateRequest: showCreateRequest,
         };
 
         function showRemove(request) {
             return createRemoveModal(request).then(show);
+        }
+
+        function showSummary(request) {
+            return createSummaryModal(request).then(show);
         }
 
         function showCreateRequest() {
@@ -32,6 +37,15 @@
                     message: 'REQUEST_DELETION_CONFIRM',
                     data: request
                 }
+            });
+        }
+
+        function createSummaryModal(request) {
+            return ModalService.showModal({
+                templateUrl: 'request-info.view.html',
+                controllerAs: 'vm',
+                controller: 'RequestInfoController',
+                inputs: {request: request}
             });
         }
 

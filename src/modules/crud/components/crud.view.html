@@ -2,7 +2,7 @@
     <tr class="row"
         ng-repeat="request in $data"
         style="cursor:pointer">
-        <td class="col-3" ng-cloak>{{request.name}}</td>
+        <td class="col-3" ng-click="vm.show(request)" ng-cloak>{{request.name}}</td>
         <td class="col-3" style="text-align:right">
             <button class="btn-link btn-xs" ng-click="vm.edit(request)" translate>EDIT</button>
             <button class="btn-link btn-xs" ng-click="vm.remove(request)" translate>REMOVE</button>

@@ -13,6 +13,7 @@
 
         return {
             send: send,
+            show: show,
             remove: remove,
             getAll: getAll,
             create: create,
@@ -39,6 +40,10 @@
         function getAll() {
             requests = requests || storageService.get(CRUD_CONFIG.REQUEST_PLACE, []);
             return requests;
+        }
+
+        function show(request) {
+            return crudModals.showSummary(request);
         }
 
         function create() {

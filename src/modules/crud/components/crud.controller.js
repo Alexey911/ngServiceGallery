@@ -16,6 +16,7 @@
 
         let vm = this;
 
+        vm.show = show;
         vm.create = create;
         vm.remove = remove;
 
@@ -37,12 +38,16 @@
             );
         }
 
+        function show(request) {
+            crudService.show(request);
+        }
+
         function create() {
             crudService.create()
                 .then(refresh);
         }
 
-        function remove(request){
+        function remove(request) {
             crudService.remove(request)
                 .then(refresh);
         }
