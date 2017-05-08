@@ -27,28 +27,32 @@
 
                 <br>
 
-                <div class="row">
-                    <p class="col-xs-offset-1 col-xs-3" style="font-weight: bold" translate>REQUEST_HEADERS</p>
+                <div ng-show="vm.request.headers.length">
+                    <div class="row">
+                        <p class="col-xs-offset-1 col-xs-3" style="font-weight: bold" translate>REQUEST_HEADERS</p>
+                    </div>
+
+                    <div class="row">
+                        <table class="col-xs-offset-5">
+                            <tr ng-repeat="header in vm.request.headers">
+                                <td>{{header.name}}={{header.value}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
 
-                <div class="row">
-                    <table class="col-xs-offset-5">
-                        <tr ng-repeat="header in vm.request.headers">
-                            <td>{{header.name}}={{header.value}}</td>
-                        </tr>
-                    </table>
-                </div>
+                <div ng-show="vm.request.params.length">
+                    <div class="row">
+                        <p class="col-xs-offset-1 col-xs-3" style="font-weight: bold" translate>REQUEST_PARAMS</p>
+                    </div>
 
-                <div class="row">
-                    <p class="col-xs-offset-1 col-xs-3" style="font-weight: bold" translate>REQUEST_PARAMS</p>
-                </div>
-
-                <div class="row">
-                    <table class="col-xs-offset-5">
-                        <tr ng-repeat="param in vm.request.params">
-                            <td>{{param.name}}={{param.value}}</td>
-                        </tr>
-                    </table>
+                    <div class="row">
+                        <table class="col-xs-offset-5">
+                            <tr ng-repeat="param in vm.request.params">
+                                <td>{{param.name}}={{param.value}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
 
                 <div ng-show="vm.request.body">
