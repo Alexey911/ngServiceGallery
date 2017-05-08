@@ -50,8 +50,8 @@
         }
 
         function getFileName(pair) {
-            const files = vm.request.binaries[pair.$$hashKey];
-            return (files && files.length) ? files[0].name : 'BROWSE';
+            const file = getFileByKey(pair.$$hashKey);
+            return file ? file.name : 'BROWSE';
         }
 
         function onContentTypeChange() {
@@ -91,16 +91,19 @@
             };
 
             for (let pair of body.pairs) {
-                if (pair.type === 'file') setUpFile(pair);
+                if (pair.type === 'file') pair.value = setUpFile(pair);
             }
             return body;
         }
 
         function setUpFile(pair) {
             const key = vm.request.body.pairs.find(p => p.name === pair.name).$$hashKey;
+            return getFileByKey(key);
+        }
 
+        function getFileByKey(key) {
             const files = vm.request.binaries[key];
-            pair.value = files && files.length && files[0];
+            return files && files.length && files[0];
         }
 
         function emptyBodyTemplate() {
