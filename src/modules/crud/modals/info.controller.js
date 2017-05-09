@@ -19,6 +19,7 @@
         function activate() {
             vm.request = request;
             vm.response = {json: '', xml: ''};
+            vm.services = getServices();
         }
 
         function send() {
@@ -50,6 +51,12 @@
                     pair.value = pair.value[0];
                 }
             }
+        }
+
+        function getServices() {
+            const services = crudService.getServices();
+            services.unshift({address: vm.request.url, name: vm.request.url});
+            return services;
         }
 
         function exit() {

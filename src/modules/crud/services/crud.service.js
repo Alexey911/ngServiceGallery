@@ -5,9 +5,18 @@
         .module('ngServiceGallery.crud')
         .factory('crudService', crudService);
 
-    crudService.$inject = ['CRUD_CONFIG', 'storageService', 'crudModals', 'searchService', 'requestBuilder', '$http', 'notificationService'];
+    crudService.$inject = [
+        'CRUD_CONFIG',
+        'storageService',
+        'crudModals',
+        'searchService',
+        'requestBuilder',
+        '$http',
+        'notificationService',
+        '$injector'
+    ];
 
-    function crudService(CRUD_CONFIG, storageService, crudModals, searchService, requestBuilder, $http, notificationService) {
+    function crudService(CRUD_CONFIG, storageService, crudModals, searchService, requestBuilder, $http, notificationService, $injector) {
 
         let requests = undefined;
 
@@ -21,6 +30,7 @@
             create: create,
             methods: methods,
             dataTypes: dataTypes,
+            getServices: getServices,
             contentTypes: contentTypes
         };
 
@@ -117,6 +127,13 @@
 
             if (response.status === -1) response.status = 'UNKNOWN';
             return response;
+        }
+
+        function getServices() {
+            const SERVICE_CONFIG = $injector.get('SERVICE_CONFIG');
+            if (!SERVICE_CONFIG) return [];
+
+            return storageService.get(SERVICE_CONFIG.STORAGE_PLACE);
         }
 
         function isXml(str) {
