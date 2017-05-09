@@ -5,9 +5,9 @@
         .module('ngServiceGallery.crud')
         .factory('crudService', crudService);
 
-    crudService.$inject = ['CRUD_CONFIG', 'storageService', 'crudModals', 'searchService', 'requestBuilder', '$http'];
+    crudService.$inject = ['CRUD_CONFIG', 'storageService', 'crudModals', 'searchService', 'requestBuilder', '$http', 'notificationService'];
 
-    function crudService(CRUD_CONFIG, storageService, crudModals, searchService, requestBuilder, $http) {
+    function crudService(CRUD_CONFIG, storageService, crudModals, searchService, requestBuilder, $http, notificationService) {
 
         let requests = undefined;
 
@@ -96,7 +96,14 @@
 
         function send(data) {
             const request = requestBuilder.build(data);
-            return $http(request);
+            return $http(request).catch(notifyOnFail);
+        }
+
+        function notifyOnFail(fail) {
+            notificationService.showMessage("RESPONSE_FAIL");
+
+            if (fail.status === -1) fail.status = 'UNKNOWN';
+            return fail;
         }
     }
 })();

@@ -75,5 +75,7 @@
   "RESPONSE": "Response data",
   "RESPONSE_STATUS": "Status",
   "RESPONSE_BODY": "Body",
-  "EDIT_REQUEST": "Request edition"
+  "EDIT_REQUEST": "Request edition",
+  "UNKNOWN": "unknown",
+  "RESPONSE_FAIL": "Occurred an exception, for more details try to change request or disable web security"
 }
