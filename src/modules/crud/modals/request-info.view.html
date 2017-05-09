@@ -93,7 +93,8 @@
 
                     <div class="row" ng-show="vm.response.data">
                         <div class="col-xs-offset-1 col-xs-3" style="font-weight: bold" translate>RESPONSE_BODY</div>
-                        <pre class="col-sm-6">{{vm.response.data | json}}</pre>
+                        <pre class="col-sm-6" ng-show="vm.response.xml">{{vm.response.xml | prettyXml}}</pre>
+                        <pre class="col-sm-6" ng-show="vm.response.json">{{vm.response.json | json }}</pre>
                     </div>
                 </div>
             </div>

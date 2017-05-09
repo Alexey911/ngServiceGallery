@@ -2,6 +2,7 @@
     angular
         .module('ngServiceGallery.crud',
             [
-                'ngServiceGallery.common'
+                'ngServiceGallery.common',
+                'prettyXml'
             ]);
 })();

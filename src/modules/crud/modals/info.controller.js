@@ -18,14 +18,24 @@
 
         function activate() {
             vm.request = request;
-            vm.response = undefined;
+            vm.response = {json: '', xml: ''};
         }
 
         function send() {
             setUpFiles();
 
             crudService.send(vm.request)
-                .then(response => vm.response = response);
+                .then(responseListener);
+        }
+
+        function responseListener(response) {
+            vm.response = response;
+            if (crudService.isXml(response.data)) {
+                vm.response.xml = response.data || '';
+            } else {
+                vm.response.xml = '';
+                vm.response.json = response.data;
+            }
         }
 
         function getFileName(files) {
