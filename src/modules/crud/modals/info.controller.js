@@ -18,7 +18,7 @@
 
         function activate() {
             vm.request = request;
-            vm.response = {json: '', xml: ''};
+            vm.response = undefined;
             vm.services = getServices();
         }
 
@@ -32,9 +32,8 @@
         function responseListener(response) {
             vm.response = response;
             if (crudService.isXml(response.data)) {
-                vm.response.xml = response.data || '';
+                vm.response.xml = response.data;
             } else {
-                vm.response.xml = '';
                 vm.response.json = response.data;
             }
         }

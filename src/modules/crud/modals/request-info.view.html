@@ -60,7 +60,7 @@
                     </div>
                 </div>
 
-                <div ng-show="vm.request.body">
+                <div ng-if="vm.request.body">
                     <div class="row">
                         <p class="col-xs-offset-1 col-xs-3" style="font-weight: bold" translate>REQUEST_BODY</p>
                     </div>
@@ -84,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="row" ng-show="vm.response.data">
+                <div class="row" ng-if="vm.response.data">
                     <div class="row">
                         <h4 style="text-align: center;font-weight: bold" translate>RESPONSE</h4>
                     </div>
@@ -98,8 +98,8 @@
 
                     <div class="row" ng-show="vm.response.data">
                         <div class="col-xs-offset-1 col-xs-3" style="font-weight: bold" translate>RESPONSE_BODY</div>
-                        <pre class="col-sm-6" ng-show="vm.response.xml">{{vm.response.xml | prettyXml}}</pre>
-                        <pre class="col-sm-6" ng-show="vm.response.json">{{vm.response.json | json }}</pre>
+                        <pre class="col-sm-6" ng-if="vm.response.xml">{{vm.response.xml | prettyXml}}</pre>
+                        <pre class="col-sm-6" ng-if="vm.response.json">{{vm.response.json | json}}</pre>
                     </div>
                 </div>
             </div>
