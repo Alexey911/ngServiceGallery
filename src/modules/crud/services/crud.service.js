@@ -7,6 +7,7 @@
 
     crudService.$inject = [
         'CRUD_CONFIG',
+        'serviceCoder',
         'storageService',
         'crudModals',
         'searchService',
@@ -16,7 +17,7 @@
         '$injector'
     ];
 
-    function crudService(CRUD_CONFIG, storageService, crudModals, searchService, requestBuilder, $http, notificationService, $injector) {
+    function crudService(CRUD_CONFIG, serviceCoder, storageService, crudModals, searchService, requestBuilder, $http, notificationService, $injector) {
 
         let requests = undefined;
 
@@ -50,7 +51,7 @@
         }
 
         function getAll(settings) {
-            requests = requests || storageService.get(CRUD_CONFIG.REQUEST_PLACE, []);
+            requests = requests || serviceCoder.decode(storageService.get(CRUD_CONFIG.REQUEST_PLACE, []));
             return searchService.filter(settings, requests);
         }
 
@@ -73,12 +74,13 @@
 
             original.url = source.url;
             original.name = source.name;
+            original.auth = source.auth;
             original.body = source.body;
             original.method = source.method;
             original.params = source.params;
             original.headers = source.headers;
 
-            storageService.save(CRUD_CONFIG.REQUEST_PLACE, requests);
+            storageService.save(CRUD_CONFIG.REQUEST_PLACE, serviceCoder.encode(requests));
 
             return original;
         }
@@ -87,7 +89,7 @@
             if (!request) return;
 
             requests.unshift(request);
-            storageService.save(CRUD_CONFIG.REQUEST_PLACE, requests);
+            storageService.save(CRUD_CONFIG.REQUEST_PLACE, serviceCoder.encode(requests));
             return request;
         }
 
@@ -100,7 +102,7 @@
             let index = requests.indexOf(request);
             requests.splice(index, 1);
 
-            storageService.save(CRUD_CONFIG.REQUEST_PLACE, requests);
+            storageService.save(CRUD_CONFIG.REQUEST_PLACE, serviceCoder.encode(requests));
 
             return request;
         }
@@ -137,7 +139,6 @@
         }
 
         function isXml(str) {
-            if (!str) return false;
             return typeof str === 'string';
         }
     }

@@ -77,5 +77,11 @@
   "RESPONSE_BODY": "Body",
   "EDIT_REQUEST": "Request edition",
   "UNKNOWN": "unknown",
-  "RESPONSE_FAIL": "Occurred an exception, for more details try to change request or disable web security"
+  "RESPONSE_FAIL": "Occurred an exception, for more details try to change request or disable web security",
+  "AUTH": "Auth",
+  "NO_AUTH": "Without",
+  "BASIC_AUTH": "Basic auth",
+  "OAUTH_2": "OAuth2",
+  "USERNAME": "Username",
+  "PASSWORD": "Password"
 }

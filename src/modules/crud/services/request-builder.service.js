@@ -22,6 +22,10 @@
             };
 
             if (data.body) setUpBody(request, data.body);
+            if (data.auth.type.value === 'basic') {
+                let user = data.auth.data;
+                request.headers['Authorization'] = 'Basic ' + btoa(user.username + ':' + user.password);
+            }
 
             return request;
         }

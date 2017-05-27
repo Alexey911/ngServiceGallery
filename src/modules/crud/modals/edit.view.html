@@ -52,6 +52,42 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="url" class="col-sm-3 control-label" translate>AUTH</label>
+                        <div class="col-xs-4">
+                            <select class="form-control input-sm"
+                                    ng-options="type as (type.name | translate) for type in vm.auth"
+                                    id="auth"
+                                    ng-model="vm.request.auth.type">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div ng-if="vm.request.auth.type.value === 'basic'">
+                        <div class="form-group row">
+                            <label for="username" class="col-sm-3 control-label" translate>USERNAME</label>
+                            <div class="col-sm-4">
+                                <input type="text"
+                                       id="username"
+                                       name="auth"
+                                       class="form-control input-sm"
+                                       ng-model="vm.request.auth.data.username"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-3 control-label" translate>PASSWORD</label>
+                            <div class="col-sm-4">
+                                <input type="password"
+                                       id="password"
+                                       name="password"
+                                       class="form-control input-sm"
+                                       ng-model="vm.request.auth.data.password"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group" ng-show="vm.request.method === 'POST'">
                         <label class="col-sm-3 control-label"
                                for="contentType"

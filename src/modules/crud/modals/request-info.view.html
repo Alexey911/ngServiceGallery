@@ -30,6 +30,11 @@
                     </select>
                 </div>
 
+                <div class="row">
+                    <p class="col-xs-offset-1 col-xs-3" style="font-weight: bold" translate>AUTH</p>
+                    <div class="col-xs-3" style="font-weight: bold">{{vm.request.auth.type.name | translate}}</div>
+                </div>
+
                 <br>
 
                 <div ng-show="vm.request.headers.length">

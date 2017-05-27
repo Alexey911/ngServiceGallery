@@ -24,6 +24,11 @@
             vm.methods = crudService.methods();
             vm.dataTypes = crudService.dataTypes();
             vm.contentTypes = crudService.contentTypes();
+            vm.auth = [
+                {value: 'no', name: 'NO_AUTH'},
+                {value: 'basic', name: 'BASIC_AUTH'},
+                {value: 'oath2', name: 'OAUTH_2'}
+            ];
 
             vm.request = (mode === 'create') ? requestTemplate() : request;
 
@@ -41,6 +46,7 @@
                 params: [],
                 headers: [],
                 body: undefined,
+                auth: {type: vm.auth[0]},
                 method: vm.methods[0]
             };
         }
@@ -73,6 +79,7 @@
             let request = {
                 'url': vm.request.url,
                 'name': vm.request.name,
+                'auth': vm.request.auth,
                 'method': vm.request.method,
                 'params': itemService.filter(vm.request.params),
                 'headers': itemService.filter(vm.request.headers),
